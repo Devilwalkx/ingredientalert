@@ -87,7 +87,7 @@ Missing services: none needed for the journey. Notifications are not sent by des
 | Item | Result |
 |---|---|
 | Emulator 1 | API 36, `pixel_6`, x86_64, font scale 1.0, Android 16. Run 15 job `android-emulator (api36-pixel6-standard)` |
-| Emulator 2 | API 29, `pixel_5`, x86_64, font scale 2.0 (200%), night mode on. Run 15 job `android-emulator (api29-pixel5-text200-dark)` |
+| Emulator 2 | API 29, `pixel_5`, x86_64, font scale 1.0 (normal size), night mode on. Job `android-emulator (api29-pixel5-standard-dark)` from the next CI run on this branch (run 15 used 200% text; those results are superseded and not claimed here) |
 | Build | Test build signed with the public Android debug key. `versionName 0.2.0`. Run 13: `versionCode 13`; run 15 builds the APK in the `android-apk` job of run 15 |
 | Install | Fresh install passed on both emulators (flow 01 with clean state). Upgrade: NOT TESTED |
 | Back | PASS (flow 04, both emulators) |
