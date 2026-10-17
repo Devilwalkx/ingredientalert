@@ -1,58 +1,29 @@
-# IngredientAlert - Status (DRAFT)
+# IngredientAlert: status (DRAFT)
 
-## First real-phone result
-**None yet.** The app has never been installed on a physical phone. On the sibling AccessChain app the first phone test found Android system bars covering the UI; the same guard (react-native-safe-area-context with all edges, plus a simulated-insets e2e test) is built in here but **not confirmed on a phone**.
+Version 0.2.0. Details of the Android quality pass, with evidence and what is NOT tested: [docs/ANDROID_PASS_REPORT.md](docs/ANDROID_PASS_REPORT.md).
+
+## Physical phone
+**Never run on a physical phone.** Android evidence comes only from an emulator in GitHub Actions (see the report for the run). Real-world barcode scanning: **NOT TESTED**. TalkBack: **NOT TESTED**. Fresh-user usability sessions: **NOT RUN** (plan: docs/USABILITY_SESSION_PLAN.md).
 
 ## Implemented
-- Core (pure TypeScript): tenants/sites/staff/role memberships; approved product identities with revisioned specification evidence; receiving with mismatch detection (unknown/invalid barcode with check digit, other product, pack, version label, batch, incomplete spec, spec changed since capture); duplicate-entry handling; write-down-now/check-later queue with idempotent reconciliation; review workflow with optimistic versions; information hold; 14 UK allergens with declared / precautionary / kitchen-control kept separate; unknown-propagating declarations over nested recipes with site applicability, impact preview, cycle and stale-reference detection; precise-revision approval bound to impact digest; separation of duties with named/reasoned/scoped/expiring exceptions; per-channel publication with idempotent retry, partial failure, stale/superseded handling, printed-copy check; revision-bound acknowledgement; offboarding; staff erasure with justified audit retention; hash-chained audit; source-linked history export (active vs stale menus); encrypted local state vault (XChaCha20-Poly1305).
-- App (Expo, Android + web): Home with to-do cards and five big buttons, guided delivery flow, review/approve flow, publish flow, service view with acknowledgement, settings/privacy/manager tools, About, Demo options (role switcher, demo helpers), in-app text size, confirmation card before consequential actions, safe-area handling, zero Android permissions.
-- CI workflow and always-newest GitHub release.
+- Core (pure TypeScript): tenants/sites/staff/roles; approved products with revisioned specification evidence; receiving with mismatch detection; duplicate handling; write-down-now/check-later queue; review workflow with optimistic versions; 14 UK allergens with *contains*, *supplier precautionary* and *kitchen procedures* kept separate; unknown-propagating declarations over nested recipes; approval bound to the exact revision and impact digest; separation of duties with named, reasoned, expiring exceptions; per-channel publication with retry and stale handling; revision-bound acknowledgement; offboarding; staff erasure with justified audit retention; hash-chained audit; encrypted state vault. **New in 0.2.0:** per-person PIN (salted scrypt) with throttle and reset; five-word status vocabulary; ordered-vs-arrived comparison; affected-scope calculation; product search; catalogue entry (`addProduct`); own-kitchen creation.
+- App (Expo, Android + web): Home with three tasks (Check a delivery, Review substitutions, Outstanding decisions and publication updates) and "Status now"; delivery flow with **camera barcode scan** (expo-camera, permission in context, denial and permanent-denial handling, torch, timeout and misread recovery), manual search and typed entry; side-by-side comparison; review with affected recipes/sites/places and three separate allergen groups; publication updates (labelled simulated); service menu with per-person acknowledgement; **PIN sign-in, auto-lock and step-up PIN** on a shared device; own-kitchen setup (people, products, recipes); light and dark; text size on top of the Android font scale; build identity in Settings > About this build.
 
-## Tested (automated)
-- **61 unit tests** (Vitest, `packages/core`): declarations (incl. 300-case property test), receiving, offline queue, workflow, overrides, publication, acknowledgement, security, whole-chain demo.
-- **17 browser tests x 3 viewports (Pixel 7, 390 px, 320 px) = 51 passing locally**: full sauce demo through the failed printed-menu update, encrypted storage, lost key fails closed, erase, no third-party requests, keyboard, installable manifest, axe WCAG 2 A/AA scan on every screen state, no overflow/overlap/text-outside-button on every screen at normal, 2x (`?fontscale=2`) and in-app Extra large text, simulated Android insets.
-- `expo prebuild` verified: every `uses-permission` is removed (zero permissions requested).
-- Screenshots were reviewed (home, impact, publish-failed, 320 px at 2x text). At 2x text on a 320 px screen the layout is cramped but nothing overlaps or overflows.
+## Simulated or missing (said in the app)
+No server. The QR / web menu and the printer are simulated. No notifications are sent (and the notification permission is not requested). The example kitchen's people have no PINs. Staff identity is a PIN on a shared device, not an account. No backup or recovery of data. No iOS build. No supplier feeds or AI reading of specification sheets.
 
-## Mutation checks (safeguard broken on purpose; tests failed; restored)
-| Break | Result |
-|---|---|
-| Separation-of-duties check disabled | 3 tests failed |
-| Unknown contains-answers ignored (treated as not declared) | 2 tests failed (incl. property test) |
-| Cycle check disabled | 1 test failed |
-| Publication basis (pending-review) check disabled | 1 test failed |
-| Acknowledgement revision binding disabled | 1 test failed |
-| Safe-area edges removed (system bars cover UI) | insets e2e failed |
-| Button text wrapping removed (`numberOfLines={1}`) | 2x-text e2e failed (text overflow) |
+## Automated tests (what they are; see the report for results and limits)
+Core unit tests (Vitest), mobile unit tests (design tokens, scan result handling), 27 browser tests x 3 viewports (Pixel 7, 390 px, 320 px; port 4421), an emulator job running Maestro flows on API 36 and API 29 in GitHub Actions. They do not establish scan reliability, physical-device behaviour, assistive-technology use or security.
 
-## Bugs found while building
-- Test fault: an acknowledgement test reused staff who had already acknowledged revision 1 (fixed with a new person).
-- Port clash: another local project served on the e2e default port; e2e uses its own port.
-- A11y: Home buttons' names did not contain their visible text (axe `label-content-name-mismatch`) and emoji leaked into names; fixed.
-- Layout: allergen answer buttons overflowed at 2x text on narrow screens; stacked full width.
+## Not externally reviewed
+Food safety, privacy, security, cryptography, accessibility: nothing has been reviewed by a specialist.
 
-## Simulated
-Staff identities (one phone, role switcher); channel adapters (QR/web, service view, printed menu; printer failure is a demo switch); all data and people; the passage of time (demo clock).
-
-## Externally reviewed
-**Nothing.** No food-safety, privacy, security, cryptography or accessibility review (with disabled users or assistive tech on a device) has taken place.
-
-## Blocked / not verified / not built
+## Blocked / open
 | Item | Why |
 |---|---|
-| Competitor facts (Nutritics, Kafoodle), FSA guidance, ICO guidance incl. Data (Use and Access) Act 2025 | Sites unreachable from the build environment; nothing was verified |
-| Real device behaviour (install, Keystore, file storage, fonts, insets) | No device available |
-| Server, authentication, sync, shared data | Not built (out of scope); real staff logins need a server |
-| Barcode camera scanning | Deliberately not added (permission + native module) |
-| AI extraction of specification sheets | Not built; disclosed future option needing a reviewed design |
-| Supplier feeds / integrations / outage handling | No API contracts exist; not invented |
-| iOS build | Needs Apple developer account and signing |
-| DPIA, lawful basis, processor terms, retention periods, incident procedure | Open (PRIVACY_REGISTER.md, RETENTION.md) |
-| Pilot (3 kitchens) and pricing test (GBP 79-199 per site per month, unvalidated) | Needs customers |
-| Dependency/`npm audit` review, SBOM | Not done |
-
-## Next steps
-1. Install on a real Android phone and report problems (GETTING_STARTED.md).
-2. Shadow a real receiving process on paper with a kitchen manager before any software pilot.
-3. Specialist food-safety and privacy review of wording, workflow and data handling.
-4. Decide on a server design only if the shadow test shows the gap is real.
+| Competitor facts, FSA and ICO guidance | Sites unreachable from the build environment; nothing verified |
+| Physical device behaviour (install, Keystore, camera, insets, PIN timing) | No device available |
+| Server, accounts, sync, real publication | Not built |
+| Private release key | Owner decision; test builds use the public Android debug key |
+| DPIA, lawful basis, retention periods, incident procedure | Open (PRIVACY_REGISTER.md, RETENTION.md) |
+| Pilot and pricing | Needs customers |
