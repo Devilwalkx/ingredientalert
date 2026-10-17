@@ -9,22 +9,26 @@ name: Camera permission asked in context; denial and permanent denial are explai
     element: "Try the example kitchen"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Try the example kitchen"
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Check a delivery.*"
 - scrollUntilVisible:
     element:
       id: "field-search-by-name-supplier-or-barcode-number"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
@@ -33,30 +37,36 @@ name: Camera permission asked in context; denial and permanent denial are explai
     element: "Harbour Teriyaki Sauce 1L"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Harbour Teriyaki Sauce 1L"
 - scrollUntilVisible:
     element: "Next: what is on the pack\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Next: what is on the pack\\?"
 - scrollUntilVisible:
     element: "Scan the barcode"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Scan the barcode"
 - scrollUntilVisible:
     element: "Use the camera to read the barcode\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - scrollUntilVisible:
     element: ".*does not take, keep or send pictures.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 19-camera-reason
 - scrollUntilVisible:
     element: "Allow camera"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Allow camera"
 - runFlow:
     when:
@@ -72,11 +82,13 @@ name: Camera permission asked in context; denial and permanent denial are explai
     element: "Camera not allowed.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 20-camera-denied
 - scrollUntilVisible:
     element: "Ask for camera access again"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Ask for camera access again"
 - runFlow:
     when:
@@ -92,17 +104,21 @@ name: Camera permission asked in context; denial and permanent denial are explai
     element: "The camera is switched off for this app"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - scrollUntilVisible:
     element: "Open Android settings"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 21-camera-after-second-denial
 - scrollUntilVisible:
     element: "Type the number or search instead"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Type the number or search instead"
 - scrollUntilVisible:
     element: "Barcode number"
     direction: DOWN
     timeout: 60000
+    speed: 85

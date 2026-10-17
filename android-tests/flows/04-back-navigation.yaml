@@ -7,22 +7,26 @@ name: System Back unwinds a step, then goes home, then leaves the app
     element: "Try the example kitchen"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Try the example kitchen"
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Check a delivery.*"
 - scrollUntilVisible:
     element:
       id: "field-search-by-name-supplier-or-barcode-number"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
@@ -31,26 +35,31 @@ name: System Back unwinds a step, then goes home, then leaves the app
     element: "Harbour Teriyaki Sauce 1L"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Harbour Teriyaki Sauce 1L"
 - scrollUntilVisible:
     element: "Next: what is on the pack\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Next: what is on the pack\\?"
 - scrollUntilVisible:
     element: "What is on the pack\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - pressKey: back
 - assertNotVisible: "What is on the pack\\?"
 - scrollUntilVisible:
     element: "Step 1 of 3: what did you order\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - pressKey: back
 - scrollUntilVisible:
     element: "Status now"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - pressKey: back
 - assertNotVisible: "Status now"

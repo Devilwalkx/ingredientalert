@@ -7,22 +7,26 @@ name: Start a delivery, then leave the app (the script kills the process)
     element: "Try the example kitchen"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Try the example kitchen"
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Check a delivery.*"
 - scrollUntilVisible:
     element:
       id: "field-search-by-name-supplier-or-barcode-number"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
@@ -31,17 +35,20 @@ name: Start a delivery, then leave the app (the script kills the process)
     element: "Harbour Teriyaki Sauce 1L"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Harbour Teriyaki Sauce 1L"
 - scrollUntilVisible:
     element: "Next: what is on the pack\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Next: what is on the pack\\?"
 - scrollUntilVisible:
     element:
       id: "field-batch-or-best-before-code"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-batch-or-best-before-code"
 - inputText: "DRAFT-123"

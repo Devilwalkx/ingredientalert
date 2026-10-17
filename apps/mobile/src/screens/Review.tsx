@@ -165,6 +165,8 @@ function CaseBody({ id }: { id: string }) {
         </Card>
       )}
 
+      {cs.impact ? <ImpactList impact={cs.impact} controls={controls} /> : null}
+
       <Collapsible defaultOpen title="Ordered and arrived, side by side"><ComparisonTable s={s} cs={cs} /></Collapsible>
 
       <Collapsible defaultOpen title="What this change touches"><ScopeBlock a={scope} /></Collapsible>
@@ -176,8 +178,6 @@ function CaseBody({ id }: { id: string }) {
           <AllergenGroups d={{ contains: ALLERGENS.filter((a) => spec.contains[a] === "declared"), mayContain: ALLERGENS.filter((a) => spec.precautionary[a] === "stated"), unresolved: ALLERGENS.filter((a) => spec.contains[a] === "unknown" || spec.precautionary[a] === "unknown"), resolved: isSpecComplete(spec) }} controls={controls} />
         </Collapsible>
       ) : null}
-
-      {cs.impact ? <ImpactList impact={cs.impact} controls={controls} /> : null}
 
       <Collapsible title="Approval trail">
         {delivery.findings.map((f) => <Txt key={f.kind} color={c.textMuted}>• {f.message}</Txt>)}

@@ -9,22 +9,26 @@ name: Scan finds nothing in the emulator's virtual scene - timeout notice, retry
     element: "Try the example kitchen"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Try the example kitchen"
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Check a delivery.*"
 - scrollUntilVisible:
     element:
       id: "field-search-by-name-supplier-or-barcode-number"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
@@ -33,39 +37,49 @@ name: Scan finds nothing in the emulator's virtual scene - timeout notice, retry
     element: "Harbour Teriyaki Sauce 1L"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Harbour Teriyaki Sauce 1L"
 - scrollUntilVisible:
     element: "Next: what is on the pack\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Next: what is on the pack\\?"
 - scrollUntilVisible:
     element: "Scan the barcode"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Scan the barcode"
-- extendedWaitUntil:
-    visible: "No barcode was read in 20 seconds.*"
-    timeout: 40000
+- scrollUntilVisible:
+    element: "No barcode was read in 20 seconds.*"
+    direction: DOWN
+    timeout: 60000
+    speed: 60
 - takeScreenshot: 18-scan-timeout
 - scrollUntilVisible:
     element: "Try scanning again"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Try scanning again"
-- extendedWaitUntil:
-    visible: "No barcode was read in 20 seconds.*"
-    timeout: 40000
+- scrollUntilVisible:
+    element: "No barcode was read in 20 seconds.*"
+    direction: DOWN
+    timeout: 60000
+    speed: 60
 - scrollUntilVisible:
     element: "Type the number or search instead"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Type the number or search instead"
 - scrollUntilVisible:
     element:
       id: "field-barcode-number"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-barcode-number"
 - inputText: "4006381333931"
@@ -73,3 +87,4 @@ name: Scan finds nothing in the emulator's virtual scene - timeout notice, retry
     element: ".*not in your product list.*"
     direction: DOWN
     timeout: 60000
+    speed: 85

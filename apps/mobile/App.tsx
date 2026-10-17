@@ -121,7 +121,11 @@ function Root() {
     }, 150);
     return () => clearTimeout(t);
   }, [app.screen, app.navNonce, locked]);
-  useEffect(() => { scroller.current?.scrollTo({ y: 0, animated: false }); }, [app.scrollNonce]);
+  useEffect(() => {
+    scroller.current?.scrollTo({ y: 0, animated: false });
+    const t = setTimeout(() => scroller.current?.scrollTo({ y: 0, animated: false }), 150);
+    return () => clearTimeout(t);
+  }, [app.scrollNonce]);
 
   if (randomError) {
     return (
@@ -162,7 +166,7 @@ function Root() {
               {inApp ? <IconBtn icon="lock" label="Lock and switch person" onPress={app.lock} /> : null}
               {inApp && S !== "settings" ? <IconBtn icon="settings" label="Settings" onPress={() => app.go("settings")} /> : null}
             </View>
-            <ScrollView ref={scroller} style={{ flex: 1 }} onScroll={(ev) => { scrollY.current = ev.nativeEvent.contentOffset.y; }} scrollEventThrottle={50} onLayout={() => { setTimeout(() => (scroller.current as { measureInWindow?: (cb: (x: number, y: number) => void) => void } | null)?.measureInWindow?.((_x, y) => { scrollTop.current = y; }), 50); }} contentContainerStyle={{ padding: space.m, paddingBottom: space.xl }} keyboardShouldPersistTaps="handled" keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "on-drag"}>
+            <ScrollView key={`nav-${app.navNonce}`} ref={scroller} style={{ flex: 1 }} onScroll={(ev) => { scrollY.current = ev.nativeEvent.contentOffset.y; }} scrollEventThrottle={50} onLayout={() => { setTimeout(() => (scroller.current as { measureInWindow?: (cb: (x: number, y: number) => void) => void } | null)?.measureInWindow?.((_x, y) => { scrollTop.current = y; }), 50); }} contentContainerStyle={{ padding: space.m, paddingBottom: space.xl }} keyboardShouldPersistTaps="handled" keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "on-drag"}>
               {inApp && app.isDemo ? <DemoStrip text="Example kitchen: made-up products, recipes and people. Not for real food-safety decisions." /> : null}
               {app.loadError && !has ? <Notice tone="bad" text={app.loadError} /> : null}
               {app.toast && inApp ? <Notice tone={app.toast.tone === "ok" ? "ok" : app.toast.tone === "bad" ? "bad" : "info"} text={app.toast.text} /> : null}

@@ -2,28 +2,36 @@ appId: app.devilwalkx.ingredientalert
 name: After process death the example kitchen asks who is using the device and the unsent delivery is still there
 ---
 - launchApp
+- extendedWaitUntil:
+    visible: "Sign in"
+    timeout: 30000
 - scrollUntilVisible:
     element: "Who is using the device\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 11-locked-after-restart
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Check a delivery.*"
 - scrollUntilVisible:
     element: "Next: what is on the pack\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Next: what is on the pack\\?"
 - scrollUntilVisible:
     element: "DRAFT-123"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 12-draft-restored

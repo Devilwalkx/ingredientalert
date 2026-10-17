@@ -7,153 +7,184 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
     element: "Try the example kitchen"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Try the example kitchen"
 - scrollUntilVisible:
     element: "Who is using the device\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 02-who-is-using
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 03-home
 - scrollUntilVisible:
     element: "Settings"
     direction: UP
     timeout: 60000
+    speed: 85
 - tapOn: "Settings"
 - scrollUntilVisible:
     element: "Demonstration tools.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Demonstration tools.*"
 - scrollUntilVisible:
     element: "Fill in the replacement-sauce delivery"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Fill in the replacement-sauce delivery"
 - scrollUntilVisible:
     element: "What is on the pack\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 04-delivery-form
 - scrollUntilVisible:
     element: "Next: check and save"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Next: check and save"
 - scrollUntilVisible:
     element: "Save and check this delivery"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Save and check this delivery"
 - scrollUntilVisible:
     element: "Ordered and arrived, side by side"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 05-delivery-result
 - scrollUntilVisible:
     element: "DIFFERENT"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 06-side-by-side
 - scrollUntilVisible:
     element: "Review this substitution"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Review this substitution"
 - scrollUntilVisible:
     element: "This step is for the Specification reviewer.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - scrollUntilVisible:
     element: "Lock and switch person"
     direction: UP
     timeout: 60000
+    speed: 85
 - tapOn: "Lock and switch person"
 - scrollUntilVisible:
     element: "Priya Nair"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Priya Nair"
 - scrollUntilVisible:
     element: "Settings"
     direction: UP
     timeout: 60000
+    speed: 85
 - tapOn: "Settings"
 - scrollUntilVisible:
     element: "Demonstration tools.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Demonstration tools.*"
 - scrollUntilVisible:
     element: "Fill in the supplier sheet for the new sauce"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Fill in the supplier sheet for the new sauce"
 - scrollUntilVisible:
     element: "Open review.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Open review.*"
 - scrollUntilVisible:
     element: "Step 1 of 3: enter the supplier's specification"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - scrollUntilVisible:
     element: "Save specification"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Save specification"
 - scrollUntilVisible:
     element: "Show which recipes change"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Show which recipes change"
 - scrollUntilVisible:
     element: "Recipes that change.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 07-recipes-change
 - scrollUntilVisible:
     element: "Lock and switch person"
     direction: UP
     timeout: 60000
+    speed: 85
 - tapOn: "Lock and switch person"
 - scrollUntilVisible:
     element: "Sam Okoye"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Sam Okoye"
 - scrollUntilVisible:
     element: "Review"
     direction: UP
     timeout: 60000
+    speed: 85
 - tapOn: "Review"
 - scrollUntilVisible:
     element: "Open review.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Open review.*"
 - scrollUntilVisible:
     element: "Step 3 of 3: decide"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - scrollUntilVisible:
     element: "Approve this change"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Approve this change"
 - scrollUntilVisible:
     element: "Approve this change\\?"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 08-approve-dialog
 # system Back must mean "No" and leave the change unapproved
 - pressKey: back
@@ -162,14 +193,17 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
     element: "Approve this change"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Approve this change"
 - scrollUntilVisible:
     element: "Yes, approve"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Yes, approve"
 - scrollUntilVisible:
     element: "Approved revision.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 09-after-approval

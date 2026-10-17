@@ -7,12 +7,14 @@ name: Real kitchen - set up with a PIN, keyboard never hides the field or the ne
     element: "Set up my kitchen"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Set up my kitchen"
 - scrollUntilVisible:
     element:
       id: "field-business-or-kitchen-group-name"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-business-or-kitchen-group-name"
 - inputText: "Test Cafe"
@@ -21,12 +23,14 @@ name: Real kitchen - set up with a PIN, keyboard never hides the field or the ne
     element: "Next"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Next"
 - scrollUntilVisible:
     element:
       id: "field-your-name"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-your-name"
 - inputText: "Pat Owner"
@@ -35,6 +39,7 @@ name: Real kitchen - set up with a PIN, keyboard never hides the field or the ne
       id: "field-choose-a-pin"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-choose-a-pin"
 - inputText: "481516"
@@ -43,6 +48,7 @@ name: Real kitchen - set up with a PIN, keyboard never hides the field or the ne
       id: "field-type-the-pin-again"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-type-the-pin-again"
 - inputText: "481516"
@@ -51,27 +57,32 @@ name: Real kitchen - set up with a PIN, keyboard never hides the field or the ne
     element: "Start my kitchen"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Start my kitchen"
 - scrollUntilVisible:
     element: "Finish setting up"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - assertNotVisible: "Example kitchen.*"
 - scrollUntilVisible:
     element: "Lock and switch person"
     direction: UP
     timeout: 60000
+    speed: 85
 - tapOn: "Lock and switch person"
 - scrollUntilVisible:
     element: "Pat Owner"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Pat Owner"
 - scrollUntilVisible:
     element:
       id: "field-your-pin"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-your-pin"
 - inputText: "000111"
@@ -79,16 +90,19 @@ name: Real kitchen - set up with a PIN, keyboard never hides the field or the ne
     element: "Unlock"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Unlock"
 - scrollUntilVisible:
     element: "Wrong PIN.*"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - scrollUntilVisible:
     element:
       id: "field-your-pin"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn:
     id: "field-your-pin"
 - eraseText: 6
@@ -97,9 +111,11 @@ name: Real kitchen - set up with a PIN, keyboard never hides the field or the ne
     element: "Unlock"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - tapOn: "Unlock"
 - scrollUntilVisible:
     element: "Finish setting up"
     direction: DOWN
     timeout: 60000
+    speed: 85
 - takeScreenshot: 17-real-kitchen-home
