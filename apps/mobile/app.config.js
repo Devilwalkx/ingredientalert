@@ -7,6 +7,6 @@ module.exports = () => {
   return {
     ...expo,
     android: { ...expo.android, versionCode: run > 0 ? run : 1 },
-    extra: { ...(expo.extra || {}), commit, builtAt: process.env.BUILD_TIME || "", channel: run > 0 ? "ci-test-build" : "development" }
+    extra: { ...(expo.extra || {}), commit, builtAt: process.env.BUILD_TIME || "", channel: process.env.RELEASE_SIGNING === "1" ? "release" : run > 0 ? "ci-test-build" : "development" }
   };
 };

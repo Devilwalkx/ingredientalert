@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import {
   ALLERGENS, ALLERGEN_LABEL, MAX_OVERRIDE_DAYS, NOT_A_GUARANTEE, NOTIFICATION_NOTICE, PUBLICATION_NOTICE, ROLES, ROLE_LABEL, SUB_NAME, canAct, generateRecoverySecret,
-  rolesAt, sauceDelivery, substituteSpecInput, wrapKeyForRecovery, type Allergen, type Role
+  demoPublishSauceRevision, encryptionSelfCheck, rolesAt, sauceDelivery, substituteSpecInput, wrapKeyForRecovery, type Allergen, type Role
 } from "@ingredientalert/core";
 import { useStore } from "../store";
 import { useDraft } from "../nav";
@@ -25,6 +25,7 @@ export function SettingsScreen() {
   const b = buildInfo();
   const [secret, setSecret] = useState<string | null>(null);
   const [setupOpen] = useState(() => app.takeParam() === "setup");
+  const [check, setCheck] = useState<Awaited<ReturnType<typeof encryptionSelfCheck>> | "running" | null>(null);
   const canSetup = canAct(s, me, "manage_catalogue", site) || canAct(s, me, "manage_staff", site) || canAct(s, me, "approve_recipe", site);
   return (
     <>
@@ -51,7 +52,7 @@ export function SettingsScreen() {
       {canAct(s, me, "grant_override", site) ? <Collapsible title="Manager tools"><ManagerTools /></Collapsible> : null}
 
       <Collapsible title="Privacy and your data">
-        <Txt>All kitchen data is stored only on this device, encrypted. There is no server and nothing is sent anywhere: the app has no internet permission. {NOTIFICATION_NOTICE}</Txt>
+        <Txt>All kitchen data is stored only on this device, encrypted with XChaCha20-Poly1305 under a key kept in Android's protected storage. There is no server and nothing is sent anywhere: the app has no internet permission. {NOTIFICATION_NOTICE}</Txt>
         <Txt>The camera is used only to read barcodes. Camera images are not stored or sent. It has no location, microphone, contacts or storage permission.</Txt>
         <Txt color={c.textMuted}>Staff names and actions are personal data. No guest health details are stored. {PUBLICATION_NOTICE}</Txt>
         <Txt color={c.textMuted}>If you lose the device or its key, the data cannot be recovered. This build has no backup copy anywhere, and uninstalling the app deletes the data.</Txt>
@@ -73,7 +74,15 @@ export function SettingsScreen() {
         <Row left="Built" right={b.builtAt} />
         <Row left="Channel" right={b.channel} />
         <Txt>{NOT_A_GUARANTEE}</Txt>
-        <Txt color={c.textMuted}>Test build signed with the public Android debug key. It has had no food-safety, privacy, security or accessibility review and has never been used in a real kitchen.</Txt>
+        <Txt color={c.textMuted}>{b.channel === "release" ? "Release build, signed with the owner's private key. " : "Test build, signed with the public Android debug key (test signing only). "}It has had no food-safety, privacy, security or accessibility review, has never been used in a real kitchen, and has not been run on a physical phone by its builders.</Txt>
+        <Btn label="Check encryption on this phone" kind="secondary" onPress={async () => { setCheck("running"); setCheck(await encryptionSelfCheck(app.keys)); }} />
+        {check === "running" ? <Notice tone="wait" text="Checking..." /> : check ? (
+          <Card accessibilityLabel="Encryption check result">
+            <Txt v="heading" header>{check.ok ? "Encryption check: passed" : "Encryption check: FAILED"}</Txt>
+            {check.steps.map((st) => <Txt key={st.label}>{`${st.ok ? "Passed" : "Failed"}: ${st.label}`}</Txt>)}
+            <Txt v="small" color={c.textMuted}>This runs the app's real encryption and the phone's real key storage on made-up text. It shows none of your data and does not prove the encryption is unbreakable. Details: docs/ENCRYPTION_ACCOUNT.md.</Txt>
+          </Card>
+        ) : null}
         <Txt color={c.textMuted}>Real: the checking rules, approval steps, the "unknown stays unknown" rule, the history, camera barcode reading (not tested on a real phone), PIN sign-in and encrypted storage on this device. Simulated: the QR / web menu and the printer. Not built: a server, shared accounts, notifications, supplier feeds, AI reading of specification sheets.</Txt>
       </Collapsible>
 
@@ -303,6 +312,7 @@ function DemoTools() {
       <DemoStrip text="Demonstration only. These shortcuts fill in the example and are not part of ordinary use. They would not exist in a real kitchen." />
       <Btn label="Fill in the replacement-sauce delivery" kind="secondary" hint="Opens the delivery form with the example filled in" onPress={() => { app.setPrefill({ receive: sauceDelivery(site) }); app.go("receive"); }} />
       <Btn label="Fill in the supplier sheet for the new sauce" kind="secondary" hint="Used in the specification step of a review" onPress={() => { app.setPrefill({ spec: substituteSpecInput(), specProduct: { name: SUB_NAME, supplier: "Fictional Foods Ltd" } }); app.go("review"); }} />
+      <Btn label="Jump to: revision 2 published, nobody has acknowledged yet" kind="secondary" hint="Runs the sauce story through the real rules as Alex, Priya and Sam" onPress={() => { const r = app.run((en) => demoPublishSauceRevision(en)); if (r.ok) app.say("Revision 2 is published. Nobody has acknowledged it yet.", "ok"); else app.say(r.error, "bad"); }} />
       <Btn label={app.settings.printerFails ? "Simulated printer failure: ON" : "Simulated printer failure: OFF"} role="checkbox" selected={app.settings.printerFails} kind="secondary" onPress={() => app.setSettings({ printerFails: !app.settings.printerFails })} />
       <Btn label="Move the clock forward 1 day" kind="secondary" onPress={() => app.run((e) => e.advanceClock(86_400_000))} />
       <Txt v="small">The clock only affects when exceptions expire. It is now {new Date(Date.now() + s.clockOffsetMs).toISOString().slice(0, 16).replace("T", " ")}.</Txt>

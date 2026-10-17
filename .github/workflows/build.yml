@@ -63,13 +63,29 @@ jobs:
             ~/.gradle/wrapper
           key: gradle-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
           restore-keys: gradle-${{ runner.os }}-
+      - name: "Detect the owner's private signing key (absent: build stays a test build)"
+        env:
+          KS_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$KS_B64" ]; then
+            echo "RELEASE_SIGNING=1" >> "$GITHUB_ENV"
+            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
+            echo "Private signing key present: this build will be signed with it."
+          else
+            echo "No signing secrets: this build is signed with the public Android debug key (test build)."
+          fi
       - name: Generate native Android project
         working-directory: apps/mobile
         env:
           BUILD_COMMIT: ${{ github.sha }}
           BUILD_TIME: ${{ github.event.head_commit.timestamp }}
         run: npx expo prebuild --platform android --no-install
-      - name: Check requested permissions (only CAMERA, which is used by the implemented barcode scan)
+      - name: Point Gradle's release build at the private key (only when present)
+        if: ${{ env.RELEASE_SIGNING == '1' }}
+        working-directory: apps/mobile
+        run: node ../../scripts/configure-release-signing.mjs android/app/build.gradle
+      - name: "Check requested permissions (only CAMERA, which is used by the implemented barcode scan)"
         working-directory: apps/mobile
         run: |
           M=android/app/src/main/AndroidManifest.xml
@@ -97,11 +113,17 @@ jobs:
           grep -q 'enableOnBackInvokedCallback="true"' android/app/src/main/AndroidManifest.xml
       - name: "Build release APK (signed with the public Android debug key: test signing only)"
         working-directory: apps/mobile/android
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           # Branch builds exist to be tested on the x86_64 emulator, so they build one CPU type (faster).
           # The main-branch build, which becomes the release, builds every CPU type that real phones use.
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then ./gradlew assembleRelease --no-daemon --build-cache
           else ./gradlew assembleRelease --no-daemon --build-cache -PreactNativeArchitectures=x86_64; fi
+      - name: Record what identifies this APK
+        run: BUILD_COMMIT=${{ github.sha }} bash scripts/apk-identity.sh apps/mobile/android/app/build/outputs/apk/release/*.apk | tee build-identity.txt
       - uses: actions/upload-artifact@v4
         with:
           name: ingredientalert-android-test-apk
@@ -167,6 +189,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back virtualscene
           disable-animations: true
+          pre-emulator-launch-script: bash android-tests/prepare-virtual-scene.sh
           script: PREV_APK=$(ls $PREV_APK_DIR/*.apk 2>/dev/null | head -1) bash android-tests/run.sh
       - uses: actions/upload-artifact@v4
         if: always()
@@ -212,6 +235,7 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: ingredientalert-android-test-apk
@@ -226,10 +250,14 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -e
-          mv out/*.apk IngredientAlert-test.apk
           (cd web && zip -qr ../IngredientAlert-web.zip .)
+          BUILD_COMMIT="${{ github.sha }}" bash scripts/apk-identity.sh out/*.apk > build-identity.txt
+          cat build-identity.txt
+          if grep -q "PRIVATE release key" build-identity.txt; then NAME=IngredientAlert.apk; KIND="Release build signed with the owner's private key"; else NAME=IngredientAlert-test.apk; KIND="Test build, signed with the public Android debug key (not a release key, not for the Play Store)"; fi
+          mv out/*.apk "$NAME"
+          { printf '%s\n\n' "Install $NAME on an Android phone. $KIND. Step by step: GETTING_STARTED.md. Commit ${{ github.sha }}, run ${{ github.run_number }}. Browser tests: ${{ needs.test-and-web.result }}. Android emulator tests (API 36 and API 29, Maestro flows): ${{ needs.android-emulator.result }}; the emulator job's per-flow results are in docs/ANDROID_PASS_REPORT.md and on the evidence branch. Emulator results are not physical-device results. This asset has NOT been run on a physical phone by anyone, TalkBack was not run, and real-world barcode scanning with the camera is NOT TESTED. The app has the application ID app.devilwalkx.ingredientalert: uninstall any older IngredientAlert first, because Android treats it as another app. Nothing is sent anywhere: there is no server, and the QR / web menu and printer are simulated. No independent person has reviewed it."; echo 'Build identity (what identifies this exact file):'; echo; sed 's/^/    /' build-identity.txt; } > notes.md
           gh release delete latest-test-build --cleanup-tag --yes || true
-          gh release create latest-test-build IngredientAlert-test.apk IngredientAlert-web.zip \
+          gh release create latest-test-build "$NAME" build-identity.txt IngredientAlert-web.zip \
             --target "${{ github.sha }}" --prerelease \
             --title "IngredientAlert test build" \
-            --notes "Install IngredientAlert-test.apk on an Android phone. Test build, signed with the public Android debug key (not a release key, not for the Play Store). Step by step: GETTING_STARTED.md. Commit ${{ github.sha }}, run ${{ github.run_number }}. Browser tests: ${{ needs.test-and-web.result }}. Android emulator tests (API 36 and API 29): ${{ needs.android-emulator.result }}. Emulator results are not physical-device results. This asset has NOT been run on a physical phone by anyone, and real-world barcode scanning with the camera is NOT TESTED (an emulator camera shows a virtual scene only). The app has a new application ID: uninstall any older IngredientAlert first. Nothing is sent anywhere: there is no server, and the QR / web menu and printer are simulated. See docs/ANDROID_PASS_REPORT.md for what is and is not tested."
+            --notes-file notes.md

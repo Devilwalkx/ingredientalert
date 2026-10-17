@@ -118,7 +118,16 @@ name: Camera permission asked in context; denial and permanent denial are explai
     speed: 85
 - tapOn: "Type the number or search instead"
 - scrollUntilVisible:
-    element: "Barcode number"
+    element:
+      id: "field-barcode-number"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- tapOn:
+    id: "field-barcode-number"
+- inputText: "4006381333931"
+- scrollUntilVisible:
+    element: ".*not in your product list.*"
     direction: DOWN
     timeout: 60000
     speed: 85

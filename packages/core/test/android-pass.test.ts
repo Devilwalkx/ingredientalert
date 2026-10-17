@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-  Engine, MAIN, STATUS_LABEL, affectedScope, allUnknownContains, allUnknownPrecaution, caseStatus, checkPin, deliveryComparison, gtinWithCheck,
+  Engine, MAIN, STATUS_LABEL, demoPublishSauceRevision, outstandingAcks, syntheticExample, affectedScope, allUnknownContains, allUnknownPrecaution, caseStatus, checkPin, deliveryComparison, gtinWithCheck,
   lockoutMs, makePinRecord, ownKitchenState, searchProducts, specMaps, statusItems, validatePin, verifyAuditChain, barcodeOf, sauceDelivery, canAct
 } from "../src/index.js";
 import { approveSauce, newEngine, receiveSauce, reviewSauce, caseVersion } from "./helpers.js";
@@ -183,5 +183,43 @@ describe("PIN reset", () => {
     e.resetPin("morgan", "jo");
     expect(e.state.pins?.jo).toBeUndefined();
     expect(e.state.audit.at(-1)!.action).toBe("pin.reset");
+  });
+});
+
+describe("individual accountability on a shared device", () => {
+  it("two named people acknowledge under their own names; nobody can acknowledge as someone else; a notification is not an acknowledgement", () => {
+    const e = new Engine(syntheticExample());
+    demoPublishSauceRevision(e);
+    const pub = e.latestPublication(e.state, MAIN)!;
+    expect(pub.revision).toBe(2);
+    expect(e.state.acks.filter((a) => a.revision === 2)).toHaveLength(0);
+    expect(statusItems(e, MAIN).map((x) => [x.id, x.count])).toEqual([["ack_outstanding", 2]]);
+    // the engine has no notification path at all: nothing but acknowledge() can add an acknowledgement
+    // the approver and administrator hold no acknowledging role
+    expect(() => e.acknowledge("sam", pub.id, 2)).toThrow();
+    expect(() => e.acknowledge("morgan", pub.id, 2)).toThrow();
+    // Jo's act records Jo and only Jo
+    e.acknowledge("jo", pub.id, 2);
+    expect(e.state.acks.filter((a) => a.revision === 2).map((a) => a.staffId)).toEqual(["jo"]);
+    expect(outstandingAcks(e.state, MAIN).outstanding).toEqual(["jess"]);
+    // repeating as Jo does not count for Jess
+    e.acknowledge("jo", pub.id, 2);
+    expect(outstandingAcks(e.state, MAIN).outstanding).toEqual(["jess"]);
+    e.acknowledge("jess", pub.id, 2);
+    expect(e.state.acks.filter((a) => a.revision === 2).map((a) => a.staffId).sort()).toEqual(["jess", "jo"]);
+    expect(outstandingAcks(e.state, MAIN).outstanding).toEqual([]);
+    // each acknowledgement is in the audit trail under the person who did it
+    const audited = e.state.audit.filter((a) => a.action === "ack.recorded" && a.detail === "revision=2").map((a) => a.actorId);
+    expect(audited).toEqual(["jo", "jess"]);
+    expect(verifyAuditChain(e.state)).toBe(true);
+    // an offboarded person can no longer acknowledge
+    const e2 = new Engine(syntheticExample());
+    demoPublishSauceRevision(e2);
+    e2.offboardStaff("morgan", "jess");
+    expect(() => e2.acknowledge("jess", e2.latestPublication(e2.state, MAIN)!.id, 2)).toThrow();
+  });
+  it("the demonstration shortcut refuses to run in a real kitchen", () => {
+    const { state } = ownKitchenState({ kitchenName: "K", siteName: "S", ownerName: "O" });
+    expect(() => demoPublishSauceRevision(new Engine(state))).toThrow(/example kitchen only/);
   });
 });

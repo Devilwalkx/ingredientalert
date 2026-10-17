@@ -1,0 +1,59 @@
+appId: app.devilwalkx.ingredientalert
+name: Scan of a KNOWN synthetic barcode (a picture placed in the emulator's virtual scene) - the number is read, the product named
+---
+- launchApp:
+    clearState: true
+    permissions:
+      camera: allow
+- scrollUntilVisible:
+    element: "Try the example kitchen"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- tapOn: "Try the example kitchen"
+- scrollUntilVisible:
+    element: "Alex Rivera"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- tapOn: "Alex Rivera"
+- scrollUntilVisible:
+    element: "Check a delivery.*"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- tapOn: "Check a delivery.*"
+- scrollUntilVisible:
+    element:
+      id: "field-search-by-name-supplier-or-barcode-number"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- tapOn:
+    id: "field-search-by-name-supplier-or-barcode-number"
+- inputText: "teriyaki"
+- hideKeyboard
+- scrollUntilVisible:
+    element: "Harbour Teriyaki Sauce 1L"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- tapOn: "Harbour Teriyaki Sauce 1L"
+- scrollUntilVisible:
+    element: "Next: what is on the pack\\?"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- tapOn: "Next: what is on the pack\\?"
+- scrollUntilVisible:
+    element: "Scan the barcode"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- tapOn: "Scan the barcode"
+- scrollUntilVisible:
+    element: "Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*"
+    direction: DOWN
+    timeout: 60000
+    speed: 85
+- takeScreenshot: 29-scan-known-barcode-read

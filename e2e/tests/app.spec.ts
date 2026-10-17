@@ -434,6 +434,46 @@ test.describe("IngredientAlert on a phone-sized browser", () => {
     await expect(text(page, "Glazed salmon bowl")).toHaveCount(0);
   });
 
+  test("Settings > About: the on-device encryption check runs the real code and passes", async ({ page }) => {
+    await example(page);
+    await openSettings(page);
+    await btn(page, "About this build").click();
+    await btn(page, "Check encryption on this phone").click();
+    await expect(text(page, "Encryption check: passed")).toBeVisible();
+    await expect(text(page, "One changed character in the encrypted text is refused")).toBeVisible();
+    await expect(text(page, "docs/ENCRYPTION_ACCOUNT.md")).toBeVisible();
+  });
+
+  test("shared device accountability: two named people acknowledge under their own names, an approver cannot acknowledge for them, nothing is a notification", async ({ page }) => {
+    await example(page);
+    await demoTools(page);
+    await btn(page, "Jump to: revision 2 published, nobody has acknowledged yet").click();
+    await as(page, "Jo");
+    await btn(page, "Menu for service and acknowledgement").click();
+    await btn(page, "I have seen revision 2").click();
+    await btn(page, "Yes, I have seen it").click();
+    await expect(text(page, "You acknowledged revision 2")).toBeVisible();
+    await expect(text(page, "Not yet confirmed: Jess")).toBeVisible();
+    await expect(text(page, "sends no notifications")).toBeVisible();
+    await as(page, "Sam");
+    await btn(page, "Menu for service and acknowledgement").click();
+    await expect(text(page, "This step is for the Service staff.")).toBeVisible();
+    await expect(btn(page, "I have seen revision 2")).toHaveCount(0);
+    await as(page, "Jess");
+    await btn(page, "Menu for service and acknowledgement").click();
+    await expect(text(page, "You acknowledged revision 2")).toHaveCount(0); // Jo's acknowledgement is not Jess's
+    await btn(page, "I have seen revision 2").click();
+    await btn(page, "Yes, I have seen it").click();
+    await expect(text(page, "Everyone on the list has confirmed this revision.")).toBeVisible();
+    await as(page, "Morgan");
+    await openSettings(page);
+    await btn(page, "Manager tools").click();
+    await btn(page, "Show history").click();
+    const hist = await page.getByLabel("History export").textContent();
+    expect(hist).toContain('"staffId": "jo"');
+    expect(hist).toContain('"staffId": "jess"');
+  });
+
   test("makes no network requests beyond the app's own files", async ({ page, baseURL }) => {
     const external: string[] = [];
     page.on("request", (r) => { if (!r.url().startsWith(baseURL!) && !r.url().startsWith("data:") && !r.url().startsWith("blob:")) external.push(r.url()); });

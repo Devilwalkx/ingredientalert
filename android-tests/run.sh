@@ -35,12 +35,21 @@ adb exec-out screencap -p > "$OUT/shots/00-launch.png"
 adb shell uiautomator dump /sdcard/launch.xml >/dev/null 2>&1 && adb pull /sdcard/launch.xml "$OUT/hierarchy/launch.xml" >/dev/null 2>&1
 adb shell am force-stop $PKG
 
+a11y_audit() {
+  local label="$1"
+  adb shell uiautomator dump /sdcard/a11y.xml >/dev/null 2>&1 && adb pull /sdcard/a11y.xml "$OUT/hierarchy/$label.xml" >/dev/null 2>&1 || { echo "{\"screen\":\"$label\",\"error\":\"dump failed\"}" >> "$OUT/a11y-tree.jsonl"; return; }
+  local dpi; dpi=$(adb shell wm density | tr -d '\r' | grep -oE '[0-9]+' | tail -1)
+  python3 android-tests/a11y-tree-audit.py "$OUT/hierarchy/$label.xml" "${dpi:-420}" "$label" >> "$OUT/a11y-tree.jsonl" 2>>"$OUT/log.txt" || true
+}
+{ echo "packages matching talkback/accessibility on this emulator image:"; adb shell pm list packages 2>/dev/null | tr -d '\r' | grep -iE "talkback|marvin|accessibility" || echo "(none)"; } > "$OUT/talkback-probe.txt"
+
 run_flow_soft() {
   local f=$1
   log "flow (not gating) $f"
   ( cd "$OUT/shots" && timeout 300 maestro test --no-ansi --format junit --output "../junit/$(basename "$f" .yaml).xml" "$GITHUB_WORKSPACE/android-tests/flows/$f" ) 2>&1 | tail -30 | tee -a "$OUT/log.txt"
   local rc=${PIPESTATUS[0]}
   mkdir -p "$OUT/maestro"; D=$(ls -dt "$HOME"/.maestro/tests/*/ 2>/dev/null | head -1); [ -n "$D" ] && cp -r "$D" "$OUT/maestro/$(basename "$f" .yaml)" 2>/dev/null || true
+  a11y_audit "$(basename "$f" .yaml)"
   echo "$f rc=$rc" >> "$OUT/soft-flows.txt"
   if [ "$rc" != "0" ]; then adb exec-out screencap -p > "$OUT/shots/SOFTFAIL-$(basename "$f" .yaml).png"; fi
 }
@@ -51,6 +60,7 @@ run_flow() {
   ( cd "$OUT/shots" && timeout 420 maestro test --no-ansi --format junit --output "../junit/$(basename "$f" .yaml).xml" "$GITHUB_WORKSPACE/android-tests/flows/$f" ) 2>&1 | tail -40 | tee -a "$OUT/log.txt"
   local rc=${PIPESTATUS[0]}
   mkdir -p "$OUT/maestro"; D=$(ls -dt "$HOME"/.maestro/tests/*/ 2>/dev/null | head -1); [ -n "$D" ] && cp -r "$D" "$OUT/maestro/$(basename "$f" .yaml)" 2>/dev/null || true
+  a11y_audit "$(basename "$f" .yaml)"
   if [ "$rc" != "0" ]; then FAIL=1; log "FLOW FAILED: $f"; adb exec-out screencap -p > "$OUT/shots/FAILED-$(basename "$f" .yaml).png"; fi
 }
 
@@ -80,9 +90,9 @@ run_flow 02-check-delivery-review-substitution.yaml
 adb shell pkill -2 screenrecord; wait $REC 2>/dev/null; sleep 2
 adb pull /sdcard/main-task.mp4 "$OUT/main-task.mp4" >/dev/null 2>&1 || log "no recording"
 
-for f in 01-first-run.yaml 04-back-navigation.yaml 07-settings-display.yaml 08-real-kitchen-pin-keyboard.yaml 11-dark-theme-in-app.yaml; do run_flow $f; done
+for f in 01-first-run.yaml 04-back-navigation.yaml 07-settings-display.yaml 08-real-kitchen-pin-keyboard.yaml 11-dark-theme-in-app.yaml 12-encryption-check.yaml 13-two-staff-acknowledge.yaml 14-auto-lock.yaml; do run_flow $f; done
 # camera permission flows depend on the Android permission dialog wording of each API level: reported, but they do not fail the job
-for f in 03-camera-permission-granted.yaml 09-scan-timeout-and-manual.yaml 10-camera-permission-denied.yaml; do run_flow_soft $f; done
+for f in 03-camera-permission-granted.yaml 09-scan-timeout-and-manual.yaml 10-camera-permission-denied.yaml 16-camera-first-denial-manual.yaml 15-scan-known-barcode.yaml; do run_flow_soft $f; done
 
 # process death: draft is written, app goes to background, the OS kills the process, then it is relaunched
 run_flow 05-draft-write.yaml
@@ -90,6 +100,19 @@ sleep 2
 adb shell am kill $PKG
 sleep 1
 adb shell pidof $PKG > "$OUT/pid-after-kill.txt" || echo "process gone" > "$OUT/pid-after-kill.txt"
+# ---- signing consequence: an APK with the same package id but a DIFFERENT signing key must be refused by Android and must not touch the installed app's data.
+# The key here is a throw-away created for this check only; it is deleted straight away and is not a release key.
+log "signing consequence check (throw-away key)"
+BT=$(ls -d "${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"/build-tools/* 2>/dev/null | sort -V | tail -1)
+if [ -n "$BT" ] && command -v keytool >/dev/null; then
+  keytool -genkeypair -keystore "$OUT/throwaway.jks" -storepass throwaway -keypass throwaway -alias t -keyalg RSA -keysize 2048 -validity 2 -dname "CN=throwaway" >/dev/null 2>&1
+  "$BT/apksigner" sign --ks "$OUT/throwaway.jks" --ks-pass pass:throwaway --out "$OUT/resigned.apk" "$APK" >/dev/null 2>&1
+  adb install -r "$OUT/resigned.apk" > "$OUT/foreign-signature-install.txt" 2>&1 || true
+  rm -f "$OUT/throwaway.jks" "$OUT/resigned.apk" "$OUT/resigned.apk.idsig"
+  if grep -q "INSTALL_FAILED_UPDATE_INCOMPATIBLE" "$OUT/foreign-signature-install.txt"; then echo "PASS: Android refused to install a differently signed APK over the installed app (INSTALL_FAILED_UPDATE_INCOMPATIBLE). The next flow checks the app's data is intact." | tee "$OUT/signing-consequence.txt"; else echo "FAIL: unexpected result: $(cat "$OUT/foreign-signature-install.txt")" | tee "$OUT/signing-consequence.txt"; FAIL=1; fi
+else
+  echo "NOT TESTED: apksigner or keytool not found on this runner" | tee "$OUT/signing-consequence.txt"
+fi
 run_flow 06-draft-restore.yaml
 
 # rotation and relaunch

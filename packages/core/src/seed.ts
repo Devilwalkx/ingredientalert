@@ -155,3 +155,28 @@ export function ownKitchenState(opts: { kitchenName: string; siteName: string; o
   s.audit.push({ seq: 1, at, tenantId, siteId: null, actorId: ownerId, action: "kitchen.created", targetType: "tenant", targetId: tenantId, detail: "", prevHash: prev, hash: sha(body) });
   return { state: s, ownerId, siteId };
 }
+
+/**
+ * Demonstration shortcut only (example kitchen): runs the whole sauce story through the REAL engine commands, each as the person
+ * who holds that role (Alex receives, Priya enters the specification and checks the recipes, Sam approves and publishes all three
+ * places), and stops with revision 2 published and nobody having acknowledged it. Nothing is written except through the engine, so
+ * the audit trail names the real actors. It is not available in a real kitchen.
+ */
+export function demoPublishSauceRevision(e: Engine): void {
+  if (!e.state.synthetic) throw new Error("Demonstration shortcut: example kitchen only");
+  const prev = e.adapter;
+  e.adapter = () => ({ ok: true });
+  try {
+    const r = e.receiveDelivery("alex", sauceDelivery(MAIN), "ff-recv");
+    const caseId = r.caseId;
+    if (!caseId) throw new Error("expected a review case");
+    const v = () => e.state.cases.find((c) => c.id === caseId)!;
+    e.verifySpecification("priya", caseId, v().version, { newProduct: { name: SUB_NAME, supplier: "Fictional Foods Ltd" }, spec: substituteSpecInput() });
+    e.reviewImpact("priya", caseId, v().version);
+    e.approveCase("sam", caseId, { expectedVersion: v().version, specId: v().specId!, impactDigest: v().impact!.digest, requestId: "ff-appr" });
+    const { publication } = e.preparePublication("sam", MAIN, "ff-prep");
+    for (const ch of ["qr_web", "service_view", "printed_menu"] as const) e.publishChannel("sam", publication.id, ch, `ff-${ch}`);
+  } finally {
+    e.adapter = prev;
+  }
+}

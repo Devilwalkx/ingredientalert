@@ -1,0 +1,28 @@
+appId: app.devilwalkx.ingredientalert
+name: The on-phone encryption check runs the real encryption code and the real key storage, and passes (including refusing a tampered copy)
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the example kitchen"
+- tapOn: "Alex Rivera"
+- tapOn: "Settings"
+- scrollUntilVisible:
+    element: "About this build"
+    direction: DOWN
+    timeout: 90000
+    speed: 40
+- tapOn: "About this build"
+- scrollUntilVisible:
+    element: "Check encryption on this phone"
+    direction: DOWN
+    timeout: 90000
+    speed: 40
+- tapOn: "Check encryption on this phone"
+- scrollUntilVisible:
+    element: "Encryption check: .*"
+    direction: DOWN
+    timeout: 60000
+    speed: 40
+- assertVisible: "Encryption check: passed"
+- assertVisible: ".*One changed character in the encrypted text is refused.*"
+- takeScreenshot: 24-encryption-check
