@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { AccessibilityInfo, BackHandler, Keyboard, Platform, Pressable, ScrollView, Text, View, findNodeHandle } from "react-native";
+import { AccessibilityInfo, BackHandler, Dimensions, Keyboard, PixelRatio, Platform, Pressable, ScrollView, Text, TextInput, View, findNodeHandle } from "react-native";
 import { SafeAreaInsetsContext, SafeAreaProvider, SafeAreaView, initialWindowMetrics, useSafeAreaInsets, type EdgeInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
@@ -105,6 +105,15 @@ function Root() {
     const show = Keyboard.addListener("keyboardDidShow", (e) => {
       beforeKb.current = rootH.current;
       setTimeout(() => { if (rootH.current >= beforeKb.current - 4) setKb(Math.max(0, e.endCoordinates.height - insets.bottom)); }, 120);
+      // Keep the focused field AND the action under it (about 100 dp, scaled by font size) above the keyboard.
+      setTimeout(() => {
+        const field = TextInput.State.currentlyFocusedInput?.();
+        const visibleBottom = rootH.current > 0 ? rootH.current : Dimensions.get("window").height - e.endCoordinates.height;
+        field?.measureInWindow?.((_x: number, y: number, _w: number, h: number) => {
+          const over = y + h + 100 * Math.max(1, PixelRatio.getFontScale()) + 24 - visibleBottom;
+          if (over > 0) scroller.current?.scrollTo({ y: scrollY.current + over, animated: true });
+        });
+      }, 300);
     });
     const hide = Keyboard.addListener("keyboardDidHide", () => setKb(0));
     return () => { show.remove(); hide.remove(); };
