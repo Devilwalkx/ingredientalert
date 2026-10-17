@@ -49,6 +49,7 @@ export function DeliverScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => { app.scrollTop(); /* eslint-disable-next-line */ }, [view.k]);
   useEffect(() => { if (view.k === "order") { setResult(null); setQueuedNow(false); req.current = newRequestId(); } }, [view.k]);
 
   const form: ReceivingInput = { siteId: site, orderedProductId: productId, barcode, packSize: pack, batchCode: batch, labelSpecRef: label, deliveryNoteRef: note };

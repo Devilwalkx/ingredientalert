@@ -48,6 +48,9 @@ interface Ctx {
   go(s: Screen, param?: string): void;
   takeParam(): string | null;
   navNonce: number;
+  /** Changes when a screen asks to be shown from its top (for example after a step finishes and the next step appears). */
+  scrollNonce: number;
+  scrollTop(): void;
   back(): boolean;
   registerBack(fn: (() => boolean) | null): void;
   settings: Settings;
@@ -92,6 +95,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [locked, setLocked] = useState(true);
   const [screen, setScreen] = useState<Screen>("home");
   const [nonce, setNonce] = useState(0);
+  const [scrollNonce, setScrollNonce] = useState(0);
   const [settings, setSettingsState] = useState<Settings>(DEFAULT_SETTINGS);
   const [prefill, setPrefill] = useState<Prefill>({});
   const [toast, setToast] = useState<Toast | null>(null);
@@ -322,6 +326,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     go: (s, prm) => { subBack.current = null; param.current = prm ?? null; setToast(null); setScreen(s); setNonce((n) => n + 1); },
     takeParam: () => { const v = param.current; param.current = null; return v; },
     navNonce: nonce,
+    scrollNonce, scrollTop: () => setScrollNonce((n) => n + 1),
     registerBack: (fn) => { subBack.current = fn; },
     back: () => {
       if (subBack.current && subBack.current()) return true;

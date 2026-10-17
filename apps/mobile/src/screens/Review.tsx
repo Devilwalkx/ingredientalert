@@ -82,6 +82,7 @@ function CaseBody({ id }: { id: string }) {
   const ordered = productName(s, cs.orderedProductId);
   const open = cs.state !== "approved" && cs.state !== "rejected";
   const scope = affectedScope(s, cs);
+  useEffect(() => { app.scrollTop(); /* eslint-disable-next-line */ }, [cs.version]);
 
   const approve = () => {
     const impact = cs.impact!;

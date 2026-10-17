@@ -76,9 +76,13 @@ function Root() {
   const rootH = useRef(0);
   const scrollY = useRef(0);
   const scrollTop = useRef(0);
+  const navRef = useRef(0);
+  navRef.current = app.navNonce;
   const bringIntoView = (node: unknown) => {
     if (Platform.OS === "web") return;
+    const at = navRef.current;
     setTimeout(() => {
+      if (navRef.current !== at) return; // the screen changed meanwhile: do not scroll the new one
       (node as { measureInWindow?: (cb: (x: number, y: number) => void) => void } | null)?.measureInWindow?.((_x, y) => {
         scroller.current?.scrollTo({ y: Math.max(0, scrollY.current + (y - scrollTop.current) - 12), animated: true });
       });
@@ -117,6 +121,7 @@ function Root() {
     }, 150);
     return () => clearTimeout(t);
   }, [app.screen, app.navNonce, locked]);
+  useEffect(() => { scroller.current?.scrollTo({ y: 0, animated: false }); }, [app.scrollNonce]);
 
   if (randomError) {
     return (

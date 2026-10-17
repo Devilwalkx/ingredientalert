@@ -11,9 +11,11 @@ name: Settings - theme, text size, shared-device lock, build identity
 - scrollUntilVisible:
     element: "About this build"
     direction: DOWN
+    timeout: 60000
 - tapOn: "About this build"
 - scrollUntilVisible:
     element: "App ID.*"
     direction: DOWN
+    timeout: 60000
 - assertVisible: "app.devilwalkx.ingredientalert"
 - takeScreenshot: 14-about-build

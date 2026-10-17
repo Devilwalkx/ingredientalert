@@ -8,19 +8,23 @@ name: Scan finds nothing in the emulator's virtual scene - timeout notice, retry
 - scrollUntilVisible:
     element: "Try the example kitchen"
     direction: DOWN
+    timeout: 60000
 - tapOn: "Try the example kitchen"
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
+    timeout: 60000
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
+    timeout: 60000
 - tapOn: "Check a delivery.*"
 - scrollUntilVisible:
     element:
       id: "field-search-by-name-supplier-or-barcode-number"
     direction: DOWN
+    timeout: 60000
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
@@ -28,14 +32,17 @@ name: Scan finds nothing in the emulator's virtual scene - timeout notice, retry
 - scrollUntilVisible:
     element: "Harbour Teriyaki Sauce 1L"
     direction: DOWN
+    timeout: 60000
 - tapOn: "Harbour Teriyaki Sauce 1L"
 - scrollUntilVisible:
     element: "Next: what is on the pack\\?"
     direction: DOWN
+    timeout: 60000
 - tapOn: "Next: what is on the pack\\?"
 - scrollUntilVisible:
     element: "Scan the barcode"
     direction: DOWN
+    timeout: 60000
 - tapOn: "Scan the barcode"
 - extendedWaitUntil:
     visible: "No barcode was read in 20 seconds.*"
@@ -44,6 +51,7 @@ name: Scan finds nothing in the emulator's virtual scene - timeout notice, retry
 - scrollUntilVisible:
     element: "Try scanning again"
     direction: DOWN
+    timeout: 60000
 - tapOn: "Try scanning again"
 - extendedWaitUntil:
     visible: "No barcode was read in 20 seconds.*"
@@ -51,14 +59,17 @@ name: Scan finds nothing in the emulator's virtual scene - timeout notice, retry
 - scrollUntilVisible:
     element: "Type the number or search instead"
     direction: DOWN
+    timeout: 60000
 - tapOn: "Type the number or search instead"
 - scrollUntilVisible:
     element:
       id: "field-barcode-number"
     direction: DOWN
+    timeout: 60000
 - tapOn:
     id: "field-barcode-number"
 - inputText: "4006381333931"
 - scrollUntilVisible:
     element: ".*not in your product list.*"
     direction: DOWN
+    timeout: 60000
