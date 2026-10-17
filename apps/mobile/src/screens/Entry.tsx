@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { ROLE_LABEL, rolesAt, validatePin } from "@ingredientalert/core";
 import { buildInfo } from "../buildInfo";
@@ -47,6 +47,7 @@ export function SetupScreen() {
   const [pin2, setPin2] = useState("");
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  useEffect(() => { app.scrollTop(); /* eslint-disable-next-line */ }, [step]);
   const submit = async () => {
     if (busy) return;
     if (pin !== pin2) { setErr("The two PINs are not the same."); return; }

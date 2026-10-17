@@ -5,9 +5,15 @@ on:
     branches: [main, "claude/**"]
   pull_request:
   workflow_dispatch:
+    inputs:
+      reuse_apk_run:
+        description: "Run id whose APK artifact to test again (skips the APK build; use after changing only tests or scripts)"
+        required: false
+        default: ""
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   test-and-web:
@@ -34,6 +40,7 @@ jobs:
           retention-days: 14
 
   android-apk:
+    if: ${{ github.event.inputs.reuse_apk_run == '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -49,6 +56,13 @@ jobs:
       - run: npm ci
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: gradle-${{ runner.os }}-
       - name: Generate native Android project
         working-directory: apps/mobile
         env:
@@ -83,7 +97,11 @@ jobs:
           grep -q 'enableOnBackInvokedCallback="true"' android/app/src/main/AndroidManifest.xml
       - name: "Build release APK (signed with the public Android debug key: test signing only)"
         working-directory: apps/mobile/android
-        run: ./gradlew assembleRelease --no-daemon
+        run: |
+          # Branch builds exist to be tested on the x86_64 emulator, so they build one CPU type (faster).
+          # The main-branch build, which becomes the release, builds every CPU type that real phones use.
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then ./gradlew assembleRelease --no-daemon --build-cache
+          else ./gradlew assembleRelease --no-daemon --build-cache -PreactNativeArchitectures=x86_64; fi
       - uses: actions/upload-artifact@v4
         with:
           name: ingredientalert-android-test-apk
@@ -92,6 +110,7 @@ jobs:
 
   android-emulator:
     needs: android-apk
+    if: ${{ always() && (needs.android-apk.result == 'success' || github.event.inputs.reuse_apk_run != '') }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
@@ -103,9 +122,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
+        if: ${{ github.event.inputs.reuse_apk_run == '' }}
         with:
           name: ingredientalert-android-test-apk
           path: apk
+      - name: Reuse the APK from an earlier run
+        if: ${{ github.event.inputs.reuse_apk_run != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download "${{ github.event.inputs.reuse_apk_run }}" -n ingredientalert-android-test-apk -D apk --repo "${{ github.repository }}"
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

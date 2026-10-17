@@ -157,12 +157,8 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
     timeout: 60000
     speed: 85
 - tapOn: "Sam Okoye"
-- scrollUntilVisible:
-    element: "Review"
-    direction: UP
-    timeout: 60000
-    speed: 85
-- tapOn: "Review"
+- tapOn:
+    id: "tab-review"
 - scrollUntilVisible:
     element: "Open review.*"
     direction: DOWN

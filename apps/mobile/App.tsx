@@ -189,7 +189,7 @@ function Root() {
               const active = S === n.id || (n.id === "publish" && S === "service");
               const badge = n.id === "review" ? reviewBadge : n.id === "publish" ? pubBadge : 0;
               return (
-                <Pressable key={n.id} accessibilityRole="tab" accessibilityState={{ selected: active }} aria-selected={active}
+                <Pressable key={n.id} testID={`tab-${n.id}`} accessibilityRole="tab" accessibilityState={{ selected: active }} aria-selected={active}
                   accessibilityLabel={badge ? undefined : n.label} accessibilityHint={badge ? `${badge} outstanding` : undefined}
                   onPress={() => app.go(n.id)} android_ripple={{ color: c.line }}
                   style={{ flex: 1, minHeight: 64, alignItems: "center", justifyContent: "center", paddingVertical: 6 }}>

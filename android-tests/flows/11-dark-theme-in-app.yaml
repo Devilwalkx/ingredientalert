@@ -33,12 +33,8 @@ name: Dark theme chosen inside the app (the emulator's system night mode did not
     timeout: 60000
     speed: 85
 - takeScreenshot: 22-dark-settings
-- scrollUntilVisible:
-    element: "Home"
-    direction: UP
-    timeout: 60000
-    speed: 85
-- tapOn: "Home"
+- tapOn:
+    id: "tab-home"
 - scrollUntilVisible:
     element: "Status now"
     direction: DOWN

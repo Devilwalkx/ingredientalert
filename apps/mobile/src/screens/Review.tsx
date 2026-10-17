@@ -29,6 +29,7 @@ export function ReviewScreen() {
   const s = app.state!;
   const [view, setView] = useView<V>({ k: "list" });
   useEffect(() => { const p = app.takeParam(); if (p && s.cases.some((x) => x.id === p)) setView({ k: "case", id: p }); /* eslint-disable-next-line */ }, []);
+  useEffect(() => { app.scrollTop(); /* eslint-disable-next-line */ }, [view.k]);
   const cases = s.cases.filter((x) => x.siteId === app.siteId);
   const open = cases.filter((x) => x.state !== "approved" && x.state !== "rejected");
   const done = cases.filter((x) => x.state === "approved" || x.state === "rejected");
