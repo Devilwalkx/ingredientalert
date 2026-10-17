@@ -1,0 +1,194 @@
+19:55:17.500 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: /home/runner/.maestro/tests/2026-10-17_195517
+19:55:17.503 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+19:55:17.504 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.11.0
+19:55:17.505 [ INFO] MAESTRO.logSystemInfo: CI: github
+19:55:17.506 [ INFO] MAESTRO.logSystemInfo: OS Name: Linux
+19:55:17.506 [ INFO] MAESTRO.logSystemInfo: OS Version: 6.17.0-1022-azure
+19:55:17.506 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+19:55:17.508 [ INFO] MAESTRO.logSystemInfo: Java Version: 17
+19:55:17.510 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+19:55:17.513 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+19:55:17.515 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+19:55:17.515 [ INFO] MAESTRO.logSystemInfo: ---------------------
+19:55:18.378 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+19:55:21.264 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 33523 with execution plan ExecutionPlan(flowsToRun=[/home/runner/work/ingredientalert/ingredientalert/android-tests/flows/08-real-kitchen-pin-keyboard.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+19:55:25.171 [ INFO] maestro.cli.runner.TestSuiteInteractor.runFlow:  Running flow Real kitchen - set up with a PIN, keyboard never hides the field or the next action, lock and sign in again
+19:55:25.186 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Getting device info
+19:55:25.428 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Got device info: DeviceInfo(platform=ANDROID, widthPixels=1080, heightPixels=2340, widthGrid=1080, heightGrid=2340)
+19:55:25.532 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Define variables RUNNING
+19:55:25.535 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Define variables COMPLETED
+19:55:25.535 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Apply configuration RUNNING
+19:55:25.536 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Apply configuration COMPLETED
+19:55:25.536 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Launch app "app.devilwalkx.ingredientalert" with clear state RUNNING
+19:55:25.537 [ INFO] maestro.Maestro.clearAppState$lambda$8: Clearing app state app.devilwalkx.ingredientalert
+19:55:26.680 [DEBUG] maestro.Maestro.setPermissionInternal: Failed to set permission com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE for app app.devilwalkx.ingredientalert: shell command failed (exit -1): 
+Exception occurred while executing:
+java.lang.IllegalArgumentException: Unknown permission: com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+	at com.android.server.pm.permission.PermissionManagerService.grantRuntimePermission(PermissionManagerService.java:2090)
+	at com.android.server.pm.permission.PermissionManagerService.access$900(PermissionManagerService.java:120)
+	at com.android.server.pm.permission.PermissionManagerService$PermissionManagerServiceInternalImpl.grantRuntimePermission(PermissionManagerService.java:2999)
+	at com.android.server.pm.PackageManagerService.grantRuntimePermission(PackageManagerService.java:5734)
+	at com.android.server.pm.PackageManagerShellCommand.runGrantRevokePermission(PackageManagerShellCommand.java:1955)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:230)
+	at android.os.ShellCommand.exec(ShellCommand.java:104)
+	at com.android.server.pm.PackageManagerService.onShellCommand(PackageManagerService.java:21729)
+	at android.os.Binder.shellCommand(Binder.java:881)
+	at android.os.Binder.onTransact(Binder.java:765)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4860)
+	at com.android.server.pm.PackageManagerService.onTransact(PackageManagerService.java:4014)
+	at android.os.Binder.execTransactInternal(Binder.java:1021)
+	at android.os.Binder.execTransact(Binder.java:994)
+
+19:55:26.685 [ INFO] maestro.Maestro.launchApp$lambda$5: Launching app app.devilwalkx.ingredientalert
+19:55:26.685 [ INFO] maestro.Maestro.launchApp$lambda$5: Stopping app.devilwalkx.ingredientalert app during launch
+19:55:26.881 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Launch app "app.devilwalkx.ingredientalert" with clear state COMPLETED
+19:55:26.883 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Set up my kitchen" is visible with speed 85, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+19:55:28.735 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Set up my kitchen
+19:55:28.749 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:30.278 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+19:55:30.283 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=229, y=492, width=709, height=121)
+19:55:30.284 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+19:55:30.303 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Set up my kitchen, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=151, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=85, label=null, optional=false).centerElement
+19:55:30.304 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+19:55:30.304 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Set up my kitchen" is visible with speed 85, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+19:55:30.304 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Set up my kitchen" RUNNING
+19:55:30.388 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Set up my kitchen, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[229,492][938,613], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=229, y=492, width=709, height=121))
+19:55:31.629 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+19:55:31.635 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (583, 552) using hierarchy based logic for wait
+19:55:32.744 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+19:55:32.745 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Set up my kitchen" COMPLETED
+19:55:32.745 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until id: field-business-or-kitchen-group-name is visible with speed 85, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+19:55:32.940 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+19:55:32.941 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=44, y=1290, width=992, height=183)
+19:55:32.941 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+19:55:32.941 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=null, idRegex=field-business-or-kitchen-group-name, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=151, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=85, label=null, optional=false).centerElement
+19:55:32.941 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+19:55:32.942 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until id: field-business-or-kitchen-group-name is visible with speed 85, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+19:55:32.942 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on id: field-business-or-kitchen-group-name RUNNING
+19:55:33.012 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=, accessibilityText=Business or kitchen group name, hintText=, ignoreBoundsFiltering=false, resource-id=field-business-or-kitchen-group-name, clickable=true, bounds=[44,1290][1036,1473], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.EditText, important-for-accessibility=true, error=}, children=[], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=44, y=1290, width=992, height=183))
+19:55:34.352 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+19:55:34.353 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (540, 1381) using hierarchy based logic for wait
+19:55:36.338 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+19:55:36.339 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on id: field-business-or-kitchen-group-name COMPLETED
+19:55:36.339 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Input text Test Cafe RUNNING
+19:55:36.340 [ INFO] maestro.Maestro.inputText: Inputting text: Test Cafe
+19:55:38.991 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Input text Test Cafe COMPLETED
+19:55:38.992 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Take screenshot 15-keyboard-open-setup RUNNING
+19:55:38.994 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+19:55:38.995 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+19:55:39.380 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Take screenshot 15-keyboard-open-setup COMPLETED
+19:55:39.380 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Next" is visible with speed 85, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+19:55:39.557 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+19:55:39.558 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=447, y=1480, width=185, height=121)
+19:55:39.558 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+19:55:39.558 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Next, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=151, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=85, label=null, optional=false).centerElement
+19:55:39.558 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+19:55:39.559 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Next" is visible with speed 85, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+19:55:39.559 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Next" RUNNING
+19:55:39.724 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Next, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[447,1480][632,1601], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=447, y=1480, width=185, height=121))
+19:55:40.993 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+19:55:40.995 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (539, 1540) using hierarchy based logic for wait
+19:55:42.631 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+19:55:42.632 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Next" COMPLETED
+19:55:42.632 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until id: field-your-name is visible with speed 85, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+19:55:43.414 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:43.451 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:45.431 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:45.519 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:46.741 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:46.789 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:47.981 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:48.069 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:49.282 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:49.327 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:50.491 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:50.579 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:51.811 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:51.859 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:52.982 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:53.028 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:54.241 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:54.329 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:55.481 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:55.529 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:56.599 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:56.645 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:57.901 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:57.949 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:55:59.231 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:55:59.319 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:00.571 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:00.619 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:01.881 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:01.928 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:03.142 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:03.229 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:04.391 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:04.439 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:05.591 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:05.679 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:06.841 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:06.849 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:07.991 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:07.998 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:09.160 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:09.167 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:10.301 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:10.307 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:11.391 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:11.436 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:12.521 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:12.567 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:13.731 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:13.737 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:14.870 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:14.876 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:15.971 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:16.014 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:17.181 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:17.269 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:18.421 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:18.467 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:19.721 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:19.769 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:20.981 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:21.070 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:22.231 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:22.319 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:23.461 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:23.509 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:24.711 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:24.799 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:26.110 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:26.118 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:27.311 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:27.399 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:28.590 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:28.679 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:29.961 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:30.049 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:31.241 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:31.329 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:32.521 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:32.570 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:33.822 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:33.909 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:35.180 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:35.185 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:36.471 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:36.559 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:37.801 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:37.889 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:39.221 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:39.269 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:40.551 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:40.639 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:41.841 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:41.929 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:43.160 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Id matching regex: field-your-name
+19:56:43.209 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+19:56:43.881 [ERROR] maestro.orchestra.Orchestra.executeCommands: [Command execution] CommandFailed: No visible element found: id: field-your-name
+19:56:44.180 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+19:56:44.180 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+19:56:44.375 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until id: field-your-name is visible with speed 85, visibility percentage 100%, timeout 60000 ms, with centering disabled FAILED
+19:56:45.696 [ INFO] maestro.cli.report.TestDebugReporter.deleteOldFiles: Performing purge of logs older than 14 days from /home/runner/.maestro/tests
