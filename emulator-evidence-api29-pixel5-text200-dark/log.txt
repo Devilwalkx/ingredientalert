@@ -1,0 +1,116 @@
+== install
+Performing Streamed Install
+Success
+requested (merged manifest): android.permission.CAMERA
+== baseline launch
+== upgrade check
+== flow 02-check-delivery-review-substitution.yaml
+Anonymous analytics enabled. To opt out, set MAESTRO_CLI_NO_ANALYTICS environment variable to any value before running Maestro.
+
+
+Waiting for flows to complete...
+[Failed] MAIN TASK - check a delivery, then review the substitution (example kitchen) (2m 34s) (No visible element found: "Step 1 of 3: enter the supplier's specification")
+
+1/1 Flow Failed
+
+== FLOW FAILED: 02-check-delivery-review-substitution.yaml
+== flow 01-first-run.yaml
+
+Waiting for flows to complete...
+[Passed] First run shows two clear starts and no demonstration controls (6s)
+
+1/1 Flow Passed in 6s
+
+== flow 04-back-navigation.yaml
+
+Waiting for flows to complete...
+[Passed] System Back unwinds a step, then goes home, then leaves the app (37s)
+
+1/1 Flow Passed in 37s
+
+== flow 07-settings-display.yaml
+
+Waiting for flows to complete...
+[Passed] Settings - theme, text size, shared-device lock, build identity (17s)
+
+1/1 Flow Passed in 17s
+
+== flow 08-real-kitchen-pin-keyboard.yaml
+
+Waiting for flows to complete...
+[Failed] Real kitchen - set up with a PIN, keyboard never hides the field or the next action, lock and sign in again (1m 20s) (No visible element found: id: field-your-name)
+
+1/1 Flow Failed
+
+== FLOW FAILED: 08-real-kitchen-pin-keyboard.yaml
+== flow 11-dark-theme-in-app.yaml
+
+Waiting for flows to complete...
+[Failed] Dark theme chosen inside the app (the emulator's system night mode did not reach the app in an earlier run) (1m 20s) (No visible element found: "Status now")
+
+1/1 Flow Failed
+
+== FLOW FAILED: 11-dark-theme-in-app.yaml
+== flow (not gating) 03-camera-permission-granted.yaml
+
+Waiting for flows to complete...
+[Passed] Camera already allowed - the scanner opens with torch control and tells the truth when nothing is read (40s)
+
+1/1 Flow Passed in 40s
+
+== flow (not gating) 09-scan-timeout-and-manual.yaml
+
+Waiting for flows to complete...
+[Failed] Scan finds nothing in the emulator's virtual scene - timeout notice, retry, then manual search (2m 18s) (No visible element found: id: field-barcode-number)
+
+1/1 Flow Failed
+
+== flow (not gating) 10-camera-permission-denied.yaml
+	at org.apache.logging.log4j.core.config.AppenderControl.tryCallAppender(AppenderControl.java:160)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppender0(AppenderControl.java:133)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppenderPreventRecursion(AppenderControl.java:124)
+	at org.apache.logging.log4j.core.config.AppenderControl.callAppender(AppenderControl.java:88)
+	at org.apache.logging.log4j.core.config.LoggerConfig.callAppenders(LoggerConfig.java:711)
+	at org.apache.logging.log4j.core.config.LoggerConfig.processLogEvent(LoggerConfig.java:669)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:645)
+	at org.apache.logging.log4j.core.config.LoggerConfig.logParent(LoggerConfig.java:702)
+	at org.apache.logging.log4j.core.config.LoggerConfig.processLogEvent(LoggerConfig.java:671)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:645)
+	at org.apache.logging.log4j.core.config.LoggerConfig.log(LoggerConfig.java:589)
+	at org.apache.logging.log4j.core.config.DefaultReliabilityStrategy.log(DefaultReliabilityStrategy.java:73)
+	at org.apache.logging.log4j.core.Logger.log(Logger.java:187)
+	at org.apache.logging.log4j.spi.AbstractLogger.tryLogMessage(AbstractLogger.java:2970)
+	at org.apache.logging.log4j.spi.AbstractLogger.logMessageTrackRecursion(AbstractLogger.java:2922)
+	at org.apache.logging.log4j.spi.AbstractLogger.logMessageSafely(AbstractLogger.java:2904)
+	at org.apache.logging.log4j.spi.AbstractLogger.logMessage(AbstractLogger.java:2653)
+	at org.apache.logging.log4j.spi.AbstractLogger.logIfEnabled(AbstractLogger.java:2393)
+	at org.apache.logging.slf4j.Log4jLogger.info(Log4jLogger.java:173)
+	at maestro.drivers.AndroidDriver.close(AndroidDriver.kt:180)
+	at maestro.Maestro.close(Maestro.kt:602)
+	at maestro.cli.session.MaestroSessionManager$MaestroSession.close(MaestroSessionManager.kt:471)
+	at maestro.cli.session.MaestroSessionManager.newSession$lambda$2(MaestroSessionManager.kt:129)
+	at kotlin.concurrent.ThreadsKt$thread$thread$1.run(Thread.kt:30)
+Caused by: java.io.IOException: Stream Closed
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:349)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.writeToDestination(OutputStreamManager.java:263)
+	... 30 more
+
+== flow 05-draft-write.yaml
+
+Waiting for flows to complete...
+[Passed] Start a delivery, then leave the app (the script kills the process) (38s)
+
+1/1 Flow Passed in 38s
+
+== flow 06-draft-restore.yaml
+
+Waiting for flows to complete...
+[Passed] After process death the example kitchen asks who is using the device and the unsent delivery is still there (18s)
+
+1/1 Flow Passed in 18s
+
+== rotation
+== startup
+== memory and scroll
+== done fail=1
