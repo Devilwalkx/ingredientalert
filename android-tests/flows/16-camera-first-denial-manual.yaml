@@ -9,26 +9,26 @@ name: First denial - the screen says plainly what happened, and typing the numbe
     element: "Try the example kitchen"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Try the example kitchen"
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Check a delivery.*"
 - scrollUntilVisible:
     element:
       id: "field-search-by-name-supplier-or-barcode-number"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
@@ -37,30 +37,30 @@ name: First denial - the screen says plainly what happened, and typing the numbe
     element: "Harbour Teriyaki Sauce 1L"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Harbour Teriyaki Sauce 1L"
 - scrollUntilVisible:
     element: "Next: what is on the pack\\?"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Next: what is on the pack\\?"
 - scrollUntilVisible:
     element: "Scan the barcode"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Scan the barcode"
 - scrollUntilVisible:
     element: "Use the camera to read the barcode\\?"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - scrollUntilVisible:
     element: "Allow camera"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Allow camera"
 - runFlow:
     when:
@@ -76,20 +76,20 @@ name: First denial - the screen says plainly what happened, and typing the numbe
     element: "Camera not allowed. You can try again, or type the number instead."
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - takeScreenshot: 30-first-denial
 - scrollUntilVisible:
     element: "Type the number or search instead"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Type the number or search instead"
 - scrollUntilVisible:
     element:
       id: "field-barcode-number"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn:
     id: "field-barcode-number"
 - inputText: "5010000100148"
@@ -97,5 +97,5 @@ name: First denial - the screen says plainly what happened, and typing the numbe
     element: ".*belongs to: Harbour Teriyaki Sauce 1L.*"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - takeScreenshot: 31-manual-after-denial

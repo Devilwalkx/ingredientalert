@@ -16,7 +16,7 @@ https://github.com/Devilwalkx/ingredientalert/releases/tag/latest-test-build (de
 | `e2e` | Playwright browser tests at Pixel 7, 390 px and 320 px widths (port 4421) |
 | `android-tests` | Maestro flows and measurements run on a CI emulator |
 | `.github/workflows/build.yml` | Tests, web build, Android APK, and the always-newest test release |
-| `docs` | SCREEN_DECISIONS, SHARED_DEVICE_SESSIONS, USABILITY_SESSION_PLAN, ANDROID_PASS_REPORT, evidence screenshots |
+| `docs` | ENCRYPTION_ACCOUNT, SIGNING, SCREEN_DECISIONS, SHARED_DEVICE_SESSIONS, USABILITY_SESSION_PLAN, ANDROID_PASS_REPORT, evidence screenshots |
 | Docs | SPEC, DATA_FLOWS, THREAT_MODEL, PERMISSIONS, PRIVACY_REGISTER, RETENTION, RISK_REGISTER, SECURITY_TESTS, DECISIONS, STATUS (all DRAFTS for review) |
 
 ## Run it

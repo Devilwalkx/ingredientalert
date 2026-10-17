@@ -43,6 +43,9 @@ jobs:
     if: ${{ github.event.inputs.reuse_apk_run == '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      BUILD_COMMIT: ${{ github.sha }}
+      BUILD_TIME: ${{ github.event.head_commit.timestamp }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

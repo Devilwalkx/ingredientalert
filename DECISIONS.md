@@ -51,3 +51,7 @@
 **D-025 Publication is simulated.** There is no server, so the QR / web menu and the printer cannot be reached. The UI labels both "(simulated)" and says "There is no server". The service view is the one place that is real in the sense that it shows the stored revision on this device.
 
 **D-026 Identity and distribution.** Application id `app.devilwalkx.ingredientalert`, version 0.2.0, versionCode from the CI run number, commit and build time injected through `app.config.js` and shown in Settings > About this build. The id changed from a placeholder, so Android treats the new app as a different one: uninstall the old build first (its example data is lost). Signed with the public Android debug key (test signing). A private release key is an open owner decision.
+
+**D-027 Encryption wording and self-check.** The app and documents state the library, algorithm, key handling and limits (docs/ENCRYPTION_ACCOUNT.md); Settings > About this build has "Check encryption on this phone" which runs the real vault and key store on made-up text. It shows the code runs on this phone; it does not show strength or hardware backing.
+
+**D-028 Release signing is prepared, not switched on.** Secrets-driven signing, an APK identity record per build and a test that Android refuses a differently signed APK are in place. No private key exists; creating, backing up and adding it is the owner's step (docs/SIGNING.md).

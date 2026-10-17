@@ -70,8 +70,7 @@ export function SettingsScreen() {
       <Collapsible title="About this build">
         <Row left="App ID" right={b.appId} />
         <Row left="Version" right={`${b.version} (build ${b.versionCode})`} />
-        <Row left="Commit" right={b.commit} />
-        <Row left="Built" right={b.builtAt} />
+        <Txt>{`Commit ${b.commit} - built ${b.builtAt}`}</Txt>
         <Row left="Channel" right={b.channel} />
         <Txt>{NOT_A_GUARANTEE}</Txt>
         <Txt color={c.textMuted}>{b.channel === "release" ? "Release build, signed with the owner's private key. " : "Test build, signed with the public Android debug key (test signing only). "}It has had no food-safety, privacy, security or accessibility review, has never been used in a real kitchen, and has not been run on a physical phone by its builders.</Txt>

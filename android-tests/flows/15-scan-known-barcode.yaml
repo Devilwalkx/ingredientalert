@@ -9,26 +9,26 @@ name: Scan of a KNOWN synthetic barcode (a picture placed in the emulator's virt
     element: "Try the example kitchen"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Try the example kitchen"
 - scrollUntilVisible:
     element: "Alex Rivera"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Alex Rivera"
 - scrollUntilVisible:
     element: "Check a delivery.*"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Check a delivery.*"
 - scrollUntilVisible:
     element:
       id: "field-search-by-name-supplier-or-barcode-number"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
@@ -37,23 +37,23 @@ name: Scan of a KNOWN synthetic barcode (a picture placed in the emulator's virt
     element: "Harbour Teriyaki Sauce 1L"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Harbour Teriyaki Sauce 1L"
 - scrollUntilVisible:
     element: "Next: what is on the pack\\?"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Next: what is on the pack\\?"
 - scrollUntilVisible:
     element: "Scan the barcode"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - tapOn: "Scan the barcode"
 - scrollUntilVisible:
     element: "Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*"
     direction: DOWN
     timeout: 60000
-    speed: 85
+    speed: 40
 - takeScreenshot: 29-scan-known-barcode-read

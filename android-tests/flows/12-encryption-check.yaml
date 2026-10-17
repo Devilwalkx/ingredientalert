@@ -24,5 +24,10 @@ name: The on-phone encryption check runs the real encryption code and the real k
     timeout: 60000
     speed: 40
 - assertVisible: "Encryption check: passed"
+- scrollUntilVisible:
+    element: ".*One changed character in the encrypted text is refused.*"
+    direction: DOWN
+    timeout: 60000
+    speed: 40
 - assertVisible: ".*One changed character in the encrypted text is refused.*"
 - takeScreenshot: 24-encryption-check

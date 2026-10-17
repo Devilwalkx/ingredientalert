@@ -21,7 +21,7 @@ out = []
 for b in blocks:
     if b.startswith("poster wall"):
         b = re.sub(r"(?m)^size .*$", "size 1.2 0.67", b)
-        b = re.sub(r"(?m)^position .*$", "position 0 0 -0.9", b)
+        b = re.sub(r"(?m)^position .*$", "position 0 -0.1 -1.7", b)
         b = re.sub(r"(?m)^rotation .*$", "rotation 0 0 0", b)
         b = re.sub(r"(?m)^default .*$", "default ean-poster.png", b)
     out.append(b)

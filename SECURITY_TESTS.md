@@ -68,4 +68,11 @@ Real-device tests (secure storage, fonts, insets, install); screen-reader testin
 | S25 | Idle auto-lock, wrong-PIN throttle, step-up PIN on erase, first-sign-in PIN choice, drafts private to the person and sealed at rest | e2e (browser) | Automated (browser only) |
 | S26 | Emulator: install, launch, back, keyboard, process-death restore, permission flows, scan timeout | `android-tests/` via CI | Automated on an emulator (not a physical device) |
 
+| S27 | Two named people acknowledge under their own names; an approver or administrator cannot acknowledge; repeating as Jo does not count for Jess; offboarded person cannot acknowledge; audit names the person; the demonstration shortcut refuses a real kitchen | core `android-pass.test.ts`; e2e "shared device accountability"; emulator flow 13 | Automated (browser + emulator) |
+| S28 | Idle auto-lock hides the previous person's screen | e2e "shared device" (browser clock); emulator flow 14 (real 1-minute wait) | Automated |
+| S29 | On-device encryption self-check: real vault, real key store, tamper / other item / other key refused, temporary key removed | core `selfcheck.test.ts`; e2e Settings > About; emulator flow 12 | Automated |
+| S30 | Camera: first denial explained and typing works; permanent denial explained with a route to system settings and typing works; permission granted opens the scanner; a picture of a known synthetic barcode placed in the emulator's virtual scene (result in the report) | emulator flows 03, 09, 10, 15, 16 | Emulator only; real packs NOT TESTED |
+| S31 | Release signing is secrets-driven and absent by default; APK identity record (signer certificate SHA-256, key kind) in every build; an APK signed with a different key is refused by Android | `scripts/`, `docs/SIGNING.md`, CI, `run.sh` signing-consequence step | Automated (CI), no private key exists |
+| S32 | Accessibility-tree audit of each emulator flow's end screen: named controls, 48 dp targets (not a TalkBack run) | `android-tests/a11y-tree-audit.py`, `a11y-tree.jsonl` in the evidence | Automated, partial |
+
 **What these do not establish:** that scanning works on real packs; that the PIN lock behaves on a physical tablet; that any wording is understood by a fresh user; that the app is secure.
