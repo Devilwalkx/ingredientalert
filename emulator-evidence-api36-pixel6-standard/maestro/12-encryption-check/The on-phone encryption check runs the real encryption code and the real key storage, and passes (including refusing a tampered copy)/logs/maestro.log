@@ -1,0 +1,101 @@
+20:30:27.659 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Define variables RUNNING
+20:30:27.662 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Define variables COMPLETED
+20:30:27.662 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Apply configuration RUNNING
+20:30:27.663 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Apply configuration COMPLETED
+20:30:27.663 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Launch app "app.devilwalkx.ingredientalert" with clear state RUNNING
+20:30:27.664 [ INFO] maestro.Maestro.clearAppState$lambda$8: Clearing app state app.devilwalkx.ingredientalert
+20:30:28.626 [DEBUG] maestro.Maestro.setPermissionInternal: Failed to set permission com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE for app app.devilwalkx.ingredientalert: shell command failed (exit -1): 
+Exception occurred while executing 'grant':
+java.lang.IllegalArgumentException: Unknown permission com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+	at com.android.server.permission.access.permission.PermissionService.setRuntimePermissionGranted(PermissionService.kt:985)
+	at com.android.server.permission.access.permission.PermissionService.access$setRuntimePermissionGranted(PermissionService.kt:108)
+	at com.android.server.permission.access.permission.PermissionService.setRuntimePermissionGranted(PermissionService.kt:883)
+	at com.android.server.permission.access.permission.PermissionService.setRuntimePermissionGranted$default(PermissionService.kt:788)
+	at com.android.server.permission.access.permission.PermissionService.grantRuntimePermission(PermissionService.kt:750)
+	at com.android.server.pm.permission.PermissionManagerService.grantRuntimePermission(PermissionManagerService.java:599)
+	at android.permission.PermissionManager.grantRuntimePermissionInternal(PermissionManager.java:680)
+	at android.permission.PermissionManager.grantRuntimePermission(PermissionManager.java:643)
+	at com.android.server.pm.PackageManagerShellCommand.runGrantRevokePermission(PackageManagerShellCommand.java:2704)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:317)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:38)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:6684)
+	at android.os.Binder.shellCommand(Binder.java:1151)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4729)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6668)
+	at android.os.Binder.execTransactInternal(Binder.java:1426)
+	at android.os.Binder.execTransact(Binder.java:1365)
+
+20:30:28.627 [ INFO] maestro.Maestro.launchApp$lambda$5: Launching app app.devilwalkx.ingredientalert
+20:30:28.628 [ INFO] maestro.Maestro.launchApp$lambda$5: Stopping app.devilwalkx.ingredientalert app during launch
+20:30:28.725 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Launch app "app.devilwalkx.ingredientalert" with clear state COMPLETED
+20:30:28.728 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Try the example kitchen" RUNNING
+20:30:30.214 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Try the example kitchen, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[313,1087][766,1145], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=313, y=1087, width=453, height=58))
+20:30:31.671 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+20:30:31.675 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (539, 1116) using hierarchy based logic for wait
+20:30:32.802 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+20:30:32.803 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Try the example kitchen" COMPLETED
+20:30:32.803 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Alex Rivera" RUNNING
+20:30:32.918 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Alex Rivera, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[475,994][688,1052], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=475, y=994, width=213, height=58))
+20:30:34.139 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+20:30:34.140 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (581, 1023) using hierarchy based logic for wait
+20:30:35.250 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+20:30:35.250 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Alex Rivera" COMPLETED
+20:30:35.250 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Settings" RUNNING
+20:30:35.341 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=, accessibilityText=Settings, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=true, bounds=[933,137][1059,263], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.Button, important-for-accessibility=true, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[965,169][1028,232], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=com.horcrux.svg.SvgView, important-for-accessibility=false, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[971,175][1021,226], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=com.horcrux.svg.g, important-for-accessibility=false, error=}, children=[TreeNode(attributes={text=, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[971,175][1021,226], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=qs2, important-for-accessibility=false, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=false, enabled=true, focused=false, checked=false, selected=false)], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=933, y=137, width=126, height=126))
+20:30:36.555 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+20:30:36.556 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (996, 200) using hierarchy based logic for wait
+20:30:37.671 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+20:30:37.672 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Settings" COMPLETED
+20:30:37.673 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "About this build" is visible with speed 40, visibility percentage 100%, timeout 90000 ms, with centering disabled RUNNING
+20:30:37.837 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:30:37.837 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=42, y=2104, width=262, height=53)
+20:30:37.838 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:30:37.852 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=About this build, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=90000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:30:37.853 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:30:37.853 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "About this build" is visible with speed 40, visibility percentage 100%, timeout 90000 ms, with centering disabled COMPLETED
+20:30:37.853 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "About this build" RUNNING
+20:30:37.962 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=About this build, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[42,2104][304,2157], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=42, y=2104, width=262, height=53))
+20:30:39.323 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+20:30:39.324 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (173, 2130) using hierarchy based logic for wait
+20:30:40.318 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+20:30:40.318 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "About this build" COMPLETED
+20:30:40.318 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Check encryption on this phone" is visible with speed 40, visibility percentage 100%, timeout 90000 ms, with centering disabled RUNNING
+20:30:40.973 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Check encryption on this phone
+20:30:41.016 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+20:30:43.159 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:30:43.160 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=242, y=2145, width=596, height=21)
+20:30:43.160 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:30:43.160 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Check encryption on this phone, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=90000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:30:43.160 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:30:43.160 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Check encryption on this phone" is visible with speed 40, visibility percentage 100%, timeout 90000 ms, with centering disabled COMPLETED
+20:30:43.161 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Check encryption on this phone" RUNNING
+20:30:43.256 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Check encryption on this phone, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[242,2145][838,2166], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=242, y=2145, width=596, height=21))
+20:30:44.489 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+20:30:44.490 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (540, 2155) using hierarchy based logic for wait
+20:30:45.513 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Check encryption on this phone" COMPLETED
+20:30:45.513 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Encryption check: .*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+20:30:46.236 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Encryption check: .*
+20:30:46.242 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+20:30:48.259 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:30:48.259 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=131, y=1219, width=818, height=69)
+20:30:48.259 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:30:48.259 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Encryption check: .*, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:30:48.259 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:30:48.260 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Encryption check: .*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+20:30:48.260 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Encryption check: passed" is visible RUNNING
+20:30:48.380 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Encryption check: passed" is visible COMPLETED
+20:30:48.380 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until ".*One changed character in the encrypted text is refused.*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+20:30:48.547 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:30:48.547 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=131, y=1729, width=818, height=126)
+20:30:48.547 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:30:48.548 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=.*One changed character in the encrypted text is refused.*, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:30:48.548 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:30:48.548 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until ".*One changed character in the encrypted text is refused.*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+20:30:48.548 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that ".*One changed character in the encrypted text is refused.*" is visible RUNNING
+20:30:48.655 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that ".*One changed character in the encrypted text is refused.*" is visible COMPLETED
+20:30:48.656 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Take screenshot 24-encryption-check RUNNING
+20:30:48.657 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+20:30:48.659 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+20:30:48.985 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Take screenshot 24-encryption-check COMPLETED

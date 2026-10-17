@@ -1,0 +1,94 @@
+20:41:46.254 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Define variables RUNNING
+20:41:46.257 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Define variables COMPLETED
+20:41:46.258 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Apply configuration RUNNING
+20:41:46.258 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Apply configuration COMPLETED
+20:41:46.258 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Launch app "app.devilwalkx.ingredientalert" RUNNING
+20:44:01.294 [DEBUG] maestro.Maestro.setPermissionInternal: Failed to set permission com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE for app app.devilwalkx.ingredientalert: shell command failed (exit -1): 
+Exception occurred while executing 'grant':
+java.lang.IllegalArgumentException: Unknown permission com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+	at com.android.server.permission.access.permission.PermissionService.setRuntimePermissionGranted(PermissionService.kt:985)
+	at com.android.server.permission.access.permission.PermissionService.access$setRuntimePermissionGranted(PermissionService.kt:108)
+	at com.android.server.permission.access.permission.PermissionService.setRuntimePermissionGranted(PermissionService.kt:883)
+	at com.android.server.permission.access.permission.PermissionService.setRuntimePermissionGranted$default(PermissionService.kt:788)
+	at com.android.server.permission.access.permission.PermissionService.grantRuntimePermission(PermissionService.kt:750)
+	at com.android.server.pm.permission.PermissionManagerService.grantRuntimePermission(PermissionManagerService.java:599)
+	at android.permission.PermissionManager.grantRuntimePermissionInternal(PermissionManager.java:680)
+	at android.permission.PermissionManager.grantRuntimePermission(PermissionManager.java:643)
+	at com.android.server.pm.PackageManagerShellCommand.runGrantRevokePermission(PackageManagerShellCommand.java:2704)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:317)
+	at com.android.modules.utils.BasicShellCommandHandler.exec(BasicShellCommandHandler.java:97)
+	at android.os.ShellCommand.exec(ShellCommand.java:38)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onShellCommand(PackageManagerService.java:6684)
+	at android.os.Binder.shellCommand(Binder.java:1151)
+	at android.os.Binder.onTransact(Binder.java:953)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4729)
+	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6668)
+	at android.os.Binder.execTransactInternal(Binder.java:1426)
+	at android.os.Binder.execTransact(Binder.java:1365)
+
+20:44:01.297 [ INFO] maestro.Maestro.launchApp$lambda$5: Launching app app.devilwalkx.ingredientalert
+20:44:01.297 [ INFO] maestro.Maestro.launchApp$lambda$5: Stopping app.devilwalkx.ingredientalert app during launch
+20:44:01.545 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Launch app "app.devilwalkx.ingredientalert" COMPLETED
+20:44:01.546 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Sign in" is visible RUNNING
+20:44:03.182 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Sign in" is visible COMPLETED
+20:44:03.183 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Who is using the device\?" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+20:44:03.477 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:44:03.479 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=42, y=485, width=996, height=69)
+20:44:03.480 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:44:03.496 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Who is using the device\?, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:44:03.496 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:44:03.496 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Who is using the device\?" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+20:44:03.497 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Take screenshot 11-locked-after-restart RUNNING
+20:44:03.498 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+20:44:03.500 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+20:44:03.869 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Take screenshot 11-locked-after-restart COMPLETED
+20:44:03.870 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Alex Rivera" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+20:44:04.042 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:44:04.042 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=475, y=994, width=213, height=58)
+20:44:04.042 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:44:04.042 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Alex Rivera, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:44:04.042 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:44:04.042 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Alex Rivera" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+20:44:04.043 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Alex Rivera" RUNNING
+20:44:04.129 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Alex Rivera, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[475,994][688,1052], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=475, y=994, width=213, height=58))
+20:44:05.424 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+20:44:05.428 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (581, 1023) using hierarchy based logic for wait
+20:44:06.627 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+20:44:06.627 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Alex Rivera" COMPLETED
+20:44:06.628 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Check a delivery.*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+20:44:06.803 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:44:06.804 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=231, y=612, width=671, height=69)
+20:44:06.804 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:44:06.804 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Check a delivery.*, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:44:06.805 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:44:06.805 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Check a delivery.*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+20:44:06.805 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Check a delivery.*" RUNNING
+20:44:06.938 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Check a delivery, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[231,612][902,681], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=231, y=612, width=671, height=69))
+20:44:08.306 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+20:44:08.307 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (566, 646) using hierarchy based logic for wait
+20:44:09.363 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+20:44:09.363 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Check a delivery.*" COMPLETED
+20:44:09.363 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Next: what is on the pack\?" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+20:44:09.487 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:44:09.487 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=292, y=2164, width=495, height=2)
+20:44:09.488 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:44:09.488 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Next: what is on the pack\?, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:44:09.488 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:44:09.488 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Next: what is on the pack\?" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+20:44:09.488 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Next: what is on the pack\?" RUNNING
+20:44:09.608 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Next: what is on the pack?, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[292,2164][787,2166], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=292, y=2164, width=495, height=2))
+20:44:11.248 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+20:44:11.249 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (539, 2165) using hierarchy based logic for wait
+20:44:12.236 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+20:44:12.237 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Next: what is on the pack\?" COMPLETED
+20:44:12.237 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "DRAFT-123" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+20:44:12.376 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2400
+20:44:12.377 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=42, y=1566, width=996, height=137)
+20:44:12.377 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+20:44:12.377 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=DRAFT-123, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+20:44:12.377 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+20:44:12.378 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "DRAFT-123" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+20:44:12.378 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Take screenshot 12-draft-restored RUNNING
+20:44:12.379 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+20:44:12.379 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+20:44:12.566 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Take screenshot 12-draft-restored COMPLETED
