@@ -1,0 +1,179 @@
+23:35:44.663 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: /home/runner/.maestro/tests/2026-10-17_233544
+23:35:44.667 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+23:35:44.668 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.11.0
+23:35:44.669 [ INFO] MAESTRO.logSystemInfo: CI: github
+23:35:44.669 [ INFO] MAESTRO.logSystemInfo: OS Name: Linux
+23:35:44.670 [ INFO] MAESTRO.logSystemInfo: OS Version: 6.17.0-1022-azure
+23:35:44.670 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+23:35:44.673 [ INFO] MAESTRO.logSystemInfo: Java Version: 17
+23:35:44.677 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+23:35:44.681 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+23:35:44.684 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+23:35:44.684 [ INFO] MAESTRO.logSystemInfo: ---------------------
+23:35:45.582 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+23:35:48.472 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 44119 with execution plan ExecutionPlan(flowsToRun=[/home/runner/work/ingredientalert/ingredientalert/android-tests/flows/15-scan-known-barcode.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+23:35:52.641 [ INFO] maestro.cli.runner.TestSuiteInteractor.runFlow:  Running flow Scan of a KNOWN synthetic barcode (a picture placed in the emulator's virtual scene) - the number is read, the product named
+23:35:52.653 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Getting device info
+23:35:52.931 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Got device info: DeviceInfo(platform=ANDROID, widthPixels=1080, heightPixels=2340, widthGrid=1080, heightGrid=2340)
+23:35:53.027 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Define variables RUNNING
+23:35:53.031 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Define variables COMPLETED
+23:35:53.032 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Apply configuration RUNNING
+23:35:53.033 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Apply configuration COMPLETED
+23:35:53.033 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Launch app "app.devilwalkx.ingredientalert" with clear state RUNNING
+23:35:53.034 [ INFO] maestro.Maestro.clearAppState$lambda$8: Clearing app state app.devilwalkx.ingredientalert
+23:35:53.382 [ INFO] maestro.Maestro.launchApp$lambda$5: Launching app app.devilwalkx.ingredientalert
+23:35:53.382 [ INFO] maestro.Maestro.launchApp$lambda$5: Stopping app.devilwalkx.ingredientalert app during launch
+23:35:53.792 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Launch app "app.devilwalkx.ingredientalert" with clear state COMPLETED
+23:35:53.794 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Try the example kitchen" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+23:35:55.129 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Try the example kitchen
+23:35:55.144 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:35:57.320 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+23:35:57.325 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=93, y=1105, width=893, height=242)
+23:35:57.326 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+23:35:57.346 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Try the example kitchen, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+23:35:57.347 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+23:35:57.347 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Try the example kitchen" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+23:35:57.347 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Try the example kitchen" RUNNING
+23:35:57.470 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Try the example kitchen, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[93,1105][986,1347], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=93, y=1105, width=893, height=242))
+23:35:58.759 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+23:35:58.764 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (539, 1226) using hierarchy based logic for wait
+23:35:59.891 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+23:35:59.892 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Try the example kitchen" COMPLETED
+23:35:59.892 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Alex Rivera" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+23:36:00.024 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+23:36:00.025 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=361, y=1941, width=446, height=121)
+23:36:00.025 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+23:36:00.025 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Alex Rivera, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+23:36:00.025 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+23:36:00.026 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Alex Rivera" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+23:36:00.026 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Alex Rivera" RUNNING
+23:36:00.150 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Alex Rivera, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[361,1941][807,2062], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=361, y=1941, width=446, height=121))
+23:36:01.755 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+23:36:01.757 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (584, 2001) using hierarchy based logic for wait
+23:36:02.890 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+23:36:02.890 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Alex Rivera" COMPLETED
+23:36:02.891 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Check a delivery.*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+23:36:03.075 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+23:36:03.075 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=242, y=1477, width=651, height=286)
+23:36:03.075 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+23:36:03.075 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Check a delivery.*, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+23:36:03.075 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+23:36:03.076 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Check a delivery.*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+23:36:03.076 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Check a delivery.*" RUNNING
+23:36:03.214 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Check a delivery, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[242,1477][893,1763], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=242, y=1477, width=651, height=286))
+23:36:04.590 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+23:36:04.591 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (567, 1620) using hierarchy based logic for wait
+23:36:05.725 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+23:36:05.726 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Check a delivery.*" COMPLETED
+23:36:05.726 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until id: field-search-by-name-supplier-or-barcode-number is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+23:36:05.840 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+23:36:05.841 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=44, y=1532, width=992, height=183)
+23:36:05.841 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+23:36:05.841 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=null, idRegex=field-search-by-name-supplier-or-barcode-number, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+23:36:05.841 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+23:36:05.842 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until id: field-search-by-name-supplier-or-barcode-number is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+23:36:05.842 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on id: field-search-by-name-supplier-or-barcode-number RUNNING
+23:36:05.966 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=, accessibilityText=Search by name, supplier or barcode number, hintText=, ignoreBoundsFiltering=false, resource-id=field-search-by-name-supplier-or-barcode-number, clickable=true, bounds=[44,1532][1036,1715], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.EditText, important-for-accessibility=true, error=}, children=[], clickable=true, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=44, y=1532, width=992, height=183))
+23:36:07.367 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+23:36:07.368 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (540, 1623) using hierarchy based logic for wait
+23:36:09.303 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+23:36:09.304 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on id: field-search-by-name-supplier-or-barcode-number COMPLETED
+23:36:09.304 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Input text teriyaki RUNNING
+23:36:09.305 [ INFO] maestro.Maestro.inputText: Inputting text: teriyaki
+23:36:12.201 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Input text teriyaki COMPLETED
+23:36:12.202 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Hide Keyboard RUNNING
+23:36:12.203 [ INFO] maestro.Maestro.hideKeyboard$lambda$12: Hiding Keyboard
+23:36:13.951 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Hide Keyboard COMPLETED
+23:36:13.952 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Harbour Teriyaki Sauce 1L" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+23:36:14.069 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+23:36:14.069 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=93, y=1252, width=893, height=242)
+23:36:14.070 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+23:36:14.070 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Harbour Teriyaki Sauce 1L, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+23:36:14.070 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+23:36:14.070 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Harbour Teriyaki Sauce 1L" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+23:36:14.070 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Harbour Teriyaki Sauce 1L" RUNNING
+23:36:14.251 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Harbour Teriyaki Sauce 1L, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[93,1252][986,1494], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=93, y=1252, width=893, height=242))
+23:36:15.454 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+23:36:15.455 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (539, 1373) using hierarchy based logic for wait
+23:36:16.487 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+23:36:16.488 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Harbour Teriyaki Sauce 1L" COMPLETED
+23:36:16.492 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Next: what is on the pack\?" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+23:36:16.849 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+23:36:16.849 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=88, y=1588, width=904, height=242)
+23:36:16.849 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+23:36:16.850 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Next: what is on the pack\?, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+23:36:16.850 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+23:36:16.850 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Next: what is on the pack\?" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+23:36:16.850 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Next: what is on the pack\?" RUNNING
+23:36:17.019 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Next: what is on the pack?, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[88,1588][992,1830], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=88, y=1588, width=904, height=242))
+23:36:18.237 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+23:36:18.238 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (540, 1709) using hierarchy based logic for wait
+23:36:19.747 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+23:36:19.747 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Next: what is on the pack\?" COMPLETED
+23:36:19.747 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Scan the barcode" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+23:36:19.847 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Scrolling try count: 0, DeviceWidth: 1080, DeviceWidth: 2340
+23:36:19.847 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Element bounds: Bounds(x=240, y=1741, width=688, height=121)
+23:36:19.847 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Visibility Percent: 1.0
+23:36:19.848 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: Command centerElement: ScrollUntilVisibleCommand(selector=ElementSelector(textRegex=Scan the barcode, idRegex=null, size=null, below=null, above=null, leftOf=null, rightOf=null, containsChild=null, containsDescendants=null, traits=null, index=null, enabled=null, optional=false, selected=null, checked=null, focused=null, childOf=null, css=null), direction=DOWN, scrollDuration=601, visibilityPercentage=100, timeout=60000, waitToSettleTimeoutMs=null, centerElement=false, originalSpeedValue=40, label=null, optional=false).centerElement
+23:36:19.848 [ INFO] maestro.orchestra.Orchestra.scrollUntilVisible: visibilityPercentageNormalized: 1.0
+23:36:19.848 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Scan the barcode" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled COMPLETED
+23:36:19.848 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Tap on "Scan the barcode" RUNNING
+23:36:19.979 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tapping on element:  UiElement(treeNode=TreeNode(attributes={text=Scan the barcode, accessibilityText=, hintText=, ignoreBoundsFiltering=false, resource-id=, clickable=false, bounds=[240,1741][928,1862], enabled=true, focused=false, checked=false, scrollable=false, selected=false, class=android.widget.TextView, important-for-accessibility=true, error=}, children=[], clickable=false, enabled=true, focused=false, checked=false, selected=false), bounds=Bounds(x=240, y=1741, width=688, height=121))
+23:36:21.236 [ INFO] maestro.Maestro.tap-HgV9Ck0: Tap aimed via settled hierarchy
+23:36:21.237 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Tapping at (584, 1801) using hierarchy based logic for wait
+23:36:22.170 [ INFO] maestro.Maestro.hierarchyBasedTap-ogj28Uc: Something has changed in the UI judging by view hierarchy. Proceed.
+23:36:22.170 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Tap on "Scan the barcode" COMPLETED
+23:36:22.171 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Scrolling DOWN until "Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled RUNNING
+23:36:22.996 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:23.082 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:25.757 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:25.852 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:28.837 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:28.879 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:31.180 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:31.225 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:33.514 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:33.558 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:35.935 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:36.022 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:38.377 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:38.420 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:40.944 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:40.990 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:43.856 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:43.942 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:46.296 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:46.382 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:48.874 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:48.962 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:51.494 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:51.582 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:54.077 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:54.162 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:56.634 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:56.722 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:36:59.156 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:36:59.202 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:01.986 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:02.072 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:04.504 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:04.592 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:06.974 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:07.062 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:09.416 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:09.459 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:11.804 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:11.892 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:14.314 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:14.402 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:16.844 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:16.888 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:19.204 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:19.292 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:21.724 [ WARN] maestro.orchestra.Orchestra.scrollUntilVisible: Error: maestro.MaestroException$ElementNotFound: Element not found: Text matching regex: Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*
+23:37:21.812 [ INFO] maestro.Maestro.swipeFromCenter: Swiping UP from center
+23:37:23.656 [ERROR] maestro.orchestra.Orchestra.executeCommands: [Command execution] CommandFailed: No visible element found: "Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*"
+23:37:23.851 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+23:37:23.852 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+23:37:24.212 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Scrolling DOWN until "Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*" is visible with speed 40, visibility percentage 100%, timeout 60000 ms, with centering disabled FAILED
+23:37:25.583 [ INFO] maestro.cli.report.TestDebugReporter.deleteOldFiles: Performing purge of logs older than 14 days from /home/runner/.maestro/tests

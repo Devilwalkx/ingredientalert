@@ -1,0 +1,129 @@
+== install
+Performing Streamed Install
+Success
+requested (merged manifest): android.permission.CAMERA
+== baseline launch
+== upgrade check
+== flow 02-check-delivery-review-substitution.yaml
+Anonymous analytics enabled. To opt out, set MAESTRO_CLI_NO_ANALYTICS environment variable to any value before running Maestro.
+
+
+Waiting for flows to complete...
+[Passed] MAIN TASK - check a delivery, then review the substitution (example kitchen) (1m 41s)
+
+1/1 Flow Passed in 1m 41s
+
+== flow 01-first-run.yaml
+
+Waiting for flows to complete...
+[Passed] First run shows two clear starts and no demonstration controls (5s)
+
+1/1 Flow Passed in 5s
+
+== flow 04-back-navigation.yaml
+
+Waiting for flows to complete...
+[Passed] System Back unwinds a step, then goes home, then leaves the app (27s)
+
+1/1 Flow Passed in 28s
+
+== flow 07-settings-display.yaml
+
+Waiting for flows to complete...
+[Passed] Settings - theme, text size, shared-device lock, build identity (16s)
+
+1/1 Flow Passed in 16s
+
+== flow 08-real-kitchen-pin-keyboard.yaml
+
+Waiting for flows to complete...
+[Failed] Real kitchen - set up with a PIN, keyboard never hides the field or the next action, lock and sign in again (1m 33s) (No visible element found: "Finish setting up")
+
+1/1 Flow Failed
+
+== FLOW FAILED: 08-real-kitchen-pin-keyboard.yaml
+== flow 11-dark-theme-in-app.yaml
+
+Waiting for flows to complete...
+[Passed] Dark theme chosen inside the app (the emulator's system night mode did not reach the app in an earlier run) (17s)
+
+1/1 Flow Passed in 17s
+
+== flow 12-encryption-check.yaml
+
+Waiting for flows to complete...
+[Passed] The on-phone encryption check runs the real encryption code and the real key storage, and passes (including refusing a tampered copy) (21s)
+
+1/1 Flow Passed in 21s
+
+== flow 13-two-staff-acknowledge.yaml
+
+Waiting for flows to complete...
+[Passed] Two named people acknowledge on one device, each under their own name; a person without the service role cannot; no notification is involved (1m 24s)
+
+1/1 Flow Passed in 1m 24s
+
+== flow 14-auto-lock.yaml
+
+Waiting for flows to complete...
+[Passed] Auto-lock - after the chosen idle time the app locks itself and the previous person's screen is not shown (1m 27s)
+
+1/1 Flow Passed in 1m 27s
+
+== flow (not gating) 03-camera-permission-granted.yaml
+
+Waiting for flows to complete...
+[Passed] Camera already allowed - the scanner opens with torch control and tells the truth when nothing is read (32s)
+
+1/1 Flow Passed in 32s
+
+== flow (not gating) 09-scan-timeout-and-manual.yaml
+
+Waiting for flows to complete...
+[Passed] Scan finds nothing in the emulator's virtual scene - timeout notice, retry, then manual search (1m 16s)
+
+1/1 Flow Passed in 1m 16s
+
+== flow (not gating) 10-camera-permission-denied.yaml
+
+Waiting for flows to complete...
+[Passed] Camera permission asked in context; denial and permanent denial are explained (56s)
+
+1/1 Flow Passed in 56s
+
+== flow (not gating) 16-camera-first-denial-manual.yaml
+
+Waiting for flows to complete...
+[Passed] First denial - the screen says plainly what happened, and typing the number and the product search still work (45s)
+
+1/1 Flow Passed in 45s
+
+== flow (not gating) 15-scan-known-barcode.yaml
+
+Waiting for flows to complete...
+[Failed] Scan of a KNOWN synthetic barcode (a picture placed in the emulator's virtual scene) - the number is read, the product named (1m 27s) (No visible element found: "Scanned. This number belongs to: Harbour Teriyaki Sauce 1L.*")
+
+1/1 Flow Failed
+
+== flow 05-draft-write.yaml
+
+Waiting for flows to complete...
+[Passed] Start a delivery, then leave the app (the script kills the process) (31s)
+
+1/1 Flow Passed in 31s
+
+== signing consequence check (throw-away key)
+== flow 06-draft-restore.yaml
+
+Waiting for flows to complete...
+[Passed] After process death the example kitchen asks who is using the device and the unsent delivery is still there (11s)
+
+1/1 Flow Passed in 11s
+
+== rotation
+== startup
+== memory and scroll
+== TalkBack experiment (non-gating)
+Bad arguments
+TalkBack was installed and switched on for the duration of this experiment; screenshots and its log lines are recorded. No judgement about usability is made.
+== done fail=1

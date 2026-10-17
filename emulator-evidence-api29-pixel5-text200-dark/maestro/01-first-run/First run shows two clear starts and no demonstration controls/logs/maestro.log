@@ -1,0 +1,37 @@
+23:18:45.915 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Define variables RUNNING
+23:18:45.919 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Define variables COMPLETED
+23:18:45.919 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Apply configuration RUNNING
+23:18:45.920 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Apply configuration COMPLETED
+23:18:45.920 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Launch app "app.devilwalkx.ingredientalert" with clear state RUNNING
+23:18:45.921 [ INFO] maestro.Maestro.clearAppState$lambda$8: Clearing app state app.devilwalkx.ingredientalert
+23:18:47.257 [DEBUG] maestro.Maestro.setPermissionInternal: Failed to set permission com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE for app app.devilwalkx.ingredientalert: shell command failed (exit -1): 
+Exception occurred while executing:
+java.lang.IllegalArgumentException: Unknown permission: com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+	at com.android.server.pm.permission.PermissionManagerService.grantRuntimePermission(PermissionManagerService.java:2090)
+	at com.android.server.pm.permission.PermissionManagerService.access$900(PermissionManagerService.java:120)
+	at com.android.server.pm.permission.PermissionManagerService$PermissionManagerServiceInternalImpl.grantRuntimePermission(PermissionManagerService.java:2999)
+	at com.android.server.pm.PackageManagerService.grantRuntimePermission(PackageManagerService.java:5734)
+	at com.android.server.pm.PackageManagerShellCommand.runGrantRevokePermission(PackageManagerShellCommand.java:1955)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:230)
+	at android.os.ShellCommand.exec(ShellCommand.java:104)
+	at com.android.server.pm.PackageManagerService.onShellCommand(PackageManagerService.java:21729)
+	at android.os.Binder.shellCommand(Binder.java:881)
+	at android.os.Binder.onTransact(Binder.java:765)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4860)
+	at com.android.server.pm.PackageManagerService.onTransact(PackageManagerService.java:4014)
+	at android.os.Binder.execTransactInternal(Binder.java:1021)
+	at android.os.Binder.execTransact(Binder.java:994)
+
+23:18:47.259 [ INFO] maestro.Maestro.launchApp$lambda$5: Launching app app.devilwalkx.ingredientalert
+23:18:47.260 [ INFO] maestro.Maestro.launchApp$lambda$5: Stopping app.devilwalkx.ingredientalert app during launch
+23:18:47.393 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Launch app "app.devilwalkx.ingredientalert" with clear state COMPLETED
+23:18:47.394 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Set up my kitchen" is visible RUNNING
+23:18:49.344 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Set up my kitchen" is visible COMPLETED
+23:18:49.345 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Try the example kitchen" is visible RUNNING
+23:18:49.741 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Try the example kitchen" is visible COMPLETED
+23:18:49.742 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Demo options" is not visible RUNNING
+23:18:50.779 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Demo options" is not visible COMPLETED
+23:18:50.780 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Take screenshot 01-first-run RUNNING
+23:18:50.782 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+23:18:50.784 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+23:18:51.147 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Take screenshot 01-first-run COMPLETED
