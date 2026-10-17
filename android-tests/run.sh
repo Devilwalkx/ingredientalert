@@ -146,7 +146,7 @@ adb shell dumpsys meminfo $PKG | grep -E "TOTAL PSS|TOTAL:|Java Heap|Native Heap
 
 adb logcat -d -t 3000 | grep -E "ReactNative|AndroidRuntime|FATAL|$PKG" | tail -200 > "$OUT/logcat-excerpt.txt"
 log "TalkBack experiment (non-gating)"
-bash android-tests/talkback-experiment.sh 2>&1 | tail -5 | tee -a "$OUT/log.txt" || true
+PKG=$PKG OUT=$OUT bash android-tests/talkback-experiment.sh 2>&1 | tail -5 | tee -a "$OUT/log.txt" || true
 adb shell am force-stop $PKG
 
 log "done fail=$FAIL"
