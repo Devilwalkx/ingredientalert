@@ -11,11 +11,11 @@ export default defineConfig({
   timeout: 60_000,
   fullyParallel: false,
   reporter: [["list"]],
-  use: { baseURL: "http://127.0.0.1:4173", trace: "off", launchOptions },
+  use: { baseURL: "http://127.0.0.1:4373", trace: "off", launchOptions },
   webServer: {
-    command: "npx serve ../apps/mobile/dist-web -l 4173 -s --no-clipboard",
-    url: "http://127.0.0.1:4173",
-    reuseExistingServer: true,
+    command: "npx serve ../apps/mobile/dist-web -l 4373 -s --no-clipboard",
+    url: "http://127.0.0.1:4373",
+    reuseExistingServer: false,
     timeout: 60_000
   },
   projects: [

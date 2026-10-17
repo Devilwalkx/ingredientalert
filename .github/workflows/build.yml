@@ -1,0 +1,100 @@
+name: build
+
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build:web -w @ingredientalert/mobile
+      - run: npx playwright install --with-deps chromium
+      - run: npm test -w @ingredientalert/e2e
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ingredientalert-web
+          path: apps/mobile/dist-web
+          retention-days: 14
+
+  android-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - run: npm ci
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      - name: Generate native Android project
+        working-directory: apps/mobile
+        run: npx expo prebuild --platform android --no-install
+      - name: Check requested permissions
+        working-directory: apps/mobile
+        run: |
+          grep "uses-permission" android/app/src/main/AndroidManifest.xml
+          if grep -E 'uses-permission android:name="android.permission.(RECORD_AUDIO|CAMERA|ACCESS_FINE_LOCATION|ACCESS_COARSE_LOCATION|ACCESS_BACKGROUND_LOCATION|READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE)"' android/app/src/main/AndroidManifest.xml | grep -v 'tools:node="remove"'; then
+            echo "Forbidden permission requested"; exit 1
+          fi
+      - name: "Build release APK (signed with the Android debug key, for testing only)"
+        working-directory: apps/mobile/android
+        run: ./gradlew assembleRelease --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ingredientalert-android-test-apk
+          path: apps/mobile/android/app/build/outputs/apk/release/*.apk
+          retention-days: 14
+
+  publish-release:
+    # Keeps a single, always-newest test build on the repo's Releases page (plain .apk, no zip).
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [test-and-web, android-apk]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ingredientalert-android-test-apk
+          path: out
+      - uses: actions/download-artifact@v4
+        with:
+          name: ingredientalert-web
+          path: web
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -e
+          mv out/*.apk IngredientAlert-test.apk
+          (cd web && zip -qr ../IngredientAlert-web.zip .)
+          gh release delete latest-test-build --cleanup-tag --yes || true
+          gh release create latest-test-build IngredientAlert-test.apk IngredientAlert-web.zip \
+            --target "${{ github.sha }}" --prerelease \
+            --title "IngredientAlert test build (synthetic data)" \
+            --notes "Install IngredientAlert-test.apk on an Android phone. Synthetic demonstration data only. Debug-signed, for testing, not the Play Store. Not tested on a real phone yet. Step by step: GETTING_STARTED.md in the repo. Built from commit ${{ github.sha }}."

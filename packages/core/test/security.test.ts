@@ -162,7 +162,7 @@ describe("mobile app configuration (permissions minimised; also verified by `exp
   });
   it("requests no dangerous permissions: camera, microphone, location and broad storage are blocked", () => {
     expect(cfg.android.permissions).toEqual([]);
-    for (const p of ["CAMERA", "RECORD_AUDIO", "ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"])
+    for (const p of ["CAMERA", "RECORD_AUDIO", "ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "INTERNET", "VIBRATE", "SYSTEM_ALERT_WINDOW"])
       expect(cfg.android.blockedPermissions).toContain(p);
   });
   it("has no analytics, tracking or camera plugins", () => {
