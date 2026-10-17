@@ -1,0 +1,95 @@
+== install
+Performing Streamed Install
+Success
+requested (merged manifest): android.permission.CAMERA
+== baseline launch
+== upgrade check
+== flow 02-check-delivery-review-substitution.yaml
+Anonymous analytics enabled. To opt out, set MAESTRO_CLI_NO_ANALYTICS environment variable to any value before running Maestro.
+
+
+Waiting for flows to complete...
+[Failed] MAIN TASK - check a delivery, then review the substitution (example kitchen) (1m 3s) (No visible element found: "Review this substitution")
+
+1/1 Flow Failed
+
+== FLOW FAILED: 02-check-delivery-review-substitution.yaml
+== flow 01-first-run.yaml
+
+Waiting for flows to complete...
+[Passed] First run shows two clear starts and no demonstration controls (5s)
+
+1/1 Flow Passed in 6s
+
+== flow 04-back-navigation.yaml
+
+Waiting for flows to complete...
+[Failed] System Back unwinds a step, then goes home, then leaves the app (47s) (Assertion is false: "Status now" is visible)
+
+1/1 Flow Failed
+
+== FLOW FAILED: 04-back-navigation.yaml
+== flow 07-settings-display.yaml
+
+Waiting for flows to complete...
+[Passed] Settings - theme, text size, shared-device lock, build identity (20s)
+
+1/1 Flow Passed in 20s
+
+== flow 08-real-kitchen-pin-keyboard.yaml
+
+Waiting for flows to complete...
+[Failed] Real kitchen - set up with a PIN, keyboard never hides the field or the next action, lock and sign in again (33s) (Element not found: Id matching regex: field-your-name)
+
+1/1 Flow Failed
+
+== FLOW FAILED: 08-real-kitchen-pin-keyboard.yaml
+== flow 11-dark-theme-in-app.yaml
+
+Waiting for flows to complete...
+[Failed] Dark theme chosen inside the app (the emulator's system night mode did not reach the app in an earlier run) (35s) (Assertion is false: "Status now" is visible)
+
+1/1 Flow Failed
+
+== FLOW FAILED: 11-dark-theme-in-app.yaml
+== flow (not gating) 03-camera-permission-granted.yaml
+
+Waiting for flows to complete...
+[Failed] Camera already allowed - the scanner opens with torch control and tells the truth when nothing is read (44s) (Assertion is false: "Switch the torch on" is visible)
+
+1/1 Flow Failed
+
+== flow (not gating) 09-scan-timeout-and-manual.yaml
+
+Waiting for flows to complete...
+[Failed] Scan finds nothing in the emulator's virtual scene - timeout notice, retry, then manual search (1m 7s) (Assertion is false: "No barcode was read in 20 seconds.*" is visible)
+
+1/1 Flow Failed
+
+== flow (not gating) 10-camera-permission-denied.yaml
+
+Waiting for flows to complete...
+[Failed] Camera permission asked in context; denial and permanent denial are explained (44s) (Element not found: Text matching regex: Allow camera)
+
+1/1 Flow Failed
+
+== flow 05-draft-write.yaml
+
+Waiting for flows to complete...
+[Failed] Start a delivery, then leave the app (the script kills the process) (41s) (Element not found: Id matching regex: field-batch-or-best-before-code)
+
+1/1 Flow Failed
+
+== FLOW FAILED: 05-draft-write.yaml
+== flow 06-draft-restore.yaml
+
+Waiting for flows to complete...
+[Failed] After process death the example kitchen asks who is using the device and the unsent delivery is still there (26s) (Element not found: Text matching regex: Next: what is on the pack\?)
+
+1/1 Flow Failed
+
+== FLOW FAILED: 06-draft-restore.yaml
+== rotation
+== startup
+== memory and scroll
+== done fail=1
