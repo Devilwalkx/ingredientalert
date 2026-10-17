@@ -1,0 +1,55 @@
+19:51:17.602 [ INFO] maestro.cli.report.TestDebugReporter.logSystemInfo: Debug output path: /home/runner/.maestro/tests/2026-10-17_195117
+19:51:17.610 [ INFO] MAESTRO.logSystemInfo: ---- System Info ----
+19:51:17.611 [ INFO] MAESTRO.logSystemInfo: Maestro Version: 2.11.0
+19:51:17.615 [ INFO] MAESTRO.logSystemInfo: CI: github
+19:51:17.615 [ INFO] MAESTRO.logSystemInfo: OS Name: Linux
+19:51:17.616 [ INFO] MAESTRO.logSystemInfo: OS Version: 6.17.0-1022-azure
+19:51:17.616 [ INFO] MAESTRO.logSystemInfo: Architecture: amd64
+19:51:17.620 [ INFO] MAESTRO.logSystemInfo: Java Version: 17
+19:51:17.626 [ INFO] MAESTRO.logSystemInfo: Xcode Version: null
+19:51:17.629 [ INFO] MAESTRO.logSystemInfo: Flutter Version: Undefined
+19:51:17.632 [ INFO] MAESTRO.logSystemInfo: Flutter Channel: Undefined
+19:51:17.634 [ INFO] MAESTRO.logSystemInfo: ---------------------
+19:51:18.462 [DEBUG] io.micrometer.common.util.internal.logging.InternalLoggerFactory.newDefaultFactory: Using SLF4J as the default logging framework
+19:51:21.135 [ INFO] maestro.cli.command.TestCommand.runShardSuite: [shard 1] Selected device emulator-5554 using port 41719 with execution plan ExecutionPlan(flowsToRun=[/home/runner/work/ingredientalert/ingredientalert/android-tests/flows/01-first-run.yaml], sequence=FlowSequence(flows=[], continueOnFailure=true), workspaceConfig=WorkspaceConfig(flows=null, includeTags=null, excludeTags=null, executionOrder=null, baselineBranch=null, notifications=null, disableRetries=false, platform=PlatformConfiguration(android=AndroidConfiguration(disableAnimations=false), ios=IOSConfiguration(disableAnimations=false, snapshotKeyHonorModalViews=null)), testOutputDir=null))
+19:51:25.248 [ INFO] maestro.cli.runner.TestSuiteInteractor.runFlow:  Running flow First run shows two clear starts and no demonstration controls
+19:51:25.259 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Getting device info
+19:51:25.536 [ INFO] maestro.Maestro.cachedDeviceInfo_delegate$lambda$0: Got device info: DeviceInfo(platform=ANDROID, widthPixels=1080, heightPixels=2340, widthGrid=1080, heightGrid=2340)
+19:51:25.634 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Define variables RUNNING
+19:51:25.638 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Define variables COMPLETED
+19:51:25.639 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Apply configuration RUNNING
+19:51:25.640 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Apply configuration COMPLETED
+19:51:25.640 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Launch app "app.devilwalkx.ingredientalert" with clear state RUNNING
+19:51:25.641 [ INFO] maestro.Maestro.clearAppState$lambda$8: Clearing app state app.devilwalkx.ingredientalert
+19:51:26.912 [DEBUG] maestro.Maestro.setPermissionInternal: Failed to set permission com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE for app app.devilwalkx.ingredientalert: shell command failed (exit -1): 
+Exception occurred while executing:
+java.lang.IllegalArgumentException: Unknown permission: com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+	at com.android.server.pm.permission.PermissionManagerService.grantRuntimePermission(PermissionManagerService.java:2090)
+	at com.android.server.pm.permission.PermissionManagerService.access$900(PermissionManagerService.java:120)
+	at com.android.server.pm.permission.PermissionManagerService$PermissionManagerServiceInternalImpl.grantRuntimePermission(PermissionManagerService.java:2999)
+	at com.android.server.pm.PackageManagerService.grantRuntimePermission(PackageManagerService.java:5734)
+	at com.android.server.pm.PackageManagerShellCommand.runGrantRevokePermission(PackageManagerShellCommand.java:1955)
+	at com.android.server.pm.PackageManagerShellCommand.onCommand(PackageManagerShellCommand.java:230)
+	at android.os.ShellCommand.exec(ShellCommand.java:104)
+	at com.android.server.pm.PackageManagerService.onShellCommand(PackageManagerService.java:21729)
+	at android.os.Binder.shellCommand(Binder.java:881)
+	at android.os.Binder.onTransact(Binder.java:765)
+	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:4860)
+	at com.android.server.pm.PackageManagerService.onTransact(PackageManagerService.java:4014)
+	at android.os.Binder.execTransactInternal(Binder.java:1021)
+	at android.os.Binder.execTransact(Binder.java:994)
+
+19:51:26.916 [ INFO] maestro.Maestro.launchApp$lambda$5: Launching app app.devilwalkx.ingredientalert
+19:51:26.917 [ INFO] maestro.Maestro.launchApp$lambda$5: Stopping app.devilwalkx.ingredientalert app during launch
+19:51:27.070 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Launch app "app.devilwalkx.ingredientalert" with clear state COMPLETED
+19:51:27.071 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Set up my kitchen" is visible RUNNING
+19:51:29.456 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Set up my kitchen" is visible COMPLETED
+19:51:29.456 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Try the example kitchen" is visible RUNNING
+19:51:29.586 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Try the example kitchen" is visible COMPLETED
+19:51:29.587 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Assert that "Demo options" is not visible RUNNING
+19:51:30.482 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Assert that "Demo options" is not visible COMPLETED
+19:51:30.482 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandStart: Take screenshot 01-first-run RUNNING
+19:51:30.487 [ INFO] maestro.Maestro.takeScreenshot: Taking screenshot
+19:51:30.490 [TRACE] maestro.utils.ScreenshotUtils.takeScreenshot: Taking screenshot to output sink
+19:51:30.878 [ INFO] maestro.cli.runner.CliConsoleListener.onCommandFinished: Take screenshot 01-first-run COMPLETED
+19:51:31.835 [ INFO] maestro.cli.report.TestDebugReporter.deleteOldFiles: Performing purge of logs older than 14 days from /home/runner/.maestro/tests
