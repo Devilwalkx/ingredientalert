@@ -1,0 +1,11 @@
+appId: app.devilwalkx.ingredientalert
+name: After process death the example kitchen asks who is using the device and the unsent delivery is still there
+---
+- launchApp
+- assertVisible: "Who is using the device\\?"
+- takeScreenshot: 11-locked-after-restart
+- tapOn: "Alex Rivera"
+- tapOn: "Check a delivery.*"
+- tapOn: "Next: what is on the pack\\?"
+- assertVisible: "DRAFT-123"
+- takeScreenshot: 12-draft-restored

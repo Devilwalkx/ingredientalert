@@ -1,0 +1,27 @@
+appId: app.devilwalkx.ingredientalert
+name: Scan finds nothing in the emulator's virtual scene - timeout notice, retry, then manual search
+---
+- launchApp:
+    clearState: true
+    permissions:
+      camera: allow
+- tapOn: "Try the example kitchen"
+- tapOn: "Alex Rivera"
+- tapOn: "Check a delivery.*"
+- tapOn: "Harbour Teriyaki Sauce 1L"
+- tapOn: "Next: what is on the pack\\?"
+- tapOn: "Scan the barcode"
+- extendedWaitUntil:
+    visible: "No barcode was read in 20 seconds.*"
+    timeout: 40000
+- takeScreenshot: 18-scan-timeout
+- tapOn: "Try scanning again"
+- assertNotVisible: "No barcode was read in 20 seconds.*"
+- extendedWaitUntil:
+    visible: "No barcode was read in 20 seconds.*"
+    timeout: 40000
+- tapOn: "Type the number or search instead"
+- tapOn:
+    id: "field-barcode-number"
+- inputText: "4006381333931"
+- assertVisible: ".*not in your product list.*"

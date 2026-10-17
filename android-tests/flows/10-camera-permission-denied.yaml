@@ -1,0 +1,47 @@
+appId: app.devilwalkx.ingredientalert
+name: Camera permission asked in context; denial and permanent denial are explained
+---
+- launchApp:
+    clearState: true
+    permissions:
+      camera: deny
+- tapOn: "Try the example kitchen"
+- tapOn: "Alex Rivera"
+- tapOn: "Check a delivery.*"
+- tapOn: "Harbour Teriyaki Sauce 1L"
+- tapOn: "Next: what is on the pack\\?"
+- tapOn: "Scan the barcode"
+- assertVisible: "Use the camera to read the barcode\\?"
+- assertVisible: ".*does not take, keep or send pictures.*"
+- takeScreenshot: 19-camera-reason
+- tapOn: "Allow camera"
+- runFlow:
+    when:
+      visible: "Don't allow"
+    commands:
+      - tapOn: "Don't allow"
+- runFlow:
+    when:
+      visible: "Deny"
+    commands:
+      - tapOn: "Deny"
+- assertVisible: "Camera not allowed.*|The camera is switched off for this app"
+- takeScreenshot: 20-camera-denied
+- runFlow:
+    when:
+      visible: "Ask for camera access again"
+    commands:
+      - tapOn: "Ask for camera access again"
+      - runFlow:
+          when:
+            visible: "Don't allow"
+          commands:
+            - tapOn: "Don't allow"
+      - runFlow:
+          when:
+            visible: "Deny"
+          commands:
+            - tapOn: "Deny"
+- takeScreenshot: 21-camera-after-second-denial
+- tapOn: "Type the number or search instead"
+- assertVisible: "Barcode number"

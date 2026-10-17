@@ -8,11 +8,12 @@ let html = readFileSync(file, "utf8");
 const tags = [
   '<link rel="manifest" href="manifest.webmanifest" />',
   '<link rel="apple-touch-icon" href="apple-touch-icon.png" />',
-  '<meta name="theme-color" content="#8a2a00" />',
+  '<meta name="theme-color" content="#1B5E43" />',
   '<meta name="apple-mobile-web-app-capable" content="yes" />',
   '<meta name="apple-mobile-web-app-title" content="IngredientAlert" />',
-  '<meta name="mobile-web-app-capable" content="yes" />'
+  '<meta name="mobile-web-app-capable" content="yes" />',
+  '<meta name="application-id" content="app.devilwalkx.ingredientalert" />'
 ];
-if (!html.includes('rel="manifest"')) html = html.replace("</head>", `${tags.join("\n")}\n</head>`);
+if (!html.includes('name="application-id"')) html = html.replace("</head>", `${tags.join("\n")}\n</head>`);
 writeFileSync(file, html);
 console.log("PWA metadata added");

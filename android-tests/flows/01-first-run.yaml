@@ -1,0 +1,9 @@
+appId: app.devilwalkx.ingredientalert
+name: First run shows two clear starts and no demonstration controls
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Set up my kitchen"
+- assertVisible: "Try the example kitchen"
+- assertNotVisible: "Demo options"
+- takeScreenshot: 01-first-run

@@ -1,17 +1,16 @@
 {
   "expo": {
-    "name": "IngredientAlert (synthetic demo)",
+    "name": "IngredientAlert",
     "slug": "ingredientalert",
-    "version": "0.0.0",
+    "version": "0.2.0",
     "orientation": "default",
     "ios": {
-      "bundleIdentifier": "invalid.placeholder.ingredientalert"
+      "bundleIdentifier": "app.devilwalkx.ingredientalert"
     },
     "android": {
-      "package": "invalid.placeholder.ingredientalert",
+      "package": "app.devilwalkx.ingredientalert",
       "permissions": [],
       "blockedPermissions": [
-        "CAMERA",
         "RECORD_AUDIO",
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
@@ -22,25 +21,38 @@
         "READ_MEDIA_VIDEO",
         "SYSTEM_ALERT_WINDOW",
         "VIBRATE",
-        "INTERNET"
-      ]
+        "INTERNET",
+        "POST_NOTIFICATIONS"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./public/icon-maskable-512.png",
+        "backgroundColor": "#1B5E43"
+      },
+      "predictiveBackGestureEnabled": true,
+      "allowBackup": false,
+      "softwareKeyboardLayoutMode": "resize"
     },
     "plugins": [
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "IngredientAlert uses the camera only to read the barcode on a delivery pack. Pictures are not saved or sent anywhere.",
+          "recordAudioAndroid": false
+        }
+      ]
     ],
     "web": {
       "bundler": "metro",
       "output": "single",
-      "name": "IngredientAlert (synthetic demo)",
+      "name": "IngredientAlert",
       "shortName": "IngredientAlert",
-      "backgroundColor": "#ffffff",
-      "themeColor": "#8a2a00",
+      "backgroundColor": "#F4F7F2",
+      "themeColor": "#1B5E43",
       "lang": "en-GB"
     },
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ]
+    "platforms": ["ios", "android", "web"],
+    "icon": "./public/icon-512.png",
+    "userInterfaceStyle": "automatic"
   }
 }

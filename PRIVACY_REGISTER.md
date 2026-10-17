@@ -11,6 +11,8 @@ Nothing here is a legal conclusion. No consent, contract, registration, approval
 | Exception records (reason text, granter, beneficiary) | Managers/staff | Explain why a safeguard was relaxed | Personal data; reason text must not contain health details. |
 | Product, supplier, specification, recipe, declaration data | Business | Core function | Business data. Approved declarations are intentionally public once published in a real service. |
 
+**Also on the device:** a salted slow hash of each person's PIN (never the PIN), sign-in and wrong-PIN events in the audit trail, and a wrong-PIN counter in settings. Camera images are used only to read a barcode number: not stored, not sent.
+
 **Not collected, by design:** diner names or allergy profiles, guest medical letters, worker photos or video, face recognition, staff location or surveillance, device identifiers, analytics. A later diner-allergy feature would need its own Article 9 and privacy assessment (health data).
 
 ## 2. Roles and bases (to be decided, not asserted)

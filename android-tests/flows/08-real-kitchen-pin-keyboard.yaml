@@ -1,0 +1,38 @@
+appId: app.devilwalkx.ingredientalert
+name: Real kitchen - set up with a PIN, keyboard never hides the field or the next action, lock and sign in again
+---
+- launchApp:
+    clearState: true
+- tapOn: "Set up my kitchen"
+- tapOn:
+    id: "field-business-or-kitchen-group-name"
+- inputText: "Test Cafe"
+- takeScreenshot: 15-keyboard-open-setup
+- tapOn: "Next"
+- tapOn:
+    id: "field-your-name"
+- inputText: "Pat Owner"
+- tapOn:
+    id: "field-choose-a-pin"
+- inputText: "481516"
+- tapOn:
+    id: "field-type-the-pin-again"
+- inputText: "481516"
+- takeScreenshot: 16-keyboard-open-pin
+- tapOn: "Start my kitchen"
+- assertVisible: "Finish setting up"
+- assertNotVisible: "Example kitchen.*"
+- tapOn: "Lock and switch person"
+- tapOn: "Pat Owner"
+- tapOn:
+    id: "field-your-pin"
+- inputText: "000111"
+- tapOn: "Unlock"
+- assertVisible: "Wrong PIN.*"
+- tapOn:
+    id: "field-your-pin"
+- eraseText: 6
+- inputText: "481516"
+- tapOn: "Unlock"
+- assertVisible: "Finish setting up"
+- takeScreenshot: 17-real-kitchen-home

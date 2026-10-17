@@ -1,0 +1,18 @@
+appId: app.devilwalkx.ingredientalert
+name: Start a delivery, then leave the app (the script kills the process)
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the example kitchen"
+- tapOn: "Alex Rivera"
+- tapOn: "Check a delivery.*"
+- tapOn: "Harbour Teriyaki Sauce 1L"
+- tapOn: "Next: what is on the pack\\?"
+- tapOn:
+    id: "field-batch-or-best-before-code"
+- inputText: "DRAFT-123"
+- hideKeyboard
+- extendedWaitUntil:
+    visible: "DRAFT-123"
+    timeout: 5000
+- pressKey: home

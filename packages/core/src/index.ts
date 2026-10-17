@@ -10,3 +10,5 @@ export * from "./vault.js";
 export * from "./seed.js";
 export * from "./persist.js";
 export { stableStringify, sha } from "./util.js";
+export * from "./pin.js";
+export * from "./status.js";

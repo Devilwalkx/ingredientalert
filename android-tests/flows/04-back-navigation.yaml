@@ -1,0 +1,18 @@
+appId: app.devilwalkx.ingredientalert
+name: System Back unwinds a step, then goes home, then leaves the app
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the example kitchen"
+- tapOn: "Alex Rivera"
+- tapOn: "Check a delivery.*"
+- tapOn: "Harbour Teriyaki Sauce 1L"
+- tapOn: "Next: what is on the pack\\?"
+- assertVisible: "What is on the pack\\?"
+- pressKey: back
+- assertNotVisible: "What is on the pack\\?"
+- assertVisible: "Step 1 of 3: what did you order\\?"
+- pressKey: back
+- assertVisible: "Status now"
+- pressKey: back
+- assertNotVisible: "Status now"

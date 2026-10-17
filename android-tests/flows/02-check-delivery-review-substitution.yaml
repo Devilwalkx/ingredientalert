@@ -1,0 +1,68 @@
+appId: app.devilwalkx.ingredientalert
+name: MAIN TASK - check a delivery, then review the substitution (example kitchen)
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the example kitchen"
+- assertVisible: "Who is using the device\\?"
+- takeScreenshot: 02-who-is-using
+- tapOn: "Alex Rivera"
+- assertVisible: "Check a delivery.*"
+- takeScreenshot: 03-home
+- tapOn: "Settings"
+- tapOn: "Demonstration tools.*"
+- tapOn: "Fill in the replacement-sauce delivery"
+- assertVisible: "What is on the pack\\?"
+- takeScreenshot: 04-delivery-form
+- scrollUntilVisible:
+    element: "Next: check and save"
+    direction: DOWN
+- tapOn: "Next: check and save"
+- scrollUntilVisible:
+    element: "Save and check this delivery"
+    direction: DOWN
+- tapOn: "Save and check this delivery"
+- assertVisible: "Ordered and arrived, side by side"
+- takeScreenshot: 05-delivery-result
+- scrollUntilVisible:
+    element: "DIFFERENT"
+    direction: DOWN
+- takeScreenshot: 06-side-by-side
+- scrollUntilVisible:
+    element: "Review this substitution"
+    direction: UP
+- tapOn: "Review this substitution"
+- assertVisible: "This step is for the Specification reviewer.*"
+# the ordinary shared-device switch: lock, then a different person taps their name
+- tapOn: "Lock and switch person"
+- tapOn: "Priya Nair"
+- tapOn: "Settings"
+- tapOn: "Demonstration tools.*"
+- tapOn: "Fill in the supplier sheet for the new sauce"
+- tapOn: "Open review.*"
+- assertVisible: "Step 1 of 3: enter the supplier's specification"
+- scrollUntilVisible:
+    element: "Save specification"
+    direction: DOWN
+- tapOn: "Save specification"
+- scrollUntilVisible:
+    element: "Show which recipes change"
+    direction: UP
+- tapOn: "Show which recipes change"
+- assertVisible: "Recipes that change.*"
+- takeScreenshot: 07-recipes-change
+- tapOn: "Lock and switch person"
+- tapOn: "Sam Okoye"
+- tapOn: "Review"
+- tapOn: "Open review.*"
+- assertVisible: "Step 3 of 3: decide"
+- tapOn: "Approve this change"
+- assertVisible: "Approve this change\\?"
+- takeScreenshot: 08-approve-dialog
+# system Back must mean "No" and leave the change unapproved
+- pressKey: back
+- assertNotVisible: "Approve this change\\?"
+- tapOn: "Approve this change"
+- tapOn: "Yes, approve"
+- assertVisible: "Approved revision.*"
+- takeScreenshot: 09-after-approval

@@ -1,0 +1,20 @@
+appId: app.devilwalkx.ingredientalert
+name: Camera already allowed - the scanner opens with torch control and tells the truth when nothing is read
+---
+- launchApp:
+    clearState: true
+    permissions:
+      camera: allow
+- tapOn: "Try the example kitchen"
+- tapOn: "Alex Rivera"
+- tapOn: "Check a delivery.*"
+- tapOn: "Harbour Teriyaki Sauce 1L"
+- tapOn: "Next: what is on the pack\\?"
+- tapOn: "Scan the barcode"
+- assertVisible: "Switch the torch on"
+- takeScreenshot: 10-scanner-open
+- tapOn: "Switch the torch on"
+- assertVisible: "Torch is on.*"
+- tapOn: "Torch is on.*"
+- tapOn: "Type the number or search instead"
+- assertVisible: "Barcode number"

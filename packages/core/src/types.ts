@@ -297,6 +297,10 @@ export interface AppState {
   retention: RetentionRecord[];
   /** idempotency keys -> id of the entity the first call produced */
   requests: Record<string, string>;
+  /** Per-person PIN verifiers (salted slow hash, never the PIN). Optional: absent in older saved data and in the demonstration kitchen. */
+  /** true only for the made-up demonstration kitchen. Real kitchens never carry this flag. */
+  synthetic?: boolean;
+  pins?: Record<string, { salt: string; hash: string; n: number; setAt: string }>;
 }
 
 export function emptyState(): AppState {

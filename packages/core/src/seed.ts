@@ -1,6 +1,7 @@
 import { specMaps, type Allergen } from "./allergens.js";
 import { gtinWithCheck } from "./barcode.js";
 import { Engine, type SpecInput } from "./engine.js";
+import { sha, stableStringify } from "./util.js";
 import { emptyState, type AppState, type Component, type ReceivingInput, type Role } from "./types.js";
 
 export const MAIN = "site-main";
@@ -131,5 +132,26 @@ export function syntheticEngine(opts: { now?: () => number } = {}): Engine {
 }
 
 export function syntheticExample(): AppState {
-  return syntheticEngine().state;
+  return { ...syntheticEngine().state, synthetic: true };
+}
+
+/**
+ * A real (non-demonstration) kitchen with one person. That person is the administrator and the publication approver,
+ * so the app can be set up. Receiving, checking and service roles are given to other people; one person doing everything
+ * is blocked by separation of duties unless a named, reasoned, expiring exception is granted.
+ */
+export function ownKitchenState(opts: { kitchenName: string; siteName: string; ownerName: string; now?: string }): { state: AppState; ownerId: string; siteId: string } {
+  const s = emptyState();
+  const at = opts.now ?? new Date().toISOString();
+  const tenantId = "tenant-own", siteId = "site-own", ownerId = "staff-owner";
+  s.tenants.push({ id: tenantId, name: opts.kitchenName.trim() || "My kitchen" });
+  s.sites.push({ id: siteId, tenantId, name: opts.siteName.trim() || "Kitchen" });
+  s.staff.push({ id: ownerId, tenantId, name: opts.ownerName.trim() || "Owner", status: "active", offboardedAt: null, erased: false });
+  s.memberships.push({ id: "mem-1", staffId: ownerId, tenantId, siteId: "*", role: "administrator", endedAt: null });
+  s.memberships.push({ id: "mem-2", staffId: ownerId, tenantId, siteId: "*", role: "publication_approver", endedAt: null });
+  s.seq = 2;
+  const prev = "genesis";
+  const body = stableStringify({ seq: 1, at, tenantId, siteId: null, actorId: ownerId, action: "kitchen.created", targetType: "tenant", targetId: tenantId, detail: "", prev });
+  s.audit.push({ seq: 1, at, tenantId, siteId: null, actorId: ownerId, action: "kitchen.created", targetType: "tenant", targetId: tenantId, detail: "", prevHash: prev, hash: sha(body) });
+  return { state: s, ownerId, siteId };
 }

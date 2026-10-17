@@ -1,10 +1,14 @@
 {
   "name": "ingredientalert",
   "private": true,
-  "version": "0.0.0",
-  "workspaces": ["packages/*", "apps/*", "e2e"],
+  "version": "0.2.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "e2e"
+  ],
   "scripts": {
-    "test": "npm test -w @ingredientalert/core",
+    "test": "npm test -w @ingredientalert/core && npm test -w @ingredientalert/mobile",
     "typecheck": "npm run typecheck -w @ingredientalert/core && npm run typecheck -w @ingredientalert/mobile",
     "demo": "npm run demo -w @ingredientalert/core",
     "e2e": "npm run build:web -w @ingredientalert/mobile && npm test -w @ingredientalert/e2e"

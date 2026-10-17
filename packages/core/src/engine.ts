@@ -4,6 +4,7 @@ import { activeSubstitution, brief, declare, dishesAt, kitchenControlLines, open
 import { DomainError, forbidden, invalid, notFound } from "./errors.js";
 import { findCycle, pathToProduct, recipeEdges, staleReferences, versionAt } from "./graph.js";
 import { authorize, rolesAt, type Action } from "./permissions.js";
+import { makePinRecord, type PinRecord } from "./pin.js";
 import {
   CHANNELS, type AppState, type Channel, type ChannelState, type Component, type Delivery, type Finding, type Impact, type ImpactItem,
   type Override, type OverrideKind, type Publication, type ReceivingInput, type ReviewCase, type Role, type SpecRevision, type Substitution
@@ -679,6 +680,75 @@ export class Engine {
       s.retention.push(rec);
       this.audit(s, actorId, actor.tenantId, null, "staff.erased", "staff", t.id, "personal details removed; audit retained");
       return rec;
+    });
+  }
+
+
+  // ---------------------------------------------------------------- catalogue (own kitchen)
+  /**
+   * Adds an approved ingredient with its supplier specification as the evidence. Catalogue entry is attributable (audit)
+   * but is not a substitution approval: a product that arrives in place of another still needs the full review.
+   */
+  addProduct(actorId: string, input: { siteId: string; name: string; supplier: string; barcode: string; spec: SpecInput }): { productId: string; specId: string } {
+    return this.tx((s) => {
+      const { site } = this.auth(s, actorId, "manage_catalogue", input.siteId);
+      if (!input.name.trim()) throw invalid("Give the product a name.");
+      const barcode = normaliseBarcode(input.barcode);
+      if (barcode && !isValidGtin(barcode)) throw invalid("That barcode number is not valid (check the digits), or leave it empty and add it later.");
+      if (barcode && s.products.some((p) => p.tenantId === site.tenantId && p.barcodes.includes(barcode))) throw invalid("This barcode already belongs to another product.");
+      const si = input.spec;
+      if (si.evidenceReference.trim().length < 3) throw invalid("Say where the allergen information came from (for example the supplier sheet reference).");
+      if (!si.label.trim()) throw invalid("Enter the supplier's version label for the specification.");
+      if (!si.packSize.trim()) throw invalid("Enter the pack size.");
+      const productId = this.id(s, "prod");
+      const specId = this.id(s, "spec");
+      const now = this.iso(s);
+      s.products.push({ id: productId, tenantId: site.tenantId, name: input.name.trim(), supplier: input.supplier.trim() || "Unknown supplier", barcodes: barcode ? [barcode] : [], kind: "ingredient", status: "approved", approvedSpecId: specId });
+      s.specs.push({
+        id: specId, tenantId: site.tenantId, productId, revision: 1, label: si.label.trim(), packSize: si.packSize.trim(), batchCodes: null,
+        ingredientsText: si.ingredientsText.trim(), contains: { ...si.contains }, precautionary: { ...si.precautionary },
+        evidence: { reference: si.evidenceReference.trim(), note: si.evidenceNote.trim(), enteredBy: actorId, enteredAt: now },
+        status: "verified", verifiedBy: actorId, verifiedAt: now
+      });
+      this.audit(s, actorId, site.tenantId, input.siteId, "product.added", "product", productId, `spec=${specId}; complete=${isSpecComplete(s.specs[s.specs.length - 1]!)}`);
+      return { productId, specId };
+    });
+  }
+
+  // ---------------------------------------------------------------- per-person PIN
+  /** A person sets their own PIN, or an administrator sets it for someone. The PIN itself is never stored or logged. */
+  setPin(actorId: string, staffId: string, pin: string): void {
+    const rec = makePinRecord(pin); // validates; slow hash computed outside the transaction work
+    this.storePin(actorId, staffId, rec);
+  }
+  storePin(actorId: string, staffId: string, rec: PinRecord): void {
+    this.tx((s) => {
+      const actor = s.staff.find((x) => x.id === actorId);
+      const target = s.staff.find((x) => x.id === staffId);
+      if (!actor || !target || actor.tenantId !== target.tenantId || actor.status !== "active" || target.status !== "active") throw forbidden();
+      if (actorId !== staffId) authorize(s, actorId, "manage_staff", actor.tenantId, null);
+      s.pins = { ...(s.pins ?? {}), [staffId]: { ...rec, setAt: this.iso(s) } };
+      this.audit(s, actorId, actor.tenantId, null, "pin.set", "staff", staffId, actorId === staffId ? "own PIN" : "set by administrator");
+    });
+  }
+  /** An administrator clears someone's PIN (forgotten PIN). The person chooses a new one at their next sign-in. The administrator never learns it. */
+  resetPin(actorId: string, staffId: string): void {
+    this.tx((s) => {
+      const actor = s.staff.find((x) => x.id === actorId);
+      const target = s.staff.find((x) => x.id === staffId);
+      if (!actor || !target || actor.tenantId !== target.tenantId) throw forbidden();
+      authorize(s, actorId, "manage_staff", actor.tenantId, null);
+      if (actorId === staffId) throw invalid("Ask another administrator to reset your PIN, or sign out and use Switch person.");
+      if (s.pins) { const { [staffId]: _gone, ...rest } = s.pins; s.pins = rest; }
+      this.audit(s, actorId, actor.tenantId, null, "pin.reset", "staff", staffId, "cleared; person chooses a new PIN at next sign-in");
+    });
+  }
+  /** Audit-only record that a person signed in or a sensitive action was re-confirmed with the PIN (no secret in the record). */
+  recordSession(staffId: string, event: "signed_in" | "locked" | "pin_failed" | "reconfirmed", detail = ""): void {
+    this.tx((s) => {
+      const t = s.staff.find((x) => x.id === staffId);
+      if (!t) throw forbidden();
+      this.audit(s, staffId, t.tenantId, null, `session.${event}`, "staff", staffId, detail);
     });
   }
 

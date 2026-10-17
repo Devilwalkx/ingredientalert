@@ -4,14 +4,14 @@ import type { AppState, Role, Staff } from "./types.js";
 export type Action =
   | "read" | "receive" | "verify_spec" | "review_impact" | "reject_case" | "approve_case" | "end_substitution"
   | "edit_recipe" | "approve_recipe" | "prepare_publication" | "publish_channel" | "acknowledge"
-  | "manage_staff" | "grant_override" | "export" | "erase_staff" | "set_controls";
+  | "manage_staff" | "grant_override" | "export" | "erase_staff" | "set_controls" | "manage_catalogue";
 
 export const ROLE_ACTIONS: Record<Role, Action[]> = {
   receiving_operator: ["read", "receive"],
-  specification_reviewer: ["read", "verify_spec", "review_impact", "reject_case", "edit_recipe"],
+  specification_reviewer: ["read", "verify_spec", "review_impact", "reject_case", "edit_recipe", "manage_catalogue"],
   publication_approver: ["read", "approve_case", "reject_case", "end_substitution", "approve_recipe", "prepare_publication", "publish_channel", "export"],
   service_staff: ["read", "acknowledge"],
-  administrator: ["read", "manage_staff", "grant_override", "export", "erase_staff", "set_controls"]
+  administrator: ["read", "manage_staff", "grant_override", "export", "erase_staff", "set_controls", "manage_catalogue"]
 };
 
 export function getStaff(state: AppState, staffId: string): Staff | undefined {

@@ -40,7 +40,7 @@
 | S9 | Encrypted state: no readable data in ciphertext; wrong key/account/rollback/tamper fail | security.test, and e2e "data is stored encrypted" | Automated |
 | S10 | Lost key fails closed in the browser | e2e | Automated |
 | S11 | No network requests leave the app's origin | e2e | Automated |
-| S12 | Android permissions: none requested | security.test (app.json), `expo prebuild` + CI step | Automated + manual (prebuild run, all `uses-permission` removed) |
+| S12 | Android permissions: only CAMERA (barcode scan); everything else blocked | security.test (app.json, expo-camera plugin with microphone off), CI step on the prebuilt manifest (allow-list: CAMERA only), emulator `dumpsys package` | Automated (CI) |
 | S13 | No "safe", "free from", "allergen-free" wording in stored data / exports | demo.test, workflow.test | Automated |
 | S14 | Refuses to run without WebCrypto | e2e | Automated |
 | S15 | Accessibility scan (axe WCAG 2 A/AA) on every screen state | e2e tour, 3 phone sizes | Automated |
@@ -55,3 +55,17 @@ See STATUS.md for the recorded results: separation-of-duties check removed, unkn
 
 ## Not done
 Real-device tests (secure storage, fonts, insets, install); screen-reader testing with people; penetration testing; fuzzing; dependency/SBOM review; independent cryptography review; server tests (tenant isolation on a real backend, invitation replay, revoked sessions, encrypted traffic inspection, restore/delete drills) because no server exists.
+
+## Added in the Android pass (0.2.0)
+| ID | Safeguard | Test | Kind |
+|---|---|---|---|
+| S19 | PIN hash and check, weak PINs refused, random salt, no PIN in state or audit, throttle policy, PIN reset permissions | core `android-pass.test.ts` | Automated |
+| S20 | Five status words and their order; a rejected review is never "approved"; the approver cannot acknowledge for staff | core `android-pass.test.ts` | Automated |
+| S21 | Ordered/arrived comparison, affected recipes/sites/places, product search, own-kitchen setup end to end, unauthorised add refused | core `android-pass.test.ts` | Automated |
+| S22 | Scan result handling: valid known, valid unknown, misread (check digit), empty, other kitchen | mobile `scanFlow.test.ts` | Automated |
+| S23 | Design tokens: contrast for every pair in light and dark, 16 sp body, nothing under 14 sp, 48 dp targets | mobile `tokens.test.ts` | Automated |
+| S24 | Served page carries `application-id` = this app, so a test cannot talk to another app on the port | e2e | Automated |
+| S25 | Idle auto-lock, wrong-PIN throttle, step-up PIN on erase, first-sign-in PIN choice, drafts private to the person and sealed at rest | e2e (browser) | Automated (browser only) |
+| S26 | Emulator: install, launch, back, keyboard, process-death restore, permission flows, scan timeout | `android-tests/` via CI | Automated on an emulator (not a physical device) |
+
+**What these do not establish:** that scanning works on real packs; that the PIN lock behaves on a physical tablet; that any wording is understood by a fresh user; that the app is secure.

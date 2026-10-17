@@ -7,7 +7,7 @@ Scope: the on-device app in this repository. A server threat model is required b
 | T1 | Someone with the unlocked phone reads kitchen data | Data encrypted at rest; key in Android Keystore-backed secure store (this-device-only) | The unlocked app shows data. Device lock is the user's control. Web demo has weaker key protection (documented). |
 | T2 | Lost phone / lost key | Fails closed: ciphertext without key shows nothing | Data permanently unrecoverable; no backup in this build. Recovery secret is a design preview only. |
 | T3 | Tampering with stored data | AEAD with account/item/version binding; tampering and rollback fail to open | Does not stop a user wiping everything. |
-| T4 | Staff acts beyond role | Authorisation inside core on every command; tenant, site, role, active status | Personas are simulated on one phone: whoever holds the phone can switch persona. Real separation needs a server. |
+| T4 | Staff acts beyond role, or acts as someone else | Authorisation inside core on every command; per-person PIN sign-in, auto-lock, step-up PIN for consequential acts, throttling, audit of sign-ins | A PIN can be lent or watched; guessing offline is possible for someone who copies the stored data; no remote revocation without a server. See docs/SHARED_DEVICE_SESSIONS.md. |
 | T5 | Receiving operator approves own change | Separation-of-duties check; only named, reasoned, scoped, expiring exception | The exception is a human risk acceptance. |
 | T6 | Unknown data presented as safe | Unknown propagates to UNRESOLVED; no "free from"; override cannot clear it; property test over random specs | Data-entry error (a typed "not declared" that is wrong) cannot be detected by software. Reviewer must check the original sheet. |
 | T7 | Barcode trusted as formulation | Identifier match only; pack, batch, version compared | Supplier can change recipe without changing barcode or label version. |
@@ -25,3 +25,5 @@ Scope: the on-device app in this repository. A server threat model is required b
 | T19 | Over-claiming | Visible notices; docs list limits; tests assert no "free from"/"safe" wording in stored publications | Wording needs specialist review. |
 
 Out of scope / not assessed: physical stock handling, cross-contact on the line, supplier fraud, real-device attacks (root, backups), accessibility with assistive technology on a real phone.
+| T20 | Camera misuse (images kept or sent) | CAMERA is the only permission; no INTERNET permission; no storage permission; frames decoded in memory | Inspection of the camera module's internals is not done; relies on the library and the manifest. |
+| T21 | Camera permission pressure / confusing denial | Asked in context with a reason; denial and permanent denial explained; typing always works | Real-device behaviour not tested. |

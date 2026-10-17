@@ -156,18 +156,26 @@ describe("encrypted local storage of the whole database", () => {
 
 describe("mobile app configuration (permissions minimised; also verified by `expo prebuild` in CI)", () => {
   const cfg = JSON.parse(readFileSync(new URL("../../../apps/mobile/app.json", import.meta.url), "utf8")).expo;
-  it("uses the placeholder package id and the synthetic-demo name", () => {
-    expect(cfg.android.package).toBe("invalid.placeholder.ingredientalert");
-    expect(cfg.name).toBe("IngredientAlert (synthetic demo)");
+  it("uses its own application id (not a placeholder, not another app's) and version 0.2.0", () => {
+    expect(cfg.android.package).toBe("app.devilwalkx.ingredientalert");
+    expect(cfg.ios.bundleIdentifier).toBe("app.devilwalkx.ingredientalert");
+    expect(cfg.version).toBe("0.2.0");
+    expect(cfg.android.allowBackup).toBe(false);
+    expect(cfg.android.predictiveBackGestureEnabled).toBe(true);
   });
-  it("requests no dangerous permissions: camera, microphone, location and broad storage are blocked", () => {
+  it("requests no dangerous permissions except CAMERA (barcode scan, asked in context); microphone, location, storage, network, notifications are blocked", () => {
     expect(cfg.android.permissions).toEqual([]);
-    for (const p of ["CAMERA", "RECORD_AUDIO", "ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "INTERNET", "VIBRATE", "SYSTEM_ALERT_WINDOW"])
+    expect(cfg.android.blockedPermissions).not.toContain("CAMERA");
+    for (const p of ["RECORD_AUDIO", "POST_NOTIFICATIONS", "ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "INTERNET", "VIBRATE", "SYSTEM_ALERT_WINDOW"])
       expect(cfg.android.blockedPermissions).toContain(p);
   });
-  it("has no analytics, tracking or camera plugins", () => {
+  it("has no analytics or tracking plugins; the only camera plugin is expo-camera with microphone access off", () => {
     const names = cfg.plugins.map((p: unknown) => (Array.isArray(p) ? p[0] : p));
-    expect(names.filter((n: string) => /analytics|sentry|firebase|segment|amplitude|tracking|camera|barcode/i.test(n))).toEqual([]);
+    expect(names.filter((n: string) => /analytics|sentry|firebase|segment|amplitude|tracking|barcode/i.test(n))).toEqual([]);
+    expect(names.filter((n: string) => /camera/i.test(n))).toEqual(["expo-camera"]);
+    const cam = cfg.plugins.find((p: unknown) => Array.isArray(p) && p[0] === "expo-camera");
+    expect(cam[1].recordAudioAndroid).toBe(false);
+    expect(cam[1].cameraPermission).toMatch(/not saved or sent/);
   });
 });
 

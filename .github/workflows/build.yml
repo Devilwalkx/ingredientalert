@@ -51,15 +51,37 @@ jobs:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
       - name: Generate native Android project
         working-directory: apps/mobile
+        env:
+          BUILD_COMMIT: ${{ github.sha }}
+          BUILD_TIME: ${{ github.event.head_commit.timestamp }}
         run: npx expo prebuild --platform android --no-install
-      - name: Check requested permissions
+      - name: Check requested permissions (only CAMERA, which is used by the implemented barcode scan)
         working-directory: apps/mobile
         run: |
-          grep "uses-permission" android/app/src/main/AndroidManifest.xml
-          if grep -E 'uses-permission android:name="android.permission.(RECORD_AUDIO|CAMERA|ACCESS_FINE_LOCATION|ACCESS_COARSE_LOCATION|ACCESS_BACKGROUND_LOCATION|READ_EXTERNAL_STORAGE|WRITE_EXTERNAL_STORAGE)"' android/app/src/main/AndroidManifest.xml | grep -v 'tools:node="remove"'; then
-            echo "Forbidden permission requested"; exit 1
-          fi
-      - name: "Build release APK (signed with the Android debug key, for testing only)"
+          M=android/app/src/main/AndroidManifest.xml
+          grep "uses-permission" $M || true
+          # every requested permission that is not removed with tools:node="remove" must be in the allow-list
+          REQUESTED=$(grep -o '<uses-permission[^>]*>' $M | grep -v 'tools:node="remove"' | sed -E 's/.*android:name="([^"]+)".*/\1/' | sort -u)
+          echo "requested: $REQUESTED"
+          for p in $REQUESTED; do
+            case "$p" in
+              android.permission.CAMERA) ;;
+              *) echo "Forbidden permission requested: $p"; exit 1;;
+            esac
+          done
+          echo "$REQUESTED" | grep -q 'android.permission.CAMERA' || { echo "CAMERA expected for the barcode scan but not requested"; exit 1; }
+          # explicitly forbidden ones must be blocked, not merely absent
+          for p in INTERNET VIBRATE SYSTEM_ALERT_WINDOW RECORD_AUDIO ACCESS_FINE_LOCATION ACCESS_COARSE_LOCATION READ_EXTERNAL_STORAGE WRITE_EXTERNAL_STORAGE POST_NOTIFICATIONS; do
+            if echo "$REQUESTED" | grep -q "android.permission.$p"; then echo "Forbidden: $p"; exit 1; fi
+          done
+      - name: Check identity and back-gesture settings
+        working-directory: apps/mobile
+        run: |
+          grep -E 'package="|enableOnBackInvokedCallback|allowBackup' android/app/src/main/AndroidManifest.xml || true
+          grep -E 'applicationId|versionCode|versionName' android/app/build.gradle
+          grep -Eq "applicationId ['\"]app.devilwalkx.ingredientalert['\"]" android/app/build.gradle
+          grep -q 'enableOnBackInvokedCallback="true"' android/app/src/main/AndroidManifest.xml
+      - name: "Build release APK (signed with the public Android debug key: test signing only)"
         working-directory: apps/mobile/android
         run: ./gradlew assembleRelease --no-daemon
       - uses: actions/upload-artifact@v4
@@ -68,10 +90,98 @@ jobs:
           path: apps/mobile/android/app/build/outputs/apk/release/*.apk
           retention-days: 14
 
+  android-emulator:
+    needs: android-apk
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: api36-pixel6-standard, api: 36, profile: pixel_6, font: "1.0", night: "no" }
+          - { name: api29-pixel5-text200-dark, api: 29, profile: pixel_5, font: "2.0", night: "yes" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: ingredientalert-android-test-apk
+          path: apk
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Fetch the previous test build (for the upgrade check)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p prev
+          gh release download latest-test-build -p '*.apk' -D prev --repo "$GITHUB_REPOSITORY" || echo "no previous release"
+          ls prev || true
+      - name: Install Maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+      - name: Run on the emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        env:
+          APK: ${{ github.workspace }}/apk/app-release.apk
+          PREV_APK_DIR: ${{ github.workspace }}/prev
+          OUT: ${{ github.workspace }}/out
+          FONT: ${{ matrix.font }}
+          NIGHT: ${{ matrix.night }}
+        with:
+          api-level: ${{ matrix.api }}
+          arch: x86_64
+          target: google_apis
+          profile: ${{ matrix.profile }}
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back virtualscene
+          disable-animations: true
+          script: PREV_APK=$(ls $PREV_APK_DIR/*.apk 2>/dev/null | head -1) bash android-tests/run.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: emulator-evidence-${{ matrix.name }}
+          path: out
+          retention-days: 30
+
+  publish-evidence:
+    # Copies the emulator screenshots, recording and measurements to a branch so they can be read without downloading artifacts.
+    if: ${{ always() && github.event_name == 'push' && needs.android-emulator.result != 'skipped' }}
+    needs: android-emulator
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: emulator-evidence-*
+          path: evidence
+      - name: Push evidence branch
+        run: |
+          set -e
+          rm -rf /tmp/ev && mkdir -p /tmp/ev && cp -r evidence/. /tmp/ev/
+          printf 'Emulator evidence for commit %s (run %s). Emulator results are not physical-device results.\n' "$GITHUB_SHA" "$GITHUB_RUN_NUMBER" > /tmp/ev/README.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan evidence-tmp
+          git rm -rf . >/dev/null 2>&1 || true
+          cp -r /tmp/ev/. .
+          git add -A
+          git commit -q -m "Emulator evidence for ${GITHUB_SHA} (run ${GITHUB_RUN_NUMBER})"
+          git push -f origin "evidence-tmp:refs/heads/evidence/run-${GITHUB_RUN_NUMBER}"
+
   publish-release:
     # Keeps a single, always-newest test build on the repo's Releases page (plain .apk, no zip).
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [test-and-web, android-apk]
+    if: ${{ always() && github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.test-and-web.result == 'success' && needs.android-apk.result == 'success' }}
+    needs: [test-and-web, android-apk, android-emulator]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -96,5 +206,5 @@ jobs:
           gh release delete latest-test-build --cleanup-tag --yes || true
           gh release create latest-test-build IngredientAlert-test.apk IngredientAlert-web.zip \
             --target "${{ github.sha }}" --prerelease \
-            --title "IngredientAlert test build (synthetic data)" \
-            --notes "Install IngredientAlert-test.apk on an Android phone. Synthetic demonstration data only. Debug-signed, for testing, not the Play Store. Not tested on a real phone yet. Step by step: GETTING_STARTED.md in the repo. Built from commit ${{ github.sha }}."
+            --title "IngredientAlert test build" \
+            --notes "Install IngredientAlert-test.apk on an Android phone. Test build, signed with the public Android debug key (not a release key, not for the Play Store). Step by step: GETTING_STARTED.md. Commit ${{ github.sha }}, run ${{ github.run_number }}. Browser tests: ${{ needs.test-and-web.result }}. Android emulator tests (API 36 and API 29): ${{ needs.android-emulator.result }}. Emulator results are not physical-device results. This asset has NOT been run on a physical phone by anyone, and real-world barcode scanning with the camera is NOT TESTED (an emulator camera shows a virtual scene only). The app has a new application ID: uninstall any older IngredientAlert first. Nothing is sent anywhere: there is no server, and the QR / web menu and printer are simulated. See docs/ANDROID_PASS_REPORT.md for what is and is not tested."
