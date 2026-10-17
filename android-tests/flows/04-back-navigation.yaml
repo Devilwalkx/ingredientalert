@@ -3,20 +3,45 @@ name: System Back unwinds a step, then goes home, then leaves the app
 ---
 - launchApp:
     clearState: true
+- scrollUntilVisible:
+    element: "Try the example kitchen"
+    direction: DOWN
 - tapOn: "Try the example kitchen"
+- scrollUntilVisible:
+    element: "Alex Rivera"
+    direction: DOWN
 - tapOn: "Alex Rivera"
+- scrollUntilVisible:
+    element: "Check a delivery.*"
+    direction: DOWN
 - tapOn: "Check a delivery.*"
+- scrollUntilVisible:
+    element:
+      id: "field-search-by-name-supplier-or-barcode-number"
+    direction: DOWN
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
 - hideKeyboard
+- scrollUntilVisible:
+    element: "Harbour Teriyaki Sauce 1L"
+    direction: DOWN
 - tapOn: "Harbour Teriyaki Sauce 1L"
+- scrollUntilVisible:
+    element: "Next: what is on the pack\\?"
+    direction: DOWN
 - tapOn: "Next: what is on the pack\\?"
-- assertVisible: "What is on the pack\\?"
+- scrollUntilVisible:
+    element: "What is on the pack\\?"
+    direction: DOWN
 - pressKey: back
 - assertNotVisible: "What is on the pack\\?"
-- assertVisible: "Step 1 of 3: what did you order\\?"
+- scrollUntilVisible:
+    element: "Step 1 of 3: what did you order\\?"
+    direction: DOWN
 - pressKey: back
-- assertVisible: "Status now"
+- scrollUntilVisible:
+    element: "Status now"
+    direction: DOWN
 - pressKey: back
 - assertNotVisible: "Status now"

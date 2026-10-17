@@ -3,15 +3,38 @@ name: Start a delivery, then leave the app (the script kills the process)
 ---
 - launchApp:
     clearState: true
+- scrollUntilVisible:
+    element: "Try the example kitchen"
+    direction: DOWN
 - tapOn: "Try the example kitchen"
+- scrollUntilVisible:
+    element: "Alex Rivera"
+    direction: DOWN
 - tapOn: "Alex Rivera"
+- scrollUntilVisible:
+    element: "Check a delivery.*"
+    direction: DOWN
 - tapOn: "Check a delivery.*"
+- scrollUntilVisible:
+    element:
+      id: "field-search-by-name-supplier-or-barcode-number"
+    direction: DOWN
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
 - hideKeyboard
+- scrollUntilVisible:
+    element: "Harbour Teriyaki Sauce 1L"
+    direction: DOWN
 - tapOn: "Harbour Teriyaki Sauce 1L"
+- scrollUntilVisible:
+    element: "Next: what is on the pack\\?"
+    direction: DOWN
 - tapOn: "Next: what is on the pack\\?"
+- scrollUntilVisible:
+    element:
+      id: "field-batch-or-best-before-code"
+    direction: DOWN
 - tapOn:
     id: "field-batch-or-best-before-code"
 - inputText: "DRAFT-123"

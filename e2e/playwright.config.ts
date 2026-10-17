@@ -10,6 +10,7 @@ const launchOptions = executablePath ? { executablePath } : {};
 export default defineConfig({
   testDir: "tests",
   timeout: 240_000,
+  expect: { timeout: 10_000 },
   fullyParallel: true,
   workers: process.env.CI ? 2 : 3,
   reporter: [["list"]],

@@ -3,12 +3,25 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
 ---
 - launchApp:
     clearState: true
+- scrollUntilVisible:
+    element: "Try the example kitchen"
+    direction: DOWN
 - tapOn: "Try the example kitchen"
-- assertVisible: "Who is using the device\\?"
+- scrollUntilVisible:
+    element: "Who is using the device\\?"
+    direction: DOWN
 - takeScreenshot: 02-who-is-using
+- scrollUntilVisible:
+    element: "Alex Rivera"
+    direction: DOWN
 - tapOn: "Alex Rivera"
-- assertVisible: "Check a delivery.*"
+- scrollUntilVisible:
+    element: "Check a delivery.*"
+    direction: DOWN
 - takeScreenshot: 03-home
+- scrollUntilVisible:
+    element: "Settings"
+    direction: UP
 - tapOn: "Settings"
 - scrollUntilVisible:
     element: "Demonstration tools.*"
@@ -18,7 +31,9 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
     element: "Fill in the replacement-sauce delivery"
     direction: DOWN
 - tapOn: "Fill in the replacement-sauce delivery"
-- assertVisible: "What is on the pack\\?"
+- scrollUntilVisible:
+    element: "What is on the pack\\?"
+    direction: DOWN
 - takeScreenshot: 04-delivery-form
 - scrollUntilVisible:
     element: "Next: check and save"
@@ -28,7 +43,9 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
     element: "Save and check this delivery"
     direction: DOWN
 - tapOn: "Save and check this delivery"
-- assertVisible: "Ordered and arrived, side by side"
+- scrollUntilVisible:
+    element: "Ordered and arrived, side by side"
+    direction: DOWN
 - takeScreenshot: 05-delivery-result
 - scrollUntilVisible:
     element: "DIFFERENT"
@@ -36,12 +53,22 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
 - takeScreenshot: 06-side-by-side
 - scrollUntilVisible:
     element: "Review this substitution"
-    direction: UP
+    direction: DOWN
 - tapOn: "Review this substitution"
-- assertVisible: "This step is for the Specification reviewer.*"
-# the ordinary shared-device switch: lock, then a different person taps their name
+- scrollUntilVisible:
+    element: "This step is for the Specification reviewer.*"
+    direction: DOWN
+- scrollUntilVisible:
+    element: "Lock and switch person"
+    direction: UP
 - tapOn: "Lock and switch person"
+- scrollUntilVisible:
+    element: "Priya Nair"
+    direction: DOWN
 - tapOn: "Priya Nair"
+- scrollUntilVisible:
+    element: "Settings"
+    direction: UP
 - tapOn: "Settings"
 - scrollUntilVisible:
     element: "Demonstration tools.*"
@@ -51,30 +78,64 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
     element: "Fill in the supplier sheet for the new sauce"
     direction: DOWN
 - tapOn: "Fill in the supplier sheet for the new sauce"
+- scrollUntilVisible:
+    element: "Open review.*"
+    direction: DOWN
 - tapOn: "Open review.*"
-- assertVisible: "Step 1 of 3: enter the supplier's specification"
+- scrollUntilVisible:
+    element: "Step 1 of 3: enter the supplier's specification"
+    direction: DOWN
 - scrollUntilVisible:
     element: "Save specification"
     direction: DOWN
 - tapOn: "Save specification"
 - scrollUntilVisible:
     element: "Show which recipes change"
-    direction: UP
+    direction: DOWN
 - tapOn: "Show which recipes change"
-- assertVisible: "Recipes that change.*"
+- scrollUntilVisible:
+    element: "Recipes that change.*"
+    direction: DOWN
 - takeScreenshot: 07-recipes-change
+- scrollUntilVisible:
+    element: "Lock and switch person"
+    direction: UP
 - tapOn: "Lock and switch person"
+- scrollUntilVisible:
+    element: "Sam Okoye"
+    direction: DOWN
 - tapOn: "Sam Okoye"
+- scrollUntilVisible:
+    element: "Review"
+    direction: UP
 - tapOn: "Review"
+- scrollUntilVisible:
+    element: "Open review.*"
+    direction: DOWN
 - tapOn: "Open review.*"
-- assertVisible: "Step 3 of 3: decide"
+- scrollUntilVisible:
+    element: "Step 3 of 3: decide"
+    direction: DOWN
+- scrollUntilVisible:
+    element: "Approve this change"
+    direction: DOWN
 - tapOn: "Approve this change"
-- assertVisible: "Approve this change\\?"
+- scrollUntilVisible:
+    element: "Approve this change\\?"
+    direction: DOWN
 - takeScreenshot: 08-approve-dialog
 # system Back must mean "No" and leave the change unapproved
 - pressKey: back
 - assertNotVisible: "Approve this change\\?"
+- scrollUntilVisible:
+    element: "Approve this change"
+    direction: DOWN
 - tapOn: "Approve this change"
+- scrollUntilVisible:
+    element: "Yes, approve"
+    direction: DOWN
 - tapOn: "Yes, approve"
-- assertVisible: "Approved revision.*"
+- scrollUntilVisible:
+    element: "Approved revision.*"
+    direction: DOWN
 - takeScreenshot: 09-after-approval

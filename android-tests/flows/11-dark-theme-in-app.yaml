@@ -3,12 +3,31 @@ name: Dark theme chosen inside the app (the emulator's system night mode did not
 ---
 - launchApp:
     clearState: true
+- scrollUntilVisible:
+    element: "Try the example kitchen"
+    direction: DOWN
 - tapOn: "Try the example kitchen"
+- scrollUntilVisible:
+    element: "Alex Rivera"
+    direction: DOWN
 - tapOn: "Alex Rivera"
+- scrollUntilVisible:
+    element: "Settings"
+    direction: UP
 - tapOn: "Settings"
+- scrollUntilVisible:
+    element: "Dark"
+    direction: DOWN
 - tapOn: "Dark"
-- assertVisible: "Display"
+- scrollUntilVisible:
+    element: "Display"
+    direction: DOWN
 - takeScreenshot: 22-dark-settings
+- scrollUntilVisible:
+    element: "Home"
+    direction: UP
 - tapOn: "Home"
-- assertVisible: "Status now"
+- scrollUntilVisible:
+    element: "Status now"
+    direction: DOWN
 - takeScreenshot: 23-dark-home

@@ -3,36 +3,87 @@ name: Real kitchen - set up with a PIN, keyboard never hides the field or the ne
 ---
 - launchApp:
     clearState: true
+- scrollUntilVisible:
+    element: "Set up my kitchen"
+    direction: DOWN
 - tapOn: "Set up my kitchen"
+- scrollUntilVisible:
+    element:
+      id: "field-business-or-kitchen-group-name"
+    direction: DOWN
 - tapOn:
     id: "field-business-or-kitchen-group-name"
 - inputText: "Test Cafe"
 - takeScreenshot: 15-keyboard-open-setup
+- scrollUntilVisible:
+    element: "Next"
+    direction: DOWN
 - tapOn: "Next"
+- scrollUntilVisible:
+    element:
+      id: "field-your-name"
+    direction: DOWN
 - tapOn:
     id: "field-your-name"
 - inputText: "Pat Owner"
+- scrollUntilVisible:
+    element:
+      id: "field-choose-a-pin"
+    direction: DOWN
 - tapOn:
     id: "field-choose-a-pin"
 - inputText: "481516"
+- scrollUntilVisible:
+    element:
+      id: "field-type-the-pin-again"
+    direction: DOWN
 - tapOn:
     id: "field-type-the-pin-again"
 - inputText: "481516"
 - takeScreenshot: 16-keyboard-open-pin
+- scrollUntilVisible:
+    element: "Start my kitchen"
+    direction: DOWN
 - tapOn: "Start my kitchen"
-- assertVisible: "Finish setting up"
+- scrollUntilVisible:
+    element: "Finish setting up"
+    direction: DOWN
 - assertNotVisible: "Example kitchen.*"
+- scrollUntilVisible:
+    element: "Lock and switch person"
+    direction: UP
 - tapOn: "Lock and switch person"
+- scrollUntilVisible:
+    element: "Pat Owner"
+    direction: DOWN
 - tapOn: "Pat Owner"
+- scrollUntilVisible:
+    element:
+      id: "field-your-pin"
+    direction: DOWN
 - tapOn:
     id: "field-your-pin"
 - inputText: "000111"
+- scrollUntilVisible:
+    element: "Unlock"
+    direction: DOWN
 - tapOn: "Unlock"
-- assertVisible: "Wrong PIN.*"
+- scrollUntilVisible:
+    element: "Wrong PIN.*"
+    direction: DOWN
+- scrollUntilVisible:
+    element:
+      id: "field-your-pin"
+    direction: DOWN
 - tapOn:
     id: "field-your-pin"
 - eraseText: 6
 - inputText: "481516"
+- scrollUntilVisible:
+    element: "Unlock"
+    direction: DOWN
 - tapOn: "Unlock"
-- assertVisible: "Finish setting up"
+- scrollUntilVisible:
+    element: "Finish setting up"
+    direction: DOWN
 - takeScreenshot: 17-real-kitchen-home

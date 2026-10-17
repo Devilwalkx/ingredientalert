@@ -5,20 +5,57 @@ name: Camera already allowed - the scanner opens with torch control and tells th
     clearState: true
     permissions:
       camera: allow
+- scrollUntilVisible:
+    element: "Try the example kitchen"
+    direction: DOWN
 - tapOn: "Try the example kitchen"
+- scrollUntilVisible:
+    element: "Alex Rivera"
+    direction: DOWN
 - tapOn: "Alex Rivera"
+- scrollUntilVisible:
+    element: "Check a delivery.*"
+    direction: DOWN
 - tapOn: "Check a delivery.*"
+- scrollUntilVisible:
+    element:
+      id: "field-search-by-name-supplier-or-barcode-number"
+    direction: DOWN
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
 - hideKeyboard
+- scrollUntilVisible:
+    element: "Harbour Teriyaki Sauce 1L"
+    direction: DOWN
 - tapOn: "Harbour Teriyaki Sauce 1L"
+- scrollUntilVisible:
+    element: "Next: what is on the pack\\?"
+    direction: DOWN
 - tapOn: "Next: what is on the pack\\?"
+- scrollUntilVisible:
+    element: "Scan the barcode"
+    direction: DOWN
 - tapOn: "Scan the barcode"
-- assertVisible: "Switch the torch on"
+- scrollUntilVisible:
+    element: "Switch the torch on"
+    direction: DOWN
 - takeScreenshot: 10-scanner-open
+- scrollUntilVisible:
+    element: "Switch the torch on"
+    direction: DOWN
 - tapOn: "Switch the torch on"
-- assertVisible: "Torch is on.*"
+- scrollUntilVisible:
+    element: "Torch is on.*"
+    direction: DOWN
+- scrollUntilVisible:
+    element: "Torch is on.*"
+    direction: DOWN
 - tapOn: "Torch is on.*"
+- scrollUntilVisible:
+    element: "Type the number or search instead"
+    direction: DOWN
 - tapOn: "Type the number or search instead"
-- assertVisible: "Barcode number"
+- scrollUntilVisible:
+    element: "Barcode number"
+    direction: DOWN

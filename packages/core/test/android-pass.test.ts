@@ -13,6 +13,16 @@ describe("PIN for a shared device", () => {
     expect(checkPin(rec, "")).toBe(false);
     expect(JSON.stringify(rec)).not.toContain("481516");
   });
+  it("hashing cost on this machine is reported (a JavaScript runtime on a real tablet will differ and is NOT measured)", () => {
+    const t0 = performance.now();
+    const rec = makePinRecord("481516");
+    const make = performance.now() - t0;
+    const t1 = performance.now();
+    checkPin(rec, "481516");
+    const check = performance.now() - t1;
+    console.log(`PIN scrypt N=4096: make ${make.toFixed(0)} ms, check ${check.toFixed(0)} ms`);
+    expect(make).toBeLessThan(3000);
+  });
   it("two records for the same PIN differ (random salt)", () => {
     expect(makePinRecord("481516").hash).not.toBe(makePinRecord("481516").hash);
   });

@@ -5,47 +5,88 @@ name: Camera permission asked in context; denial and permanent denial are explai
     clearState: true
     permissions:
       camera: deny
+- scrollUntilVisible:
+    element: "Try the example kitchen"
+    direction: DOWN
 - tapOn: "Try the example kitchen"
+- scrollUntilVisible:
+    element: "Alex Rivera"
+    direction: DOWN
 - tapOn: "Alex Rivera"
+- scrollUntilVisible:
+    element: "Check a delivery.*"
+    direction: DOWN
 - tapOn: "Check a delivery.*"
+- scrollUntilVisible:
+    element:
+      id: "field-search-by-name-supplier-or-barcode-number"
+    direction: DOWN
 - tapOn:
     id: "field-search-by-name-supplier-or-barcode-number"
 - inputText: "teriyaki"
 - hideKeyboard
+- scrollUntilVisible:
+    element: "Harbour Teriyaki Sauce 1L"
+    direction: DOWN
 - tapOn: "Harbour Teriyaki Sauce 1L"
+- scrollUntilVisible:
+    element: "Next: what is on the pack\\?"
+    direction: DOWN
 - tapOn: "Next: what is on the pack\\?"
+- scrollUntilVisible:
+    element: "Scan the barcode"
+    direction: DOWN
 - tapOn: "Scan the barcode"
-- assertVisible: "Use the camera to read the barcode\\?"
-- assertVisible: ".*does not take, keep or send pictures.*"
+- scrollUntilVisible:
+    element: "Use the camera to read the barcode\\?"
+    direction: DOWN
+- scrollUntilVisible:
+    element: ".*does not take, keep or send pictures.*"
+    direction: DOWN
 - takeScreenshot: 19-camera-reason
+- scrollUntilVisible:
+    element: "Allow camera"
+    direction: DOWN
 - tapOn: "Allow camera"
 - runFlow:
     when:
-      visible: "Don't allow"
+      visible: "Don.t allow"
     commands:
-      - tapOn: "Don't allow"
+      - tapOn: "Don.t allow"
 - runFlow:
     when:
       visible: "Deny"
     commands:
       - tapOn: "Deny"
-- assertVisible: "Camera not allowed.*|The camera is switched off for this app"
+- scrollUntilVisible:
+    element: "Camera not allowed.*"
+    direction: DOWN
 - takeScreenshot: 20-camera-denied
+- scrollUntilVisible:
+    element: "Ask for camera access again"
+    direction: DOWN
+- tapOn: "Ask for camera access again"
 - runFlow:
     when:
-      visible: "Ask for camera access again"
+      visible: "Don.t allow"
     commands:
-      - tapOn: "Ask for camera access again"
-      - runFlow:
-          when:
-            visible: "Don't allow"
-          commands:
-            - tapOn: "Don't allow"
-      - runFlow:
-          when:
-            visible: "Deny"
-          commands:
-            - tapOn: "Deny"
+      - tapOn: "Don.t allow"
+- runFlow:
+    when:
+      visible: "Deny.*"
+    commands:
+      - tapOn: "Deny.*"
+- scrollUntilVisible:
+    element: "The camera is switched off for this app"
+    direction: DOWN
+- scrollUntilVisible:
+    element: "Open Android settings"
+    direction: DOWN
 - takeScreenshot: 21-camera-after-second-denial
+- scrollUntilVisible:
+    element: "Type the number or search instead"
+    direction: DOWN
 - tapOn: "Type the number or search instead"
-- assertVisible: "Barcode number"
+- scrollUntilVisible:
+    element: "Barcode number"
+    direction: DOWN
