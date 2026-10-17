@@ -9,6 +9,8 @@ import { TEXT_FACTOR, type TextSize } from "./theme";
 // ---- text scale: in-app setting x optional ?fontscale= (web tests). Android system font scale applies on top (allowFontScaling stays on).
 export const TextScaleContext = createContext<number>(1);
 export function useScale() { return useContext(TextScaleContext); }
+/** Set by the app shell: brings a focused field near the top of the visible area, so the field and the action below it stay visible above the keyboard (also at 200% text). */
+export const FocusScrollContext = createContext<(node: unknown) => void>(() => undefined);
 export function factorFor(size: TextSize, query: number): number { return TEXT_FACTOR[size] * query; }
 
 export function Txt(p: { v?: Variant; children: React.ReactNode; color?: string; style?: StyleProp<TextStyle>; header?: boolean; selectable?: boolean; label?: string; live?: boolean; align?: "left" | "center" | "right" }) {
@@ -108,8 +110,10 @@ export function Field(p: { label: string; value: string; onChange: (t: string) =
   const c = useTheme();
   const f = useScale();
   const [focus, setFocus] = useState(false);
+  const box = useRef<any>(null);
+  const bring = useContext(FocusScrollContext);
   return (
-    <View style={{ marginBottom: space.m }}>
+    <View ref={box} style={{ marginBottom: space.m }}>
       <Txt v="label">{p.label}</Txt>
       {p.help ? <Txt v="small" color={c.textMuted}>{p.help}</Txt> : null}
       <TextInput
@@ -117,7 +121,7 @@ export function Field(p: { label: string; value: string; onChange: (t: string) =
         accessibilityLabel={p.label}
         value={p.value}
         onChangeText={p.onChange}
-        onFocus={() => setFocus(true)}
+        onFocus={() => { setFocus(true); bring(box.current); }}
         onBlur={() => setFocus(false)}
         multiline={p.multiline}
         keyboardType={p.keyboard === "numeric" ? "number-pad" : "default"}

@@ -18,7 +18,7 @@ export function WelcomeScreen() {
       <View style={{ alignItems: "center", paddingVertical: space.m }}>
         <View style={{ width: 72, height: 72, borderRadius: 20, backgroundColor: c.primary, alignItems: "center", justifyContent: "center" }}><Icon name="warn" size={40} color={c.onPrimary} /></View>
       </View>
-      <Txt v="display" align="center">IngredientAlert</Txt>
+      <Txt v="heading" align="center">IngredientAlert</Txt>
       <Txt align="center" color={c.textMuted}>Catch a substituted delivery at the door, get it checked by a second person, and keep the menu's allergen information in step.</Txt>
       <View style={{ height: space.m }} />
       {app.loadError ? <Notice tone="bad" text={app.loadError} /> : null}

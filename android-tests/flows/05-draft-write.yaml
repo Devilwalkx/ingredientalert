@@ -6,6 +6,10 @@ name: Start a delivery, then leave the app (the script kills the process)
 - tapOn: "Try the example kitchen"
 - tapOn: "Alex Rivera"
 - tapOn: "Check a delivery.*"
+- tapOn:
+    id: "field-search-by-name-supplier-or-barcode-number"
+- inputText: "teriyaki"
+- hideKeyboard
 - tapOn: "Harbour Teriyaki Sauce 1L"
 - tapOn: "Next: what is on the pack\\?"
 - tapOn:

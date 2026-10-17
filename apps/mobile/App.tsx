@@ -8,7 +8,7 @@ import { installSecureRandom } from "./src/secureRandom";
 import { platformBlocker } from "./src/platformCheck";
 import { StoreProvider, useApp, type Screen } from "./src/store";
 import { ConfirmHost } from "./src/confirm";
-import { DemoStrip, IconBtn, Loading, Notice, Transition, Txt, TextScaleContext, factorFor, Gap } from "./src/ui";
+import { DemoStrip, FocusScrollContext, IconBtn, Loading, Notice, Transition, Txt, TextScaleContext, factorFor, Gap } from "./src/ui";
 import { Icon, type IconName } from "./src/design/Icon";
 import { ThemeProvider, useTheme, useThemeMode } from "./src/design/theme";
 import { TOUCH, space } from "./src/design/tokens";
@@ -74,6 +74,16 @@ function Root() {
   const titleRef = useRef<any>(null);
   const [kb, setKb] = useState(0);
   const rootH = useRef(0);
+  const scrollY = useRef(0);
+  const scrollTop = useRef(0);
+  const bringIntoView = (node: unknown) => {
+    if (Platform.OS === "web") return;
+    setTimeout(() => {
+      (node as { measureInWindow?: (cb: (x: number, y: number) => void) => void } | null)?.measureInWindow?.((_x, y) => {
+        scroller.current?.scrollTo({ y: Math.max(0, scrollY.current + (y - scrollTop.current) - 12), animated: true });
+      });
+    }, 350);
+  };
   const beforeKb = useRef(0);
 
   useEffect(() => { SystemUI.setBackgroundColorAsync(c.bg).catch(() => undefined); }, [c.bg]);
@@ -135,6 +145,7 @@ function Root() {
   const screen = S === "home" ? <HomeScreen /> : S === "receive" ? <DeliverScreen /> : S === "review" ? <ReviewScreen /> : S === "publish" ? <PublishScreen /> : S === "service" ? <ServiceScreen /> : S === "settings" ? <SettingsScreen /> : <HomeScreen />;
   return (
     <TextScaleContext.Provider value={factor}>
+      <FocusScrollContext.Provider value={bringIntoView}>
       <View style={{ flex: 1, backgroundColor: c.bg, paddingBottom: kb }} onLayout={(ev) => { rootH.current = ev.nativeEvent.layout.height; }} onTouchStart={app.touch}>
         <StatusBar style={mode === "dark" ? "light" : "dark"} />
         <SafeAreaView style={{ flex: 1 }} edges={["top", "left", "right"]}>
@@ -146,7 +157,7 @@ function Root() {
               {inApp ? <IconBtn icon="lock" label="Lock and switch person" onPress={app.lock} /> : null}
               {inApp && S !== "settings" ? <IconBtn icon="settings" label="Settings" onPress={() => app.go("settings")} /> : null}
             </View>
-            <ScrollView ref={scroller} style={{ flex: 1 }} contentContainerStyle={{ padding: space.m, paddingBottom: space.xl }} keyboardShouldPersistTaps="handled" keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "on-drag"}>
+            <ScrollView ref={scroller} style={{ flex: 1 }} onScroll={(ev) => { scrollY.current = ev.nativeEvent.contentOffset.y; }} scrollEventThrottle={50} onLayout={() => { setTimeout(() => (scroller.current as { measureInWindow?: (cb: (x: number, y: number) => void) => void } | null)?.measureInWindow?.((_x, y) => { scrollTop.current = y; }), 50); }} contentContainerStyle={{ padding: space.m, paddingBottom: space.xl }} keyboardShouldPersistTaps="handled" keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "on-drag"}>
               {inApp && app.isDemo ? <DemoStrip text="Example kitchen: made-up products, recipes and people. Not for real food-safety decisions." /> : null}
               {app.loadError && !has ? <Notice tone="bad" text={app.loadError} /> : null}
               {app.toast && inApp ? <Notice tone={app.toast.tone === "ok" ? "ok" : app.toast.tone === "bad" ? "bad" : "info"} text={app.toast.text} /> : null}
@@ -184,6 +195,7 @@ function Root() {
           </View>
         ) : <View style={{ height: kb === 0 ? insets.bottom : 0 }} />}
       </View>
+      </FocusScrollContext.Provider>
     </TextScaleContext.Provider>
   );
 }

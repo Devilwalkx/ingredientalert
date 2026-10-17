@@ -10,7 +10,13 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
 - assertVisible: "Check a delivery.*"
 - takeScreenshot: 03-home
 - tapOn: "Settings"
+- scrollUntilVisible:
+    element: "Demonstration tools.*"
+    direction: DOWN
 - tapOn: "Demonstration tools.*"
+- scrollUntilVisible:
+    element: "Fill in the replacement-sauce delivery"
+    direction: DOWN
 - tapOn: "Fill in the replacement-sauce delivery"
 - assertVisible: "What is on the pack\\?"
 - takeScreenshot: 04-delivery-form
@@ -37,7 +43,13 @@ name: MAIN TASK - check a delivery, then review the substitution (example kitche
 - tapOn: "Lock and switch person"
 - tapOn: "Priya Nair"
 - tapOn: "Settings"
+- scrollUntilVisible:
+    element: "Demonstration tools.*"
+    direction: DOWN
 - tapOn: "Demonstration tools.*"
+- scrollUntilVisible:
+    element: "Fill in the supplier sheet for the new sauce"
+    direction: DOWN
 - tapOn: "Fill in the supplier sheet for the new sauce"
 - tapOn: "Open review.*"
 - assertVisible: "Step 1 of 3: enter the supplier's specification"

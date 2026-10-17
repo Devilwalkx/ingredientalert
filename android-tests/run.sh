@@ -17,6 +17,10 @@ adb shell getprop ro.build.version.release > "$OUT/device.txt"
 log "install"
 adb install -r "$APK" 2>&1 | tee -a "$OUT/log.txt"
 adb shell dumpsys package $PKG | grep -E "versionName|versionCode|requested permissions|android.permission|granted=" | tr -d '\r' > "$OUT/package.txt"
+# the MERGED manifest of the installed app (libraries add permissions too): only CAMERA may be requested
+REQ=$(adb shell dumpsys package $PKG | tr -d '\r' | sed -n '/requested permissions:/,/install permissions:/p' | grep -o 'android\.permission\.[A-Z_]*' | sort -u)
+echo "requested (merged manifest): $REQ" | tee -a "$OUT/log.txt"
+for p in $REQ; do if [ "$p" != "android.permission.CAMERA" ]; then echo "UNEXPECTED PERMISSION: $p" | tee -a "$OUT/log.txt"; FAIL=1; fi; done
 adb shell settings put system font_scale "$FONT"
 adb shell cmd uimode night "$NIGHT"
 adb shell settings put global window_animation_scale 0
@@ -74,7 +78,7 @@ run_flow 02-check-delivery-review-substitution.yaml
 adb shell pkill -2 screenrecord; wait $REC 2>/dev/null; sleep 2
 adb pull /sdcard/main-task.mp4 "$OUT/main-task.mp4" >/dev/null 2>&1 || log "no recording"
 
-for f in 01-first-run.yaml 04-back-navigation.yaml 07-settings-display.yaml 08-real-kitchen-pin-keyboard.yaml; do run_flow $f; done
+for f in 01-first-run.yaml 04-back-navigation.yaml 07-settings-display.yaml 08-real-kitchen-pin-keyboard.yaml 11-dark-theme-in-app.yaml; do run_flow $f; done
 # camera permission flows depend on the Android permission dialog wording of each API level: reported, but they do not fail the job
 for f in 03-camera-permission-granted.yaml 09-scan-timeout-and-manual.yaml 10-camera-permission-denied.yaml; do run_flow_soft $f; done
 

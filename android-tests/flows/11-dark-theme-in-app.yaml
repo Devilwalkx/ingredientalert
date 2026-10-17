@@ -1,0 +1,14 @@
+appId: app.devilwalkx.ingredientalert
+name: Dark theme chosen inside the app (the emulator's system night mode did not reach the app in an earlier run)
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the example kitchen"
+- tapOn: "Alex Rivera"
+- tapOn: "Settings"
+- tapOn: "Dark"
+- assertVisible: "Display"
+- takeScreenshot: 22-dark-settings
+- tapOn: "Home"
+- assertVisible: "Status now"
+- takeScreenshot: 23-dark-home
