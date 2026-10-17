@@ -40,6 +40,7 @@ run_flow_soft() {
   log "flow (not gating) $f"
   ( cd "$OUT/shots" && timeout 300 maestro test --no-ansi --format junit --output "../junit/$(basename "$f" .yaml).xml" "$GITHUB_WORKSPACE/android-tests/flows/$f" ) 2>&1 | tail -30 | tee -a "$OUT/log.txt"
   local rc=${PIPESTATUS[0]}
+  mkdir -p "$OUT/maestro"; D=$(ls -dt "$HOME"/.maestro/tests/*/ 2>/dev/null | head -1); [ -n "$D" ] && cp -r "$D" "$OUT/maestro/$(basename "$f" .yaml)" 2>/dev/null || true
   echo "$f rc=$rc" >> "$OUT/soft-flows.txt"
   if [ "$rc" != "0" ]; then adb exec-out screencap -p > "$OUT/shots/SOFTFAIL-$(basename "$f" .yaml).png"; fi
 }
@@ -49,6 +50,7 @@ run_flow() {
   log "flow $f"
   ( cd "$OUT/shots" && timeout 420 maestro test --no-ansi --format junit --output "../junit/$(basename "$f" .yaml).xml" "$GITHUB_WORKSPACE/android-tests/flows/$f" ) 2>&1 | tail -40 | tee -a "$OUT/log.txt"
   local rc=${PIPESTATUS[0]}
+  mkdir -p "$OUT/maestro"; D=$(ls -dt "$HOME"/.maestro/tests/*/ 2>/dev/null | head -1); [ -n "$D" ] && cp -r "$D" "$OUT/maestro/$(basename "$f" .yaml)" 2>/dev/null || true
   if [ "$rc" != "0" ]; then FAIL=1; log "FLOW FAILED: $f"; adb exec-out screencap -p > "$OUT/shots/FAILED-$(basename "$f" .yaml).png"; fi
 }
 
